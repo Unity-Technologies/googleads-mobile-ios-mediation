@@ -109,47 +109,25 @@ static NSMapTable<NSString *, GADMAdapterUnityRewardedAd *> *_placementInUseRewa
     return;
   }
   [_adEventDelegate willPresentFullScreenView];
-  [UnityAds addDelegate:self];
-  [UnityAds show:viewController placementId:_placementID];
+  [UnityAds show:viewController placementId:_placementID showDelegate:self];
 }
 
 #pragma mark - UnityAdsExtendedDelegate Methods
 
 - (void)unityAdsDidError:(UnityAdsError)error withMessage:(nonnull NSString *)message {
-  [UnityAds removeDelegate:self];
-  if (_adEventDelegate) {
-    NSError *errorWithDescription =
-        GADMAdapterUnitySDKErrorWithUnityAdsErrorAndMessage(error, message);
-    [_adEventDelegate didFailToPresentWithError:errorWithDescription];
-  }
+  // Logic to handle error events has moved to the UnityAdsShowDelegate function
+  // unityAdsShowFailed.
 }
 
 - (void)unityAdsDidFinish:(nonnull NSString *)placementID
           withFinishState:(UnityAdsFinishState)state {
-  [UnityAds removeDelegate:self];
-
-  if (state == kUnityAdsFinishStateCompleted) {
-    [_adEventDelegate didEndVideo];
-
-    // Unity Ads doesn't provide a way to set the reward on their front-end. Default to a reward
-    // amount of 1. Publishers using this adapter should override the reward on the AdMob
-    // front-end.
-    GADAdReward *reward = [[GADAdReward alloc] initWithRewardType:@""
-                                                     rewardAmount:[NSDecimalNumber one]];
-    [_adEventDelegate didRewardUserWithReward:reward];
-  } else if (state == kUnityAdsFinishStateError) {
-    NSError *error = GADMAdapterUnityErrorWithCodeAndDescription(
-        GADMAdapterUnityErrorFinish,
-        @"UnityAds finished presenting with error state kUnityAdsFinishStateError.");
-    [_adEventDelegate didFailToPresentWithError:error];
-  }
-
-  [_adEventDelegate willDismissFullScreenView];
-  [_adEventDelegate didDismissFullScreenView];
+  // Logic to handle finish events has moved to the UnityAdsShowDelegate function
+  // unityAdsShowComplete.
 }
 
 - (void)unityAdsDidStart:(nonnull NSString *)placementID {
-  [_adEventDelegate didStartVideo];
+  // Logic to handle start events has moved to the UnityAdsShowDelegate function
+  // unityAdsShowStart.
 }
 
 - (void)unityAdsReady:(nonnull NSString *)placementID {
@@ -158,15 +136,8 @@ static NSMapTable<NSString *, GADMAdapterUnityRewardedAd *> *_placementInUseRewa
 }
 
 - (void)unityAdsDidClick:(nonnull NSString *)placementID {
-  // The Unity Ads SDK doesn't provide an event for leaving the application, so the adapter assumes
-  // that a click event indicates the user is leaving the application for a browser or deeplink, and
-  // notifies the Google Mobile Ads SDK accordingly.
-  [_adEventDelegate reportClick];
-}
-
-- (void)unityAdsPlacementStateChanged:(nonnull NSString *)placementID
-                             oldState:(UnityAdsPlacementState)oldState
-                             newState:(UnityAdsPlacementState)newState {
+  // Logic to handle click events has moved to the UnityAdsShowDelegate function
+  // unityAdsShowClick.
 }
 
 #pragma mark - UnityAdsLoadDelegate Methods
@@ -187,6 +158,48 @@ static NSMapTable<NSString *, GADMAdapterUnityRewardedAd *> *_placementInUseRewa
   if (_adLoadCompletionHandler) {
     _adEventDelegate = _adLoadCompletionHandler(self, nil);
   }
+}
+
+#pragma mark - UnityAdsShowDelegate Methods
+
+- (void)unityAdsShowClick:(NSString *)placementId {
+  // The Unity Ads SDK doesn't provide an event for leaving the application, so the adapter assumes
+  // that a click event indicates the user is leaving the application for a browser or deeplink, and
+  // notifies the Google Mobile Ads SDK accordingly.
+  [_adEventDelegate reportClick];
+}
+
+- (void)unityAdsShowComplete:(NSString *)placementId withFinishState:(UnityAdsShowCompletionState)state {
+  if (state == kUnityAdsFinishStateCompleted) {
+    [_adEventDelegate didEndVideo];
+
+    // Unity Ads doesn't provide a way to set the reward on their front-end. Default to a reward
+    // amount of 1. Publishers using this adapter should override the reward on the AdMob
+    // front-end.
+    GADAdReward *reward = [[GADAdReward alloc] initWithRewardType:@""
+                                                     rewardAmount:[NSDecimalNumber one]];
+    [_adEventDelegate didRewardUserWithReward:reward];
+  } else if (state == kUnityAdsFinishStateError) {
+    NSError *error = GADMAdapterUnityErrorWithCodeAndDescription(
+        GADMAdapterUnityErrorFinish,
+        @"UnityAds finished presenting with error state kUnityAdsFinishStateError.");
+    [_adEventDelegate didFailToPresentWithError:error];
+  }
+
+  [_adEventDelegate willDismissFullScreenView];
+  [_adEventDelegate didDismissFullScreenView];
+}
+
+- (void)unityAdsShowFailed:(NSString *)placementId withError:(UnityAdsShowError)error withMessage:(NSString *)message {
+  if (_adEventDelegate) {
+    NSError *errorWithDescription =
+        GADMAdapterUnitySDKErrorWithUnityAdsShowErrorAndMessage(error, message);
+    [_adEventDelegate didFailToPresentWithError:errorWithDescription];
+  }
+}
+
+- (void)unityAdsShowStart:(nonnull NSString *)placementId {
+  [_adEventDelegate didStartVideo];
 }
 
 @end
