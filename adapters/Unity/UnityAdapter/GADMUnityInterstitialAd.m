@@ -159,7 +159,6 @@ static NSMapTable<NSString *, GADMUnityInterstitialAd *> *_placementInUse;
 #pragma mark - UnityAdsShowDelegate Methods
 
 - (void)unityAdsShowClick:(NSString *)placementId {
-  // TODO: unityAdsDidClick?
   id<GADMAdNetworkConnector> strongNetworkConnector = _connector;
   id<GADMAdNetworkAdapter> strongAdapter = _adapter;
   // The Unity Ads SDK doesn't provide an event for leaving the application, so the adapter assumes
