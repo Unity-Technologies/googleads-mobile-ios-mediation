@@ -112,34 +112,6 @@ static NSMapTable<NSString *, GADMAdapterUnityRewardedAd *> *_placementInUseRewa
   [UnityAds show:viewController placementId:_placementID showDelegate:self];
 }
 
-#pragma mark - UnityAdsExtendedDelegate Methods
-
-- (void)unityAdsDidError:(UnityAdsError)error withMessage:(nonnull NSString *)message {
-  // Logic to handle error events has moved to the UnityAdsShowDelegate function
-  // unityAdsShowFailed.
-}
-
-- (void)unityAdsDidFinish:(nonnull NSString *)placementID
-          withFinishState:(UnityAdsFinishState)state {
-  // Logic to handle finish events has moved to the UnityAdsShowDelegate function
-  // unityAdsShowComplete.
-}
-
-- (void)unityAdsDidStart:(nonnull NSString *)placementID {
-  // Logic to handle start events has moved to the UnityAdsShowDelegate function
-  // unityAdsShowStart.
-}
-
-- (void)unityAdsReady:(nonnull NSString *)placementID {
-  // Logic to mark a placement ready has moved to the UnityAdsLoadDelegate function
-  // unityAdsAdLoaded.
-}
-
-- (void)unityAdsDidClick:(nonnull NSString *)placementID {
-  // Logic to handle click events has moved to the UnityAdsShowDelegate function
-  // unityAdsShowClick.
-}
-
 #pragma mark - UnityAdsLoadDelegate Methods
 
 - (void)unityAdsAdFailedToLoad:(nonnull NSString *)placementId {
