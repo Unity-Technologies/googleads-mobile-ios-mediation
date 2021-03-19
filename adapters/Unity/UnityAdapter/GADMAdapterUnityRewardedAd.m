@@ -18,9 +18,7 @@
 #import "GADMAdapterUnityUtils.h"
 #import "GADUnityError.h"
 
-@interface GADMAdapterUnityRewardedAd () <GADMediationRewardedAd,
-                                          UnityAdsExtendedDelegate,
-                                          UnityAdsLoadDelegate>
+@interface GADMAdapterUnityRewardedAd () <GADMediationRewardedAd, UnityAdsLoadDelegate>
 @end
 
 @implementation GADMAdapterUnityRewardedAd {
@@ -114,7 +112,7 @@ static NSMapTable<NSString *, GADMAdapterUnityRewardedAd *> *_placementInUseRewa
 
 #pragma mark - UnityAdsLoadDelegate Methods
 
-- (void)unityAdsAdFailedToLoad:(nonnull NSString *)placementId {
+- (void)unityAdsAdFailedToLoad:(NSString *)placementId withError:(UnityAdsLoadError)error withMessage:(NSString *)message {
   dispatch_async(_lockQueue, ^{
     GADMAdapterUnityMapTableRemoveObjectForKey(_placementInUseRewarded, self->_placementID);
   });
@@ -133,6 +131,10 @@ static NSMapTable<NSString *, GADMAdapterUnityRewardedAd *> *_placementInUseRewa
 }
 
 #pragma mark - UnityAdsShowDelegate Methods
+
+- (void)unityAdsShowStart:(nonnull NSString *)placementId {
+  [_adEventDelegate didStartVideo];
+}
 
 - (void)unityAdsShowClick:(NSString *)placementId {
   // The Unity Ads SDK doesn't provide an event for leaving the application, so the adapter assumes
@@ -168,10 +170,6 @@ static NSMapTable<NSString *, GADMAdapterUnityRewardedAd *> *_placementInUseRewa
         GADMAdapterUnitySDKErrorWithUnityAdsShowErrorAndMessage(error, message);
     [_adEventDelegate didFailToPresentWithError:errorWithDescription];
   }
-}
-
-- (void)unityAdsShowStart:(nonnull NSString *)placementId {
-  [_adEventDelegate didStartVideo];
 }
 
 @end

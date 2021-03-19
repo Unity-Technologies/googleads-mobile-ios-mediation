@@ -130,8 +130,7 @@ static NSMapTable<NSString *, GADMUnityInterstitialAd *> *_placementInUse;
 }
 
 #pragma mark - UnityAdsLoadDelegate Methods
-
-- (void)unityAdsAdFailedToLoad:(nonnull NSString *)placementId {
+- (void)unityAdsAdFailedToLoad:(NSString *)placementId withError:(UnityAdsLoadError)error withMessage:(NSString *)message {
   dispatch_async(_lockQueue, ^{
     GADMAdapterUnityMapTableRemoveObjectForKey(_placementInUse, self->_placementID);
   });
@@ -157,6 +156,11 @@ static NSMapTable<NSString *, GADMUnityInterstitialAd *> *_placementInUse;
 }
 
 #pragma mark - UnityAdsShowDelegate Methods
+
+- (void)unityAdsShowStart:(nonnull NSString *)placementId {
+  // nothing to do
+  // todo: double check if impression need this
+}
 
 - (void)unityAdsShowClick:(NSString *)placementId {
   id<GADMAdNetworkConnector> strongNetworkConnector = _connector;
@@ -189,11 +193,6 @@ static NSMapTable<NSString *, GADMUnityInterstitialAd *> *_placementInUse;
       [strongNetworkConnector adapterDidDismissInterstitial:strongAdapter];
     }
   }
-}
-
-- (void)unityAdsShowStart:(nonnull NSString *)placementId {
-  // nothing to do
-  // todo: double check if impression need this
 }
 
 @end
