@@ -118,18 +118,21 @@ static NSMapTable<NSString *, GADMUnityInterstitialAd *> *_placementInUse;
     return;
   }
 
-  if (![UnityAds isReady:_placementID]) {
-    NSError *error = GADMAdapterUnityErrorWithCodeAndDescription(
-        GADMAdapterUnityErrorShowAdNotReady, @"Failed to show Unity Ads interstitial.");
-    [strongConnector adapter:strongAdapter didFailAd:error];
-    return;
-  }
-
   [strongConnector adapterWillPresentInterstitial:strongAdapter];
   [UnityAds show:rootViewController placementId:_placementID showDelegate:self];
 }
 
 #pragma mark - UnityAdsLoadDelegate Methods
+
+- (void)unityAdsAdLoaded:(nonnull NSString *)placementId {
+  id<GADMAdNetworkConnector> strongNetworkConnector = _connector;
+  id<GADMAdNetworkAdapter> strongAdapter = _adapter;
+
+  if (strongNetworkConnector && strongAdapter) {
+    [strongNetworkConnector adapterDidReceiveInterstitial:strongAdapter];
+  }
+}
+
 - (void)unityAdsAdFailedToLoad:(NSString *)placementId withError:(UnityAdsLoadError)error withMessage:(NSString *)message {
   dispatch_async(_lockQueue, ^{
     GADMAdapterUnityMapTableRemoveObjectForKey(_placementInUse, self->_placementID);
@@ -146,20 +149,10 @@ static NSMapTable<NSString *, GADMUnityInterstitialAd *> *_placementInUse;
   }
 }
 
-- (void)unityAdsAdLoaded:(nonnull NSString *)placementId {
-  id<GADMAdNetworkConnector> strongNetworkConnector = _connector;
-  id<GADMAdNetworkAdapter> strongAdapter = _adapter;
-
-  if (strongNetworkConnector && strongAdapter) {
-    [strongNetworkConnector adapterDidReceiveInterstitial:strongAdapter];
-  }
-}
-
 #pragma mark - UnityAdsShowDelegate Methods
 
 - (void)unityAdsShowStart:(nonnull NSString *)placementId {
   // nothing to do
-  // todo: double check if impression need this
 }
 
 - (void)unityAdsShowClick:(NSString *)placementId {
@@ -184,15 +177,25 @@ static NSMapTable<NSString *, GADMUnityInterstitialAd *> *_placementInUse;
 }
 
 - (void)unityAdsShowFailed:(NSString *)placementId withError:(UnityAdsShowError)error withMessage:(NSString *)message {
-  id<GADMAdNetworkConnector> strongNetworkConnector = _connector;
+  id<GADMAdNetworkConnector> strongConnector = _connector;
   id<GADMAdNetworkAdapter> strongAdapter = _adapter;
 
-  if (error == kUnityAdsErrorShowError) {
-    if (strongNetworkConnector && strongAdapter) {
-      [strongNetworkConnector adapterWillDismissInterstitial:strongAdapter];
-      [strongNetworkConnector adapterDidDismissInterstitial:strongAdapter];
-    }
+  if (!strongConnector || !strongAdapter) {
+    return;
   }
+
+  if (error == kUnityShowErrorNotReady) {
+    NSError *error = GADMAdapterUnityErrorWithCodeAndDescription(
+        GADMAdapterUnityErrorShowAdNotReady, @"Failed to show Unity Ads interstitial.");
+    [strongConnector adapter:strongAdapter didFailAd:error];
+  } else {
+    NSError *errorWithDescription =
+        GADMAdapterUnitySDKErrorWithUnityAdsShowErrorAndMessage(error, message);
+    [strongConnector adapter:strongAdapter didFailAd:errorWithDescription];
+  }
+
+  [strongConnector adapterWillDismissInterstitial:strongAdapter];
+  [strongConnector adapterDidDismissInterstitial:strongAdapter];
 }
 
 @end

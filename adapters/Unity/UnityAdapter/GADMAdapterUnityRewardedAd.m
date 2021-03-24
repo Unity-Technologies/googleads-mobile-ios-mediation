@@ -100,17 +100,17 @@ static NSMapTable<NSString *, GADMAdapterUnityRewardedAd *> *_placementInUseRewa
     GADMAdapterUnityMapTableRemoveObjectForKey(_placementInUseRewarded, self->_placementID);
   });
 
-  if (![UnityAds isReady:_placementID]) {
-    NSError *error = GADMAdapterUnityErrorWithCodeAndDescription(
-        GADMAdapterUnityErrorShowAdNotReady, @"Failed to show Unity Ads rewarded video.");
-    [_adEventDelegate didFailToPresentWithError:error];
-    return;
-  }
   [_adEventDelegate willPresentFullScreenView];
   [UnityAds show:viewController placementId:_placementID showDelegate:self];
 }
 
 #pragma mark - UnityAdsLoadDelegate Methods
+
+- (void)unityAdsAdLoaded:(nonnull NSString *)placementId {
+  if (_adLoadCompletionHandler) {
+    _adEventDelegate = _adLoadCompletionHandler(self, nil);
+  }
+}
 
 - (void)unityAdsAdFailedToLoad:(NSString *)placementId withError:(UnityAdsLoadError)error withMessage:(NSString *)message {
   dispatch_async(_lockQueue, ^{
@@ -121,12 +121,6 @@ static NSMapTable<NSString *, GADMAdapterUnityRewardedAd *> *_placementInUseRewa
     NSError *error = GADUnityErrorWithDescription([NSString
         stringWithFormat:@"Failed to load rewarded ad with placement ID '%@'", placementId]);
     _adEventDelegate = _adLoadCompletionHandler(nil, error);
-  }
-}
-
-- (void)unityAdsAdLoaded:(nonnull NSString *)placementId {
-  if (_adLoadCompletionHandler) {
-    _adEventDelegate = _adLoadCompletionHandler(self, nil);
   }
 }
 
@@ -165,10 +159,22 @@ static NSMapTable<NSString *, GADMAdapterUnityRewardedAd *> *_placementInUseRewa
 }
 
 - (void)unityAdsShowFailed:(NSString *)placementId withError:(UnityAdsShowError)error withMessage:(NSString *)message {
-  if (_adEventDelegate) {
-    NSError *errorWithDescription =
-        GADMAdapterUnitySDKErrorWithUnityAdsShowErrorAndMessage(error, message);
-    [_adEventDelegate didFailToPresentWithError:errorWithDescription];
+  id<GADMediationRewardedAdEventDelegate> strongDelegate = _adEventDelegate;
+
+  if (!strongDelegate) {
+    return;
+  }
+
+  NSError *errorWithDescription =
+      GADMAdapterUnitySDKErrorWithUnityAdsShowErrorAndMessage(error, message);
+
+  if (error == kUnityShowErrorNotReady) {
+    NSError *error = GADMAdapterUnityErrorWithCodeAndDescription(
+        GADMAdapterUnityErrorShowAdNotReady, @"Failed to show Unity Ads rewarded video.");
+    [strongDelegate didFailToPresentWithError:error];
+  } else {
+
+    [strongDelegate didFailToPresentWithError:errorWithDescription];
   }
 }
 
