@@ -138,20 +138,15 @@ static NSMapTable<NSString *, GADMAdapterUnityRewardedAd *> *_placementInUseRewa
 }
 
 - (void)unityAdsShowComplete:(NSString *)placementId withFinishState:(UnityAdsShowCompletionState)state {
-  if (state == kUnityAdsFinishStateCompleted) {
-    [_adEventDelegate didEndVideo];
+  [_adEventDelegate didEndVideo];
 
+  if (state == kUnityAdsFinishStateCompleted) {
     // Unity Ads doesn't provide a way to set the reward on their front-end. Default to a reward
     // amount of 1. Publishers using this adapter should override the reward on the AdMob
     // front-end.
     GADAdReward *reward = [[GADAdReward alloc] initWithRewardType:@""
                                                      rewardAmount:[NSDecimalNumber one]];
     [_adEventDelegate didRewardUserWithReward:reward];
-  } else if (state == kUnityAdsFinishStateError) {
-    NSError *error = GADMAdapterUnityErrorWithCodeAndDescription(
-        GADMAdapterUnityErrorFinish,
-        @"UnityAds finished presenting with error state kUnityAdsFinishStateError.");
-    [_adEventDelegate didFailToPresentWithError:error];
   }
 
   [_adEventDelegate willDismissFullScreenView];
@@ -159,23 +154,9 @@ static NSMapTable<NSString *, GADMAdapterUnityRewardedAd *> *_placementInUseRewa
 }
 
 - (void)unityAdsShowFailed:(NSString *)placementId withError:(UnityAdsShowError)error withMessage:(NSString *)message {
-  id<GADMediationRewardedAdEventDelegate> strongDelegate = _adEventDelegate;
-
-  if (!strongDelegate) {
-    return;
-  }
-
   NSError *errorWithDescription =
       GADMAdapterUnitySDKErrorWithUnityAdsShowErrorAndMessage(error, message);
-
-  if (error == kUnityShowErrorNotReady) {
-    NSError *error = GADMAdapterUnityErrorWithCodeAndDescription(
-        GADMAdapterUnityErrorShowAdNotReady, @"Failed to show Unity Ads rewarded video.");
-    [strongDelegate didFailToPresentWithError:error];
-  } else {
-
-    [strongDelegate didFailToPresentWithError:errorWithDescription];
-  }
+  [_adEventDelegate didFailToPresentWithError:errorWithDescription];
 }
 
 @end

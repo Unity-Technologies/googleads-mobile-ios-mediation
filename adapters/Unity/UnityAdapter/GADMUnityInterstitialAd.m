@@ -158,41 +158,42 @@ static NSMapTable<NSString *, GADMUnityInterstitialAd *> *_placementInUse;
 - (void)unityAdsShowClick:(NSString *)placementId {
   id<GADMAdNetworkConnector> strongNetworkConnector = _connector;
   id<GADMAdNetworkAdapter> strongAdapter = _adapter;
+
+  if (!strongAdapter) {
+    return;
+  }
+
   // The Unity Ads SDK doesn't provide an event for leaving the application, so the adapter assumes
   // that a click event indicates the user is leaving the application for a browser or deeplink, and
   // notifies the Google Mobile Ads SDK accordingly.
-  if (strongNetworkConnector && strongAdapter) {
-    [strongNetworkConnector adapterDidGetAdClick:strongAdapter];
-    [strongNetworkConnector adapterWillLeaveApplication:strongAdapter];
-  }
+
+  [strongNetworkConnector adapterDidGetAdClick:strongAdapter];
+  [strongNetworkConnector adapterWillLeaveApplication:strongAdapter];
 }
 
 - (void)unityAdsShowComplete:(NSString *)placementId withFinishState:(UnityAdsShowCompletionState)state {
   id<GADMAdNetworkConnector> strongNetworkConnector = _connector;
   id<GADMAdNetworkAdapter> strongAdapter = _adapter;
-  if (strongNetworkConnector && strongAdapter) {
-    [strongNetworkConnector adapterWillDismissInterstitial:strongAdapter];
-    [strongNetworkConnector adapterDidDismissInterstitial:strongAdapter];
+
+  if (!strongAdapter) {
+    return;
   }
+
+  [strongNetworkConnector adapterWillDismissInterstitial:strongAdapter];
+  [strongNetworkConnector adapterDidDismissInterstitial:strongAdapter];
 }
 
 - (void)unityAdsShowFailed:(NSString *)placementId withError:(UnityAdsShowError)error withMessage:(NSString *)message {
   id<GADMAdNetworkConnector> strongConnector = _connector;
   id<GADMAdNetworkAdapter> strongAdapter = _adapter;
 
-  if (!strongConnector || !strongAdapter) {
+  if (!strongAdapter) {
     return;
   }
 
-  if (error == kUnityShowErrorNotReady) {
-    NSError *error = GADMAdapterUnityErrorWithCodeAndDescription(
-        GADMAdapterUnityErrorShowAdNotReady, @"Failed to show Unity Ads interstitial.");
-    [strongConnector adapter:strongAdapter didFailAd:error];
-  } else {
-    NSError *errorWithDescription =
-        GADMAdapterUnitySDKErrorWithUnityAdsShowErrorAndMessage(error, message);
-    [strongConnector adapter:strongAdapter didFailAd:errorWithDescription];
-  }
+  NSError *errorWithDescription =
+      GADMAdapterUnitySDKErrorWithUnityAdsShowErrorAndMessage(error, message);
+  [strongConnector adapter:strongAdapter didFailAd:errorWithDescription];
 
   [strongConnector adapterWillDismissInterstitial:strongAdapter];
   [strongConnector adapterDidDismissInterstitial:strongAdapter];
