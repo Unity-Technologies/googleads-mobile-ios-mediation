@@ -105,6 +105,8 @@ static NSMapTable<NSString *, GADMAdapterUnityRewardedAd *> *_placementInUseRewa
 }
 
 - (void)cleanup {
+  // Clean up references to prevent a memory leak where the object can not be cleand up
+  // due to holding on to the references.
   _adEventDelegate = nil;
   _adLoadCompletionHandler = nil;
 }
