@@ -104,6 +104,11 @@ static NSMapTable<NSString *, GADMAdapterUnityRewardedAd *> *_placementInUseRewa
   [UnityAds show:viewController placementId:_placementID showDelegate:self];
 }
 
+- (void)cleanup {
+  _adEventDelegate = nil;
+  _adLoadCompletionHandler = nil;
+}
+
 #pragma mark - UnityAdsLoadDelegate Methods
 
 - (void)unityAdsAdLoaded:(nonnull NSString *)placementId {
@@ -122,6 +127,7 @@ static NSMapTable<NSString *, GADMAdapterUnityRewardedAd *> *_placementInUseRewa
         stringWithFormat:@"Failed to load rewarded ad with placement ID '%@'", placementId]);
     _adEventDelegate = _adLoadCompletionHandler(nil, error);
   }
+  [self cleanup];
 }
 
 #pragma mark - UnityAdsShowDelegate Methods
@@ -151,12 +157,14 @@ static NSMapTable<NSString *, GADMAdapterUnityRewardedAd *> *_placementInUseRewa
 
   [_adEventDelegate willDismissFullScreenView];
   [_adEventDelegate didDismissFullScreenView];
+  [self cleanup];
 }
 
 - (void)unityAdsShowFailed:(NSString *)placementId withError:(UnityAdsShowError)error withMessage:(NSString *)message {
   NSError *errorWithDescription =
       GADMAdapterUnitySDKErrorWithUnityAdsShowErrorAndMessage(error, message);
   [_adEventDelegate didFailToPresentWithError:errorWithDescription];
+  [self cleanup];
 }
 
 @end
