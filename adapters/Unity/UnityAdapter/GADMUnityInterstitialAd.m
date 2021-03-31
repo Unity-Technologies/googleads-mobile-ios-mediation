@@ -63,8 +63,8 @@ static NSMapTable<NSString *, GADMUnityInterstitialAd *> *_placementInUse;
   }
 
   _gameID = [[[strongConnector credentials] objectForKey:kGADMAdapterUnityGameID] copy];
-  _placementID = [[[strongConnector credentials] objectForKey:kGADMAdapterUnityPlacementID] copy];
-  if (!_gameID || !_placementID) {
+  NSString *placementID = [[[strongConnector credentials] objectForKey:kGADMAdapterUnityPlacementID] copy];
+  if (!_gameID || !placementID) {
     NSError *error = GADMAdapterUnityErrorWithCodeAndDescription(
         GADMAdapterUnityErrorInvalidServerParameters, @"Game ID and Placement ID cannot be nil.");
     [strongConnector adapter:strongAdapter didFailAd:error];
@@ -77,13 +77,13 @@ static NSMapTable<NSString *, GADMUnityInterstitialAd *> *_placementInUse;
 
   __block GADMUnityInterstitialAd *interstitialAd = nil;
   dispatch_sync(_lockQueue, ^{
-    interstitialAd = [_placementInUse objectForKey:_placementID];
+    interstitialAd = [_placementInUse objectForKey:placementID];
   });
 
   if (interstitialAd) {
     if (strongConnector && strongAdapter) {
       NSString *errorMsg = [NSString
-          stringWithFormat:@"An ad is already loading for placement ID: %@.", _placementID];
+          stringWithFormat:@"An ad is already loading for placement ID: %@.", placementID];
       NSError *error = GADMAdapterUnityErrorWithCodeAndDescription(
           GADMAdapterUnityErrorAdAlreadyLoaded, errorMsg);
       [strongConnector adapter:strongAdapter didFailAd:error];
@@ -92,10 +92,10 @@ static NSMapTable<NSString *, GADMUnityInterstitialAd *> *_placementInUse;
   }
 
   dispatch_async(_lockQueue, ^{
-    GADMAdapterUnityMapTableSetObjectForKey(_placementInUse, self->_placementID, self);
+    GADMAdapterUnityMapTableSetObjectForKey(_placementInUse, placementID, self);
   });
 
-  [UnityAds load:_placementID loadDelegate:self];
+  [UnityAds load:placementID loadDelegate:self];
 }
 
 - (void)presentInterstitialFromRootViewController:(UIViewController *)rootViewController {
@@ -118,6 +118,10 @@ static NSMapTable<NSString *, GADMUnityInterstitialAd *> *_placementInUse;
     return;
   }
 
+  if (!_placementID) {
+    NSLog(@"Unity Ads received call to show before successfully loading an ad");
+  }
+  
   [strongConnector adapterWillPresentInterstitial:strongAdapter];
   [UnityAds show:rootViewController placementId:_placementID showDelegate:self];
 }
@@ -125,6 +129,7 @@ static NSMapTable<NSString *, GADMUnityInterstitialAd *> *_placementInUse;
 #pragma mark - UnityAdsLoadDelegate Methods
 
 - (void)unityAdsAdLoaded:(nonnull NSString *)placementId {
+  _placementID = placementId;
   id<GADMAdNetworkConnector> strongNetworkConnector = _connector;
   id<GADMAdNetworkAdapter> strongAdapter = _adapter;
 
@@ -134,6 +139,7 @@ static NSMapTable<NSString *, GADMUnityInterstitialAd *> *_placementInUse;
 }
 
 - (void)unityAdsAdFailedToLoad:(NSString *)placementId withError:(UnityAdsLoadError)error withMessage:(NSString *)message {
+  _placementID = placementId;
   dispatch_async(_lockQueue, ^{
     GADMAdapterUnityMapTableRemoveObjectForKey(_placementInUse, self->_placementID);
   });
