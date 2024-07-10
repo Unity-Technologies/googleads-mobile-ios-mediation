@@ -52,7 +52,7 @@
     return delegate;
   };
 
-  NSString *placementId = adConfiguration.credentials.settings[GADMAdapterPanglePlacementID] ?: @"";
+  NSString *placementId = adConfiguration.credentials.settings[GADMAdapterPanglePlacementID];
   if (!placementId.length) {
     NSError *error = GADMAdapterPangleErrorWithCodeAndDescription(
         GADPangleErrorInvalidServerParameters,
@@ -63,7 +63,9 @@
 
   PAGRewardedRequest *request = [PAGRewardedRequest request];
   request.adString = adConfiguration.bidResponse;
-
+  if (adConfiguration.watermark) {
+    request.extraInfo = @{@"admob_watermark":adConfiguration.watermark?:@""};
+  }
   GADPangleRewardedRenderer *__weak weakSelf = self;
   [PAGRewardedAd loadAdWithSlotID:placementId
                           request:request

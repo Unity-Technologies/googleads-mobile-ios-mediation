@@ -1,5 +1,52 @@
 ## DT Exchange iOS Mediation Adapter Changelog
 
+#### [Version 8.3.0.0](https://dl.google.com/googleadmobadssdk/mediation/ios/dtexchange/DTExchangeAdapter-8.3.0.0.zip)
+- Verified compatibility with DT Exchange SDK version 8.3.0.
+
+Built and tested with:
+- Google Mobile Ads SDK version 11.5.0.
+- DT Exchange SDK version 8.3.0.
+
+#### [Version 8.2.8.0](https://dl.google.com/googleadmobadssdk/mediation/ios/dtexchange/DTExchangeAdapter-8.2.8.0.zip)
+- Verified compatibility with DT Exchange SDK version 8.2.8.
+
+Built and tested with:
+- Google Mobile Ads SDK version 11.3.0.
+- DT Exchange SDK version 8.2.8.
+
+#### [Version 8.2.7.0](https://dl.google.com/googleadmobadssdk/mediation/ios/dtexchange/DTExchangeAdapter-8.2.7.0.zip)
+- Verified compatibility with DT Exchange SDK version 8.2.7.
+
+Built and tested with:
+- Google Mobile Ads SDK version 11.2.0.
+- DT Exchange SDK version 8.2.7.
+
+#### [Version 8.2.6.1](https://dl.google.com/googleadmobadssdk/mediation/ios/dtexchange/DTExchangeAdapter-8.2.6.1.zip)
+- Added `didFailToPresentWithError` callbacks in rewarded ad.
+- Added `IAAdDidExpire` delegate method in interstitial and rewarded ads.
+- Now requires minimum iOS version 12.0.
+- Now requires Google Mobile Ads SDK version 11.0 or higher.
+- Included `Info.plist` in the frameworks within `DTExchangeAdapter.xcframework`.
+
+Built and tested with:
+- Google Mobile Ads SDK version 11.0.1.
+- DT Exchange SDK version 8.2.6.
+
+#### [Version 8.2.6.0](https://dl.google.com/googleadmobadssdk/mediation/ios/dtexchange/DTExchangeAdapter-8.2.6.0.zip)
+- Verified compatibility with DT Exchange SDK version 8.2.6.
+- Removed the deprecated `willBackgroundApplication` delegate methods from the banner and interstitial ad implementations.
+
+Built and tested with:
+- Google Mobile Ads SDK version 10.14.0.
+- DT Exchange SDK version 8.2.6.
+
+#### [Version 8.2.5.0](https://dl.google.com/googleadmobadssdk/mediation/ios/dtexchange/DTExchangeAdapter-8.2.5.0.zip)
+- Verified compatibility with DT Exchange SDK version 8.2.5.
+
+Built and tested with:
+- Google Mobile Ads SDK version 10.14.0.
+- DT Exchange SDK version 8.2.5.
+
 #### [Version 8.2.4.0](https://dl.google.com/googleadmobadssdk/mediation/ios/dtexchange/DTExchangeAdapter-8.2.4.0.zip)
 - Verified compatibility with DT Exchange SDK version 8.2.4.
 

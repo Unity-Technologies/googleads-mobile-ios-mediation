@@ -23,10 +23,18 @@
 #import "GADMAdapterChartboostUtils.h"
 #import "GADMChartboostError.h"
 #import "GADMediationAdapterChartboost.h"
+#import "GADMediationAdapterChartboostBannerAd.h"
+#import "GADMediationAdapterChartboostInterstitialAd.h"
 
 @implementation GADMediationAdapterChartboost {
+  /// Chartboost banner ad wrapper.
+  GADMediationAdapterChartboostBannerAd *_bannerAd;
+
   /// Chartboost rewarded ad wrapper.
   GADMAdapterChartboostRewardedAd *_rewardedAd;
+
+  /// Chartboost interstitial ad wrapper.
+  GADMediationAdapterChartboostInterstitialAd *_interstitialAd;
 }
 
 + (void)setUpWithConfiguration:(GADMediationServerConfiguration *)configuration
@@ -75,6 +83,9 @@
                   completion:^(CHBStartError *cbError) {
                     NSError *error = nil;
                     if (cbError) {
+                      error = GADMAdapterChartboostErrorWithCodeAndDescription(
+                          GADMAdapterChartboostErrorInitializationFailure,
+                          @"Chartboost SDK failed to initialize.");
                       NSLog(@"Failed to initialize Chartboost SDK: %@", cbError);
                     }
                     completionHandler(error);
@@ -118,6 +129,26 @@
   _rewardedAd = [[GADMAdapterChartboostRewardedAd alloc] initWithAdConfiguration:adConfiguration
                                                                completionHandler:completionHandler];
   [_rewardedAd loadRewardedAd];
+}
+
+- (void)loadBannerForAdConfiguration:(GADMediationBannerAdConfiguration *)adConfiguration
+                   completionHandler:(GADMediationBannerLoadCompletionHandler)completionHandler {
+  _bannerAd =
+      [[GADMediationAdapterChartboostBannerAd alloc] initWithAdConfiguration:adConfiguration
+                                                           completionHandler:completionHandler];
+
+  [_bannerAd loadBannerAd];
+}
+
+- (void)loadInterstitialForAdConfiguration:
+            (GADMediationInterstitialAdConfiguration *)adConfiguration
+                         completionHandler:
+                             (GADMediationInterstitialLoadCompletionHandler)completionHandler {
+  _interstitialAd = [[GADMediationAdapterChartboostInterstitialAd alloc]
+      initWithAdConfiguration:adConfiguration
+            completionHandler:completionHandler];
+
+  [_interstitialAd loadInterstitialAd];
 }
 
 @end

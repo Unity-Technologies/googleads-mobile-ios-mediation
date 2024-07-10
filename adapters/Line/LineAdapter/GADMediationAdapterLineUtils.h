@@ -18,6 +18,7 @@
 #import <GoogleMobileAds/GoogleMobileAds.h>
 
 #import "GADMediationAdapterLine.h"
+#import "GADMediationAdapterLineExtras.h"
 
 /// Returns an NSError with code |code| and with NSLocalizedDescriptionKey and
 /// NSLocalizedFailureReasonErrorKey values set to |description|.
@@ -34,11 +35,27 @@ void GADMediationAdapterLineLog(NSString *_Nonnull format, ...);
 void GADMediationAdapterLineMutableSetAddObject(NSMutableSet *_Nullable set,
                                                 NSObject *_Nonnull object);
 
-/// Returns the slot ID from the ad configuration. It may return nil if it encounters an error.
-NSString *_Nullable GADMediationAdapterLineSlotID(
-    GADMediationAdConfiguration *_Nonnull adConfiguration, NSError *_Nullable *_Nonnull errorPtr);
+/// Returns the slot ID from the credentials. It may return nil if it encounters an error.
+NSString *_Nullable GADMediationAdapterLineSlotID(GADMediationCredentials *_Nonnull credentials,
+                                                  NSError *_Nullable *_Nonnull errorPtr);
 
 /// Registers Five Ad SDK with the credentials array. If it was previously registered, then it will
 /// just return.
 NSError *_Nullable GADMediationAdapterLineRegisterFiveAd(
     NSArray<GADMediationCredentials *> *_Nonnull credentialsArray);
+
+/// Returns whether ad should start with aduio.
+/// - It returns true when the extra's adAudio is GADMediationAdapterLineAdAudioUnmuted.
+/// - It returns false when the extra's adAudio is GADMediationAdapterLineAdAudioMuted.
+/// - If the extras is nil or the the extra's adAudio is GADMediationAdapterLineAdAudioUnset, its
+/// return value depends on GADMobileAds.sharedInstance.applicationMuted.
+BOOL GADMediationAdapterLineShouldEnableAudio(GADExtras *_Nullable extras);
+
+/// Returns FADAdLoader for the registered FADConfig. If FADConfig hasn't been registered, then it
+/// returns nil.
+FADAdLoader *_Nullable GADMediationAdapterLineFADAdLoaderForRegisteredConfig(
+    NSError *_Nullable *_Nullable errorPtr);
+
+/// Watermark string from ad configuraiton.
+NSString *_Nullable GADMediationAdapterLineWatermarkStringFromAdConfiguration(
+    GADMediationAdConfiguration *_Nonnull adConfiguration);

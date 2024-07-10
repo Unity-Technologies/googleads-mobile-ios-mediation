@@ -98,7 +98,14 @@ static GADMAdapterIronSourceInterstitialAdDelegate *interstitialDelegate = nil;
     [GADMAdapterIronSourceUtils
         onLog:[NSString stringWithFormat:@"Loading IronSource interstitial ad with Instance ID: %@",
                                          self.instanceID]];
-    [IronSource loadISDemandOnlyInterstitial:self.instanceID];
+
+    [GADMAdapterIronSourceUtils setWatermarkWithAdConfiguration:adConfiguration];
+    NSString *bidResponse = adConfiguration.bidResponse;
+    if(bidResponse) {
+      [IronSource loadISDemandOnlyInterstitialWithAdm:self.instanceID adm:bidResponse];
+    } else{
+      [IronSource loadISDemandOnlyInterstitial:self.instanceID];
+    }
   } else {
     NSString *errorMsg = [NSString
         stringWithFormat:
@@ -151,7 +158,23 @@ static GADMAdapterIronSourceInterstitialAdDelegate *interstitialDelegate = nil;
 #pragma mark - Utils methods
 
 - (BOOL)canLoadInterstitialInstance {
-  return ![[self getState] isEqualToString:GADMAdapterIronSourceInstanceStateLocked];
+  if ([[self getState] isEqualToString:GADMAdapterIronSourceInstanceStateLocked]) {
+    return false;
+  }
+
+  GADMAdapterIronSourceInterstitialAd *adInstance =
+      [GADMAdapterIronSourceInterstitialAd delegateForKey:self.instanceID];
+  if (adInstance == nil) {
+    return true;
+  }
+
+  NSString *currentInstanceState = [adInstance getState];
+  if ([currentInstanceState isEqualToString:GADMAdapterIronSourceInstanceStateLocked] ||
+      [currentInstanceState isEqualToString:GADMAdapterIronSourceInstanceStateShowing]) {
+    return false;
+  }
+
+  return true;
 }
 
 #pragma mark - GADMediationInterstitialAd

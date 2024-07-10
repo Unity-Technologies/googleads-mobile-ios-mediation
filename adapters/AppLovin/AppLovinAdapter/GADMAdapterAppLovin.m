@@ -148,6 +148,7 @@
            strongSelf->_interstitial = [[ALInterstitialAd alloc] initWithSdk:strongSelf->_SDK];
            strongSelf->_interstitial.adDisplayDelegate = strongSelf->_interstitialDelegate;
            strongSelf->_interstitial.adVideoPlaybackDelegate = strongSelf->_interstitialDelegate;
+           strongSelf->_settings = strongConnector.credentials;
 
            if (strongSelf->_zoneIdentifier.length > 0) {
              [strongSelf->_SDK.adService

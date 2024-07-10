@@ -30,7 +30,7 @@
   GADMediationBannerLoadCompletionHandler _adLoadCompletionHandler;
 
   /// The ad event delegate to forward ad rendering events to the Google Mobile Ads SDK.
-  id<GADMediationBannerAdEventDelegate> _adEventDelegate;
+  __weak id<GADMediationBannerAdEventDelegate> _adEventDelegate;
 
   /// The Mintegral banner ad.
   MTGBannerAdView *_bannerAdView;
@@ -109,6 +109,14 @@
 
 - (void)adViewCloseFullScreen:(MTGBannerAdView *)adView {
   [_adEventDelegate didDismissFullScreenView];
+}
+
+- (void)adViewWillLeaveApplication:(MTGBannerAdView *)adView {
+  // Do nothing.
+}
+
+- (void)adViewClosed:(MTGBannerAdView *)adView {
+  // Do nothing.
 }
 
 #pragma mark - GADMediationBannerAd

@@ -14,7 +14,7 @@
 
 #import "GADMAdapterIMobileUnifiedNativeAd.h"
 
-#import <ImobileSdkAds/ImobileSdkAds.h>
+#import <ImobileSdkAds.h>
 
 #import <stdatomic.h>
 
@@ -33,9 +33,7 @@
   GADMediationNativeLoadCompletionHandler _loadCompletionHandler;
 
   /// The ad event delegate to forward ad rendering events to the Google Mobile Ads SDK.
-  /// Intentionally keeping a reference to the delegate because this delegate is returned from the
-  /// GMA SDK, not set on the GMA SDK.
-  id<GADMediationNativeAdEventDelegate> _delegate;
+  __weak id<GADMediationNativeAdEventDelegate> _delegate;
 
   /// View to display the i-mobile native ad.
   UIView *_iMobileNativeAdView;
@@ -241,7 +239,6 @@
                                  view:(UIView *)view
                        viewController:(UIViewController *)viewController {
   [_iMobileNativeAd sendClick];
-  [_delegate willBackgroundApplication];
 }
 
 @end

@@ -32,7 +32,7 @@
   GADMediationBannerLoadCompletionHandler _adLoadCompletionHandler;
 
   /// The ad event delegate to forward ad rendering events to the Google Mobile Ads SDK.
-  id<GADMediationBannerAdEventDelegate> _delegate;
+  __weak id<GADMediationBannerAdEventDelegate> _delegate;
 
   /// The requested ad size.
   GADAdSize _bannerSize;
@@ -62,10 +62,8 @@
     _adConfiguration = adConfiguration;
     _bannerSize = GADMAdapterVungleAdSizeForAdSize(adConfiguration.adSize);
 
-    VungleAdNetworkExtras *networkExtras = adConfiguration.extras;
     self.desiredPlacement =
-        [GADMAdapterVungleUtils findPlacement:adConfiguration.credentials.settings
-                                networkExtras:networkExtras];
+        [GADMAdapterVungleUtils findPlacement:adConfiguration.credentials.settings];
 
     __block atomic_flag adLoadHandlerCalled = ATOMIC_FLAG_INIT;
     __block GADMediationBannerLoadCompletionHandler origAdLoadHandler = [completionHandler copy];
@@ -96,13 +94,6 @@
     _adLoadCompletionHandler(nil, error);
     return;
   }
-
-  if (!self.desiredPlacement.length) {
-    NSError *error = GADMAdapterVungleInvalidPlacementErrorWithCodeAndDescription();
-    _adLoadCompletionHandler(nil, error);
-    return;
-  }
-
   if (![VungleAds isInitialized]) {
     NSString *appID = [GADMAdapterVungleUtils findAppID:_adConfiguration.credentials.settings];
     [[GADMAdapterVungleRouter sharedInstance] initWithAppId:appID delegate:self];
@@ -135,9 +126,7 @@
 }
 
 - (void)bannerAdDidFailToLoad:(nonnull VungleBanner *)banner withError:(nonnull NSError *)error {
-  NSError *gadError = GADMAdapterVungleErrorToGADError(GADMAdapterVungleErrorAdNotPlayable,
-                                                       error.code, error.localizedDescription);
-  _adLoadCompletionHandler(nil, gadError);
+  _adLoadCompletionHandler(nil, error);
 }
 
 - (void)bannerAdWillPresent:(nonnull VungleBanner *)banner {
@@ -149,9 +138,7 @@
 }
 
 - (void)bannerAdDidFailToPresent:(nonnull VungleBanner *)banner withError:(nonnull NSError *)error {
-  NSError *gadError = GADMAdapterVungleErrorToGADError(GADMAdapterVungleErrorRenderBannerAd,
-                                                       error.code, error.localizedDescription);
-  [_delegate didFailToPresentWithError:gadError];
+  [_delegate didFailToPresentWithError:error];
 }
 
 - (void)bannerAdWillClose:(nonnull VungleBanner *)banner {
@@ -173,7 +160,7 @@
 }
 
 - (void)bannerAdWillLeaveApplication:(nonnull VungleBanner *)banner {
-  [_delegate willBackgroundApplication];
+  // Google Mobile Ads SDK doesn't have a matching event.
 }
 
 #pragma mark - GADMAdapterVungleDelegate

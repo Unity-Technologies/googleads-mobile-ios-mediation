@@ -1,7 +1,73 @@
 ## AppLovin iOS Mediation Adapter Changelog
 
-#### Next Version
+#### [Version 12.5.0.0](https://dl.google.com/googleadmobadssdk/mediation/ios/applovin/AppLovinAdapter-12.5.0.0.zip)
+- Verified compatibility with AppLovin SDK 12.5.0.
+
+Built and tested with:
+- Google Mobile Ads SDK version 11.5.0.
+- AppLovin SDK version 12.5.0.
+
+#### [Version 12.4.2.0](https://dl.google.com/googleadmobadssdk/mediation/ios/applovin/AppLovinAdapter-12.4.2.0.zip)
+- Verified compatibility with AppLovin SDK 12.4.2.
+
+Built and tested with:
+- Google Mobile Ads SDK version 11.4.0.
+- AppLovin SDK version 12.4.2.
+
+#### [Version 12.4.1.0](https://dl.google.com/googleadmobadssdk/mediation/ios/applovin/AppLovinAdapter-12.4.1.0.zip)
+- Verified compatibility with AppLovin SDK 12.4.1.
+
+Built and tested with:
+- Google Mobile Ads SDK version 11.3.0.
+- AppLovin SDK version 12.4.1.
+
+#### [Version 12.4.0.0](https://dl.google.com/googleadmobadssdk/mediation/ios/applovin/AppLovinAdapter-12.4.0.0.zip)
+- Verified compatibility with AppLovin SDK 12.4.0.
+
+Built and tested with:
+- Google Mobile Ads SDK version 11.2.0.
+- AppLovin SDK version 12.4.0.
+
+#### [Version 12.3.0.0](https://dl.google.com/googleadmobadssdk/mediation/ios/applovin/AppLovinAdapter-12.3.0.0.zip)
+- Verified compatibility with AppLovin SDK 12.3.0.
+
+Built and tested with:
+- Google Mobile Ads SDK version 11.2.0.
+- AppLovin SDK version 12.3.0.
+
+#### [Version 12.2.1.0](https://dl.google.com/googleadmobadssdk/mediation/ios/applovin/AppLovinAdapter-12.2.1.0.zip)
+- Verified compatibility with AppLovin SDK 12.2.1.
+- Now requires minimum iOS version 12.0.
+- Now requires Google Mobile Ads SDK version 11.0 or higher.
+- Included `Info.plist` in the frameworks within `AppLovinAdapter.xcframework`.
+
+Built and tested with:
+- Google Mobile Ads SDK version 11.0.1.
+- AppLovin SDK version 12.2.1.
+
+#### [Version 12.1.0.1](https://dl.google.com/googleadmobadssdk/mediation/ios/applovin/AppLovinAdapter-12.1.0.1.zip)
+- Added the possibility to load an interstitial or rewarded ad right after
+requesting to show them if the server parameters are enabled.
+
+Built and tested with:
+- Google Mobile Ads SDK version 10.14.0.
+- AppLovin SDK version 12.1.0.
+
+#### [Version 12.1.0.0](https://dl.google.com/googleadmobadssdk/mediation/ios/applovin/AppLovinAdapter-12.1.0.0.zip)
+- Verified compatibility with AppLovin SDK 12.1.0.
+- Removed the deprecated `willBackgroundApplication` delegate method from the interstitial ad implementation.
+
+Built and tested with:
+- Google Mobile Ads SDK version 10.14.0.
+- AppLovin SDK version 12.1.0.
+
+#### [Version 11.11.4.0](https://dl.google.com/googleadmobadssdk/mediation/ios/applovin/AppLovinAdapter-11.11.4.0.zip)
+- Verified compatibility with AppLovin SDK 11.11.4.
 - Adapter no longer checks for the AppLovin SDK key from the `Info.plist` file.
+
+Built and tested with:
+- Google Mobile Ads SDK version 10.12.0.
+- AppLovin SDK version 11.11.4.
 
 #### [Version 11.11.3.0](https://dl.google.com/googleadmobadssdk/mediation/ios/applovin/AppLovinAdapter-11.11.3.0.zip)
 - Verified compatibility with AppLovin SDK 11.11.3.

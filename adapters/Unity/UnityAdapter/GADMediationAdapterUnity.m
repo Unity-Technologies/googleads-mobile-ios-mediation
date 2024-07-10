@@ -14,6 +14,7 @@
 
 #import "GADMediationAdapterUnity.h"
 #import <UnityAds/UnityAds.h>
+#import "GADMAdapterUnityConstants.h"
 #import "GADMAdapterUnityUtils.h"
 #import "GADMUnityBannerMediationAdapterProxy.h"
 #import "GADMUnityInterstitialMediationAdapterProxy.h"
@@ -29,6 +30,7 @@
 @property(nonatomic, strong) GADUnityBaseMediationAdapterProxy *adapterProxy;
 @property(nonatomic, strong) UADSBannerView *bannerView;
 @property(nonatomic, strong) NSString *objectId;  // Object ID used to track loaded/shown ads.
+@property(nonatomic, strong, nullable) NSData *watermarkForFullScreenAd;
 @end
 
 @implementation GADMediationAdapterUnity
@@ -66,12 +68,22 @@
   return extractVersionFromString(GADMAdapterUnityVersion);
 }
 
+- (void)collectSignalsForRequestParameters:(GADRTBRequestParameters *)params
+                         completionHandler:(GADRTBSignalCompletionHandler)completionHandler {
+  [UnityAds getToken:^(NSString *_Nullable token) {
+    NSString *unityToken = token ?: @"";
+    completionHandler(unityToken, nil);
+  }];
+}
+
 - (void)loadRewardedAdForAdConfiguration:(GADMediationRewardedAdConfiguration *)adConfiguration
                        completionHandler:
                            (GADMediationRewardedLoadCompletionHandler)completionHandler {
-  [GADMediationAdapterUnity setCOPPA:(adConfiguration.childDirectedTreatment
-                                          ? adConfiguration.childDirectedTreatment.integerValue
-                                          : -1)];
+  [GADMediationAdapterUnity
+      setCOPPA:(GADMobileAds.sharedInstance.requestConfiguration.tagForChildDirectedTreatment
+                    ? GADMobileAds.sharedInstance.requestConfiguration.tagForChildDirectedTreatment
+                          .integerValue
+                    : -1)];
   self.adapterProxy = [[GADMUnityRewardedMediationAdapterProxy alloc] initWithAd:self
                                                                completionHandler:completionHandler];
 
@@ -82,9 +94,11 @@
             (GADMediationInterstitialAdConfiguration *)adConfiguration
                          completionHandler:
                              (GADMediationInterstitialLoadCompletionHandler)completionHandler {
-  [GADMediationAdapterUnity setCOPPA:(adConfiguration.childDirectedTreatment
-                                          ? adConfiguration.childDirectedTreatment.integerValue
-                                          : -1)];
+  [GADMediationAdapterUnity
+      setCOPPA:(GADMobileAds.sharedInstance.requestConfiguration.tagForChildDirectedTreatment
+                    ? GADMobileAds.sharedInstance.requestConfiguration.tagForChildDirectedTreatment
+                          .integerValue
+                    : -1)];
   self.adapterProxy =
       [[GADMUnityInterstitialMediationAdapterProxy alloc] initWithAd:self
                                                    completionHandler:completionHandler];
@@ -97,17 +111,23 @@
 
   self.placementId = adConfiguration.placementId;
   self.objectId = [NSUUID UUID].UUIDString;
+  self.watermarkForFullScreenAd = adConfiguration.watermark;
   UADSLoadOptions *loadOptions = [UADSLoadOptions new];
   loadOptions.objectId = self.objectId;
+  if (adConfiguration.bidResponse) {
+    loadOptions.adMarkup = adConfiguration.bidResponse;
+  }
 
   [UnityAds load:self.placementId options:loadOptions loadDelegate:self.adapterProxy];
 }
 
 - (void)loadBannerForAdConfiguration:(GADMediationBannerAdConfiguration *)adConfiguration
                    completionHandler:(GADMediationBannerLoadCompletionHandler)completionHandler {
-  [GADMediationAdapterUnity setCOPPA:(adConfiguration.childDirectedTreatment
-                                          ? adConfiguration.childDirectedTreatment.integerValue
-                                          : -1)];
+  [GADMediationAdapterUnity
+      setCOPPA:(GADMobileAds.sharedInstance.requestConfiguration.tagForChildDirectedTreatment
+                    ? GADMobileAds.sharedInstance.requestConfiguration.tagForChildDirectedTreatment
+                          .integerValue
+                    : -1)];
   [self initializeWithConfiguration:adConfiguration];
 
   self.placementId = adConfiguration.placementId;
@@ -119,16 +139,30 @@
   }
   self.adapterProxy = [[GADMUnityBannerMediationAdapterProxy alloc] initWithAd:self
                                                              completionHandler:completionHandler];
-
   self.bannerView = [[UADSBannerView alloc] initWithPlacementId:self.placementId
                                                            size:supportedSize.size];
   self.bannerView.delegate = self.adapterProxy;
-  [self.bannerView load];
+  UADSLoadOptions *loadOptions = [UADSLoadOptions new];
+  NSData *watermark = adConfiguration.watermark;
+  if (watermark != nil) {
+    NSString *watermarkString = [watermark base64EncodedStringWithOptions:0];
+    [loadOptions.dictionary setValue:watermarkString forKey:GADMAdapterUnityWatermarkKey];
+  }
+  if (adConfiguration.bidResponse) {
+    loadOptions.adMarkup = adConfiguration.bidResponse;
+  }
+
+  [self.bannerView loadWithOptions:loadOptions];
 }
 
 - (void)presentFromViewController:(nonnull UIViewController *)viewController {
   UADSShowOptions *showOptions = [UADSShowOptions new];
   showOptions.objectId = self.objectId;
+  if (self.watermarkForFullScreenAd != nil) {
+    NSString *watermarkString = [self.watermarkForFullScreenAd base64EncodedStringWithOptions:0];
+    [showOptions.dictionary setValue:watermarkString forKey:GADMAdapterUnityWatermarkKey];
+  }
+
   [self.adapterProxy.eventDelegate willPresentFullScreenView];
   [UnityAds show:viewController
        placementId:self.placementId

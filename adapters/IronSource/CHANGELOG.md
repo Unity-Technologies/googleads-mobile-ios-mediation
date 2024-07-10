@@ -1,5 +1,88 @@
 ## IronSource iOS Mediation Adapter Changelog
 
+#### [Version 8.1.1.0.0](https://dl.google.com/googleadmobadssdk/mediation/ios/ironsource/IronSourceAdapter-8.1.1.0.0.zip)
+- Verified compatibility with IronSource SDK version 8.1.1.0.
+
+Built and tested with:
+- Google Mobile Ads SDK version 11.6.0.
+- IronSource SDK version 8.1.1.0.
+
+#### [Version 8.1.0.0.1](https://dl.google.com/googleadmobadssdk/mediation/ios/ironsource/IronSourceAdapter-8.1.0.0.1.zip)
+- Fixed missing callbacks for Interstitial and Rewarded ads.
+
+Built and tested with:
+- Google Mobile Ads SDK version 11.5.0.
+- IronSource SDK version 8.1.0.0.
+
+#### [Version 8.1.0.0.0](https://dl.google.com/googleadmobadssdk/mediation/ios/ironsource/IronSourceAdapter-8.1.0.0.0.zip)
+- Verified compatibility with IronSource SDK version 8.1.0.0.
+
+Built and tested with:
+- Google Mobile Ads SDK version 11.5.0.
+- IronSource SDK version 8.1.0.0.
+
+#### [Version 8.0.0.0.1](https://dl.google.com/googleadmobadssdk/mediation/ios/ironsource/IronSourceAdapter-8.0.0.0.1.zip)
+- Added watermark support for bidding ads.
+
+Built and tested with:
+- Google Mobile Ads SDK version 11.4.0.
+- IronSource SDK version 8.0.0.0.
+
+#### [Version 8.0.0.0.0](https://dl.google.com/googleadmobadssdk/mediation/ios/ironsource/IronSourceAdapter-8.0.0.0.0.zip)
+- Verified compatibility with IronSource SDK version 8.0.0.0.
+
+Built and tested with:
+- Google Mobile Ads SDK version 11.3.0.
+- IronSource SDK version 8.0.0.0.
+
+#### [Version 7.9.1.0.0](https://dl.google.com/googleadmobadssdk/mediation/ios/ironsource/IronSourceAdapter-7.9.1.0.0.zip)
+- Verified compatibility with IronSource SDK version 7.9.1.0.
+- Updated ironSource adapter to conform to `GADRTBAdapter` protocol.
+- Added bidding support for interstitial and rewarded ad formats.
+
+Built and tested with:
+- Google Mobile Ads SDK version 11.2.0.
+- IronSource SDK version 7.9.1.0.
+
+#### [Version 7.9.0.0.0](https://dl.google.com/googleadmobadssdk/mediation/ios/ironsource/IronSourceAdapter-7.9.0.0.0.zip)
+- Verified compatibility with IronSource SDK version 7.9.0.0.
+
+Built and tested with:
+- Google Mobile Ads SDK version 11.2.0.
+- IronSource SDK version 7.9.0.0.
+
+#### [Version 7.8.0.0.0](https://dl.google.com/googleadmobadssdk/mediation/ios/ironsource/IronSourceAdapter-7.8.0.0.0.zip)
+- Verified compatibility with IronSource SDK version 7.8.0.0.
+- Now requires minimum iOS version 12.0.
+- Now requires Google Mobile Ads SDK version 11.0 or higher.
+- Included `Info.plist` in the frameworks within `IronSourceAdapter.xcframework`.
+
+Built and tested with:
+- Google Mobile Ads SDK version 11.0.1.
+- IronSource SDK version 7.8.0.0.
+
+#### [Version 7.7.0.0.0](https://dl.google.com/googleadmobadssdk/mediation/ios/ironsource/IronSourceAdapter-7.7.0.0.0.zip)
+- Verified compatibility with IronSource SDK version 7.7.0.0.
+
+Built and tested with:
+- Google Mobile Ads SDK version 10.14.0.
+- IronSource SDK version 7.7.0.0.
+
+#### [Version 7.6.0.0](https://dl.google.com/googleadmobadssdk/mediation/ios/ironsource/IronSourceAdapter-7.6.0.0.zip)
+- Verified compatibility with IronSource SDK version 7.6.0.
+- Replaced the deprecated method `GADMobileAds.sharedInstance.sdkVersion` with `GADMobileAds.sharedInstance.versionNumber`.
+
+Built and tested with:
+- Google Mobile Ads SDK version 10.14.0.
+- IronSource SDK version 7.6.0.
+
+#### [Version 7.5.1.0](https://dl.google.com/googleadmobadssdk/mediation/ios/ironsource/IronSourceAdapter-7.5.1.0.zip)
+- Verified compatibility with IronSource SDK version 7.5.1.
+
+Built and tested with:
+- Google Mobile Ads SDK version 10.12.0.
+- IronSource SDK version 7.5.1.
+
 #### [Version 7.5.0.0.0](https://dl.google.com/googleadmobadssdk/mediation/ios/ironsource/IronSourceAdapter-7.5.0.0.0.zip)
 - Added waterfall support for banner (includes MREC) ad format.
 - Verified compatibility with IronSource SDK version 7.5.0.0.

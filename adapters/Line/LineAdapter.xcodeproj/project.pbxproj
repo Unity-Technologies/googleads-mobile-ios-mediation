@@ -35,7 +35,7 @@
 		AD98A64B2A216B1200017B8D /* GADMediationAdapterLine.h in Headers */ = {isa = PBXBuildFile; fileRef = AD98A64A2A216B1200017B8D /* GADMediationAdapterLine.h */; };
 		AD98A64D2A216BC500017B8D /* GADMediationAdapterLine.m in Sources */ = {isa = PBXBuildFile; fileRef = AD98A64C2A216BC500017B8D /* GADMediationAdapterLine.m */; };
 		AD98A6502A2171DD00017B8D /* LineAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = AD98A6422A2164BD00017B8D /* LineAdapter.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		ADA4F5AB2A43C3B200B2236A /* GADMediationAdapterLineExtras.h in Headers */ = {isa = PBXBuildFile; fileRef = ADA4F5AA2A43C3B200B2236A /* GADMediationAdapterLineExtras.h */; };
+		ADA4F5AB2A43C3B200B2236A /* GADMediationAdapterLineExtras.h in Headers */ = {isa = PBXBuildFile; fileRef = ADA4F5AA2A43C3B200B2236A /* GADMediationAdapterLineExtras.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ADA4F5AD2A43C3F100B2236A /* GADMediationAdapterLineNativeAdLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = ADA4F5AC2A43C3F100B2236A /* GADMediationAdapterLineNativeAdLoader.h */; };
 		ADA4F5AF2A43C40C00B2236A /* GADMediationAdapterLineNativeAdLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA4F5AE2A43C40C00B2236A /* GADMediationAdapterLineNativeAdLoader.m */; };
 		ADA4F5B12A43C43A00B2236A /* GADMediationAdapterLineExtras.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA4F5B02A43C43A00B2236A /* GADMediationAdapterLineExtras.m */; };
@@ -64,6 +64,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		AD00C3F82B8691E2007C85F3 /* LineAdapter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LineAdapter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD98A6322A2163E000017B8D /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
 		AD98A6332A2163E000017B8D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		AD98A6352A21644C00017B8D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -80,6 +81,7 @@
 		ADA4F5AC2A43C3F100B2236A /* GADMediationAdapterLineNativeAdLoader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GADMediationAdapterLineNativeAdLoader.h; sourceTree = "<group>"; };
 		ADA4F5AE2A43C40C00B2236A /* GADMediationAdapterLineNativeAdLoader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GADMediationAdapterLineNativeAdLoader.m; sourceTree = "<group>"; };
 		ADA4F5B02A43C43A00B2236A /* GADMediationAdapterLineExtras.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GADMediationAdapterLineExtras.m; sourceTree = "<group>"; };
+		ADC499962B07E9DC003BC0CD /* libAdapter.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAdapter.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADEAFA462A36A2890036464A /* GADMediationAdapterLineBannerAdLoader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GADMediationAdapterLineBannerAdLoader.h; sourceTree = "<group>"; };
 		ADEAFA482A36A3420036464A /* GADMediationAdapterLineBannerAdLoader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GADMediationAdapterLineBannerAdLoader.m; sourceTree = "<group>"; };
 		ADEAFA5A2A37B5F80036464A /* GADMediationAdapterLineRewardedAdLoader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GADMediationAdapterLineRewardedAdLoader.m; sourceTree = "<group>"; };
@@ -88,13 +90,19 @@
 		ADFAAF012A33C14300D92129 /* GADMediationAdapterLineConstants.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GADMediationAdapterLineConstants.m; sourceTree = "<group>"; };
 		ADFAAF092A33E51200D92129 /* GADMediationAdapterLineUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GADMediationAdapterLineUtils.h; sourceTree = "<group>"; };
 		ADFAAF0A2A33E64500D92129 /* GADMediationAdapterLineUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GADMediationAdapterLineUtils.m; sourceTree = "<group>"; };
-		ADFAAF3C2A35139000D92129 /* libAdapter.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAdapter.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADFAAF402A35141400D92129 /* GADMediationAdapterLineInterstitialAdLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADMediationAdapterLineInterstitialAdLoader.h; sourceTree = "<group>"; };
 		ADFAAF422A3514D700D92129 /* GADMediationAdapterLineInterstitialAdLoader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GADMediationAdapterLineInterstitialAdLoader.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		7DFABB1A1DA8682C00322E02 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AD00C3F52B8691E2007C85F3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -113,6 +121,8 @@
 				AD98A6392A21644C00017B8D /* Configuration */,
 				AD98A6452A21666D00017B8D /* LineAdapter */,
 				AD98A6402A2164BD00017B8D /* Public */,
+				ADC499962B07E9DC003BC0CD /* libAdapter.a */,
+				AD00C3F82B8691E2007C85F3 /* LineAdapter.framework */,
 			);
 			sourceTree = "<group>";
 		};
@@ -184,14 +194,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				ADFAAF252A3509C400D92129 /* GADMediationAdapterLineUtils.h in Headers */,
+				ADA4F5AB2A43C3B200B2236A /* GADMediationAdapterLineExtras.h in Headers */,
 				ADA4F5AD2A43C3F100B2236A /* GADMediationAdapterLineNativeAdLoader.h in Headers */,
 				AD98A6502A2171DD00017B8D /* LineAdapter.h in Headers */,
 				ADFAAF002A33C0ED00D92129 /* GADMediationAdapterLineConstants.h in Headers */,
-				ADA4F5AB2A43C3B200B2236A /* GADMediationAdapterLineExtras.h in Headers */,
 				ADEAFA5D2A37B6260036464A /* GADMediationAdapterLineRewardedAdLoader.h in Headers */,
 				ADFAAF412A35141500D92129 /* GADMediationAdapterLineInterstitialAdLoader.h in Headers */,
 				AD98A64B2A216B1200017B8D /* GADMediationAdapterLine.h in Headers */,
 				ADEAFA472A36A2890036464A /* GADMediationAdapterLineBannerAdLoader.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AD00C3F32B8691E2007C85F3 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -213,8 +230,26 @@
 			);
 			name = Adapter;
 			productName = Adapter;
-			productReference = ADFAAF3C2A35139000D92129 /* libAdapter.a */;
+			productReference = ADC499962B07E9DC003BC0CD /* libAdapter.a */;
 			productType = "com.apple.product-type.library.static";
+		};
+		AD00C3F72B8691E2007C85F3 /* LineAdapter */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AD00C3FE2B8691E2007C85F3 /* Build configuration list for PBXNativeTarget "LineAdapter" */;
+			buildPhases = (
+				AD00C3F32B8691E2007C85F3 /* Headers */,
+				AD00C3F42B8691E2007C85F3 /* Sources */,
+				AD00C3F52B8691E2007C85F3 /* Frameworks */,
+				AD00C3F62B8691E2007C85F3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LineAdapter;
+			productName = LineAdapter;
+			productReference = AD00C3F82B8691E2007C85F3 /* LineAdapter.framework */;
+			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
 
@@ -236,6 +271,9 @@
 					7DFABB1C1DA8682C00322E02 = {
 						CreatedOnToolsVersion = 7.3.1;
 					};
+					AD00C3F72B8691E2007C85F3 = {
+						CreatedOnToolsVersion = 15.1;
+					};
 				};
 			};
 			buildConfigurationList = 7DFABB181DA8682C00322E02 /* Build configuration list for PBXProject "LineAdapter" */;
@@ -254,9 +292,20 @@
 				7DFABB1C1DA8682C00322E02 /* Adapter */,
 				7D1B6CA21DC2ACF900D8CABF /* Framework */,
 				5AD983D022EFAE79000FCD2F /* ValidateSourceCode */,
+				AD00C3F72B8691E2007C85F3 /* LineAdapter */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AD00C3F62B8691E2007C85F3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
 		5AD983D622EFAE90000FCD2F /* Validate Source Code */ = {
@@ -309,6 +358,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AD00C3F42B8691E2007C85F3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
@@ -331,12 +387,14 @@
 		7D1B6CA41DC2ACF900D8CABF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 			};
 			name = Debug;
 		};
 		7D1B6CA51DC2ACF900D8CABF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 			};
 			name = Release;
 		};
@@ -452,6 +510,121 @@
 			};
 			name = Release;
 		};
+		AD00C3FC2B8691E2007C85F3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AD98A63A2A21644C00017B8D /* Adapter.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = "$(inherited)";
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				EXECUTABLE_PREFIX = "";
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2024 Google. All rights reserved.";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = "$(inherited)";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACH_O_TYPE = staticlib;
+				MARKETING_VERSION = "$(inherited)";
+				MIN_OS_MAJOR_VERSION = "$(inherited)";
+				MIN_OS_MAJOR_VERSION_64_BIT = "$(inherited)";
+				MIN_OS_MINOR_VERSION = "$(inherited)";
+				MIN_OS_MINOR_VERSION_64_BIT = "$(inherited)";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.google.LineAdapter;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "$(inherited)";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		AD00C3FD2B8691E2007C85F3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AD98A63A2A21644C00017B8D /* Adapter.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = "$(inherited)";
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				EXECUTABLE_PREFIX = "";
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2024 Google. All rights reserved.";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = "$(inherited)";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACH_O_TYPE = staticlib;
+				MARKETING_VERSION = "$(inherited)";
+				MIN_OS_MAJOR_VERSION = "$(inherited)";
+				MIN_OS_MAJOR_VERSION_64_BIT = "$(inherited)";
+				MIN_OS_MINOR_VERSION = "$(inherited)";
+				MIN_OS_MINOR_VERSION_64_BIT = "$(inherited)";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.google.LineAdapter;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "$(inherited)";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -487,6 +660,15 @@
 			buildConfigurations = (
 				7DFABB271DA8682C00322E02 /* Debug */,
 				7DFABB281DA8682C00322E02 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AD00C3FE2B8691E2007C85F3 /* Build configuration list for PBXNativeTarget "LineAdapter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AD00C3FC2B8691E2007C85F3 /* Debug */,
+				AD00C3FD2B8691E2007C85F3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

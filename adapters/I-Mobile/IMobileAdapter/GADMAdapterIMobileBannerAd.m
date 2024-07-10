@@ -14,7 +14,7 @@
 
 #import "GADMAdapterIMobileBannerAd.h"
 
-#import <ImobileSdkAds/ImobileSdkAds.h>
+#import <ImobileSdkAds.h>
 
 #import <stdatomic.h>
 
@@ -33,9 +33,7 @@
   GADMediationBannerLoadCompletionHandler _loadCompletionHandler;
 
   /// The ad event delegate to forward ad rendering events to the Google Mobile Ads SDK.
-  /// Intentionally keeping a reference to the delegate because this delegate is returned from the
-  /// GMA SDK, not set on the GMA SDK.
-  id<GADMediationBannerAdEventDelegate> _delegate;
+  __weak id<GADMediationBannerAdEventDelegate> _delegate;
 
   /// View to display the i-mobile banner ad.
   UIView *_imobileAdView;
@@ -159,7 +157,6 @@
 
 - (void)imobileSdkAdsSpotDidClick:(NSString *)spotId {
   [_delegate reportClick];
-  [_delegate willBackgroundApplication];
 }
 
 - (void)imobileSdkAdsSpotDidShow:(NSString *)spotId {

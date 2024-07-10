@@ -17,6 +17,7 @@
 #import "GADMAdapterVungleRewardBasedVideoAd.h"
 #import "GADMAdapterVungleRouter.h"
 #import "GADMAdapterVungleUtils.h"
+#import "GADMediationVungleAppOpenAd.h"
 #import "GADMediationVungleBanner.h"
 #import "GADMediationVungleInterstitial.h"
 #import "GADMediationVungleNativeAd.h"
@@ -38,6 +39,9 @@
 
   /// Liftoff Monetize banner ad wrapper.
   GADMediationVungleBanner *_bannerAd;
+
+  /// Liftoff Monetize app open ad wrapper.
+  GADMediationVungleAppOpenAd *_appOpenAd;
 }
 
 + (void)setUpWithConfiguration:(nonnull GADMediationServerConfiguration *)configuration
@@ -107,8 +111,10 @@
             (nonnull GADMediationRewardedAdConfiguration *)adConfiguration
                        completionHandler:
                            (nonnull GADMediationRewardedLoadCompletionHandler)completionHandler {
-  if (adConfiguration.childDirectedTreatment) {
-    [VunglePrivacySettings setCOPPAStatus:[adConfiguration.childDirectedTreatment boolValue]];
+  NSNumber *childDirectedTreatment =
+      GADMobileAds.sharedInstance.requestConfiguration.tagForChildDirectedTreatment;
+  if (childDirectedTreatment) {
+    [VunglePrivacySettings setCOPPAStatus:[childDirectedTreatment boolValue]];
   }
   if (!adConfiguration.bidResponse) {
     _waterfallRewardedAd =
@@ -126,8 +132,10 @@
             (nonnull GADMediationInterstitialAdConfiguration *)adConfiguration
                          completionHandler:(nonnull GADMediationInterstitialLoadCompletionHandler)
                                                completionHandler {
-  if (adConfiguration.childDirectedTreatment) {
-    [VunglePrivacySettings setCOPPAStatus:[adConfiguration.childDirectedTreatment boolValue]];
+  NSNumber *childDirectedTreatment =
+      GADMobileAds.sharedInstance.requestConfiguration.tagForChildDirectedTreatment;
+  if (childDirectedTreatment) {
+    [VunglePrivacySettings setCOPPAStatus:[childDirectedTreatment boolValue]];
   }
   _interstitialAd =
       [[GADMediationVungleInterstitial alloc] initWithAdConfiguration:adConfiguration
@@ -138,8 +146,10 @@
 - (void)loadNativeAdForAdConfiguration:(nonnull GADMediationNativeAdConfiguration *)adConfiguration
                      completionHandler:
                          (nonnull GADMediationNativeLoadCompletionHandler)completionHandler {
-  if (adConfiguration.childDirectedTreatment) {
-    [VunglePrivacySettings setCOPPAStatus:[adConfiguration.childDirectedTreatment boolValue]];
+  NSNumber *childDirectedTreatment =
+      GADMobileAds.sharedInstance.requestConfiguration.tagForChildDirectedTreatment;
+  if (childDirectedTreatment) {
+    [VunglePrivacySettings setCOPPAStatus:[childDirectedTreatment boolValue]];
   }
   _nativeAd = [[GADMediationVungleNativeAd alloc] initNativeAdForAdConfiguration:adConfiguration
                                                                completionHandler:completionHandler];
@@ -161,9 +171,28 @@
 - (void)loadBannerForAdConfiguration:(nonnull GADMediationBannerAdConfiguration *)adConfiguration
                    completionHandler:
                        (nonnull GADMediationBannerLoadCompletionHandler)completionHandler {
+  NSNumber *tagForChildDirectedTreatment =
+      GADMobileAds.sharedInstance.requestConfiguration.tagForChildDirectedTreatment;
+  if (tagForChildDirectedTreatment) {
+    [VunglePrivacySettings setCOPPAStatus:[tagForChildDirectedTreatment boolValue]];
+  }
   _bannerAd = [[GADMediationVungleBanner alloc] initWithAdConfiguration:adConfiguration
                                                       completionHandler:completionHandler];
   [_bannerAd requestBannerAd];
+}
+
+- (void)loadAppOpenAdForAdConfiguration:
+            (nonnull GADMediationAppOpenAdConfiguration *)adConfiguration
+                      completionHandler:
+                          (nonnull GADMediationAppOpenLoadCompletionHandler)loadCompletionHandler {
+  NSNumber *tagForChildDirectedTreatment =
+      GADMobileAds.sharedInstance.requestConfiguration.tagForChildDirectedTreatment;
+  if (tagForChildDirectedTreatment) {
+    [VunglePrivacySettings setCOPPAStatus:tagForChildDirectedTreatment.boolValue];
+  }
+  _appOpenAd = [[GADMediationVungleAppOpenAd alloc] initWithAdConfiguration:adConfiguration
+                                                      loadCompletionHandler:loadCompletionHandler];
+  [_appOpenAd requestAppOpenAd];
 }
 
 #pragma mark GADRTBAdapter implementation

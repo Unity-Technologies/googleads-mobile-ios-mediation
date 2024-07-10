@@ -1,5 +1,30 @@
 ## i-mobile iOS Mediation Adapter Changelog
 
+#### [Version 2.3.4.0](https://dl.google.com/googleadmobadssdk/mediation/ios/imobile/IMobileAdapter-2.3.4.0.zip)
+- Verified compatibility with i-mobile SDK 2.3.4.
+- Added support to return the i-mobile SDK version in `adSDKVersion`.
+
+Built and tested with:
+- Google Mobile Ads SDK version 11.2.0.
+- i-mobile SDK version 2.3.4.
+
+#### [Version 2.3.3.0](https://dl.google.com/googleadmobadssdk/mediation/ios/imobile/IMobileAdapter-2.3.3.0.zip)
+- Verified compatibility with i-mobile SDK 2.3.3.
+
+Built and tested with:
+- Google Mobile Ads SDK version 11.1.0.
+- i-mobile SDK version 2.3.3.
+
+#### [Version 2.3.2.1](https://dl.google.com/googleadmobadssdk/mediation/ios/imobile/IMobileAdapter-2.3.2.1.zip)
+- Removed the deprecated `willBackgroundApplication` delegate method from the banner, interstitial, and native ad implementations.
+- Now requires minimum iOS version 12.0.
+- Now requires Google Mobile Ads SDK version 11.0 or higher.
+- Included `Info.plist` in the frameworks within `IMobileAdapter.xcframework`.
+
+Built and tested with:
+- Google Mobile Ads SDK version 11.0.1.
+- i-mobile SDK version 2.3.2.
+
 #### [Version 2.3.2.0](https://dl.google.com/googleadmobadssdk/mediation/ios/imobile/IMobileAdapter-2.3.2.0.zip)
 - Verified compatibility with i-mobile SDK 2.3.2.
 - Removed support of the `armv7` architecture.

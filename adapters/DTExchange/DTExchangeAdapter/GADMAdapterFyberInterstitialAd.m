@@ -32,9 +32,7 @@
   GADMediationInterstitialLoadCompletionHandler _loadCompletionHandler;
 
   /// The ad event delegate to forward ad rendering events to the Google Mobile Ads SDK.
-  /// Intentionally keeping a reference to the delegate because this delegate is returned from the
-  /// GMA SDK, not set on the GMA SDK.
-  id<GADMediationInterstitialAdEventDelegate> _delegate;
+  __weak id<GADMediationInterstitialAdEventDelegate> _delegate;
 
   /// DT Exchange Ad Spot to be loaded.
   IAAdSpot *_adSpot;
@@ -210,8 +208,15 @@
   [_delegate didDismissFullScreenView];
 }
 
+- (void)IAAdDidExpire:(IAUnitController *)unitController {
+  NSError *error = GADMAdapterFyberErrorWithCodeAndDescription(
+      GADMAdapterFyberErrorPresentationFailureForAdExpiration,
+      @"DT Exchange interstitial ad couldn't be presented because it was expired.");
+  [_delegate didFailToPresentWithError:error];
+}
+
 - (void)IAUnitControllerWillOpenExternalApp:(nullable IAUnitController *)unitController {
-  [_delegate willBackgroundApplication];
+  // Google Mobile Ads SDK doesn't have a matching event.
 }
 
 @end

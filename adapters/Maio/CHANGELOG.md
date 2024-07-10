@@ -1,5 +1,48 @@
 ## maio iOS Mediation Adapter Changelog
 
+#### [Version 2.1.5.0](https://dl.google.com/googleadmobadssdk/mediation/ios/maio/MaioAdapter-2.1.5.0.zip)
+- Verified compatibility with maio SDK version 2.1.5.
+
+Built and tested with:
+- Google Mobile Ads SDK version 11.6.0.
+- Maio SDK version 2.1.5.
+
+#### [Version 2.1.4.0](https://dl.google.com/googleadmobadssdk/mediation/ios/maio/MaioAdapter-2.1.4.0.zip)
+- Verified compatibility with maio SDK version 2.1.4.
+
+Built and tested with:
+- Google Mobile Ads SDK version 11.2.0.
+- Maio SDK version 2.1.4.
+
+#### [Version 2.1.3.0](https://dl.google.com/googleadmobadssdk/mediation/ios/maio/MaioAdapter-2.1.3.0.zip)
+- Verified compatibility with maio SDK version 2.1.3.
+
+Built and tested with:
+- Google Mobile Ads SDK version 11.1.0.
+- Maio SDK version 2.1.3.
+
+#### [Version 2.1.2.1](https://dl.google.com/googleadmobadssdk/mediation/ios/maio/MaioAdapter-2.1.2.1.zip)
+- Now requires Google Mobile Ads SDK version 11.0 or higher.
+- Included `Info.plist` in the frameworks within `MaioAdapter.xcframework`.
+
+Built and tested with:
+- Google Mobile Ads SDK version 11.0.1.
+- Maio SDK version 2.1.2.
+
+#### [Version 2.1.2.0](https://dl.google.com/googleadmobadssdk/mediation/ios/maio/MaioAdapter-2.1.2.0.zip)
+- Verified compatibility with maio SDK version 2.1.2.
+
+Built and tested with:
+- Google Mobile Ads SDK version 10.14.0.
+- Maio SDK version 2.1.2.
+
+#### [Version 2.1.1.0](https://dl.google.com/googleadmobadssdk/mediation/ios/maio/MaioAdapter-2.1.1.0.zip)
+- Verified compatibility with maio SDK version 2.1.1.
+
+Built and tested with:
+- Google Mobile Ads SDK version 10.12.0.
+- Maio SDK version 2.1.1.
+
 #### [Version 2.0.0.0](https://dl.google.com/googleadmobadssdk/mediation/ios/maio/MaioAdapter-2.0.0.0.zip)
 - Verified compatibility with maio SDK version 2.0.0.
 - Removed the dependency on `MaioOB SDK`.

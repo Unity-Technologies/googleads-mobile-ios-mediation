@@ -30,7 +30,7 @@
 
   /// The ad event delegate which is used to report interstitial related information to the Google
   /// Mobile Ads SDK.
-  id<GADMediationInterstitialAdEventDelegate> _interstitialAdEventDelegate;
+  __weak id<GADMediationInterstitialAdEventDelegate> _interstitialAdEventDelegate;
 
   /// The interstitial ad.
   FADInterstitial *_interstitialAd;
@@ -70,7 +70,16 @@
     return;
   }
 
-  NSString *slotID = GADMediationAdapterLineSlotID(_adConfiguration, &error);
+  if (_adConfiguration.bidResponse) {
+    [self loadBiddingAd];
+  } else {
+    [self loadWaterfallAd];
+  }
+}
+
+- (void)loadWaterfallAd {
+  NSError *error;
+  NSString *slotID = GADMediationAdapterLineSlotID(_adConfiguration.credentials, &error);
   if (error) {
     _interstitialAdLoadCompletionHandler(nil, error);
     return;
@@ -78,10 +87,48 @@
 
   _interstitialAd = [[FADInterstitial alloc] initWithSlotId:slotID];
   [_interstitialAd setLoadDelegate:self];
-  [_interstitialAd setAdViewEventListener:self];
-  [_interstitialAd enableSound:!GADMobileAds.sharedInstance.applicationMuted];
+  [_interstitialAd setEventListener:self];
+  [_interstitialAd enableSound:GADMediationAdapterLineShouldEnableAudio(_adConfiguration.extras)];
   GADMediationAdapterLineLog(@"Start loading an interstitial ad from FiveAd SDK.");
   [_interstitialAd loadAdAsync];
+}
+
+- (void)loadBiddingAd {
+  __block NSError *error;
+  FADAdLoader *adLoader = GADMediationAdapterLineFADAdLoaderForRegisteredConfig(&error);
+  if (error) {
+    _interstitialAdLoadCompletionHandler(nil, error);
+    return;
+  }
+  NSString *watermarkString =
+      GADMediationAdapterLineWatermarkStringFromAdConfiguration(_adConfiguration);
+  FADBidData *bidData = [[FADBidData alloc] initWithBidResponse:_adConfiguration.bidResponse
+                                                  withWatermark:watermarkString];
+  GADMediationAdapterLineInterstitialAdLoader *__weak weakSelf = self;
+  [adLoader
+      loadInterstitialAdWithBidData:bidData
+                   withLoadCallback:^(FADInterstitial *_Nullable interstitialAd,
+                                      NSError *_Nullable adLoadError) {
+                     GADMediationAdapterLineInterstitialAdLoader *strongSelf = weakSelf;
+                     if (!strongSelf) {
+                       return;
+                     }
+
+                     if (adLoadError) {
+                       GADMediationAdapterLineLog(@"FiveAd SDK failed to load a bidding "
+                                                  @"interstitial ad. The FiveAd error code: %ld.",
+                                                  adLoadError.code);
+                       error = GADMediationAdapterLineErrorWithFiveAdErrorCode(adLoadError.code);
+                       strongSelf->_interstitialAdLoadCompletionHandler(nil, error);
+                       return;
+                     }
+
+                     [interstitialAd setEventListener:strongSelf];
+                     [interstitialAd enableSound:GADMediationAdapterLineShouldEnableAudio(
+                                                     strongSelf->_adConfiguration.extras)];
+                     strongSelf->_interstitialAd = interstitialAd;
+                     strongSelf->_interstitialAdLoadCompletionHandler(strongSelf, nil);
+                   }];
 }
 
 #pragma mark - GADMediationInterstitialAd
@@ -92,7 +139,7 @@
   [_interstitialAd show];
 }
 
-#pragma mark - FADLoadDelegate
+#pragma mark - FADLoadDelegate (for waterfall interstitial ad)
 
 - (void)fiveAdDidLoad:(id<FADAdInterface>)ad {
   GADMediationAdapterLineLog(@"FiveAd SDK loaded an interstitial ad.");
@@ -106,56 +153,45 @@
   _interstitialAdLoadCompletionHandler(nil, error);
 }
 
-#pragma mark - FADAdViewEventListener
+#pragma mark - FADInterstitialEventListener
 
-- (void)fiveAdDidClick:(id<FADAdInterface>)ad {
-  GADMediationAdapterLineLog(@"The FiveAd interstitial ad did click.");
-  [_interstitialAdEventDelegate reportClick];
-}
-
-- (void)fiveAdDidImpression:(id<FADAdInterface>)ad {
-  GADMediationAdapterLineLog(@"The FiveAd interstitial ad did impression.");
-  [_interstitialAdEventDelegate reportImpression];
-}
-
-- (void)fiveAdDidClose:(id<FADAdInterface>)ad {
-  GADMediationAdapterLineLog(@"The FiveAd interstitial ad did close.");
-  [_interstitialAdEventDelegate didDismissFullScreenView];
-}
-
-- (void)fiveAd:(id<FADAdInterface>)ad didFailedToShowAdWithError:(FADErrorCode)errorCode {
+- (void)fiveInterstitialAd:(nonnull FADInterstitial *)ad
+    didFailedToShowAdWithError:(FADErrorCode)errorCode {
   GADMediationAdapterLineLog(
       @"The FiveAd interstitial ad did fail to show. The FiveAd error code: %ld.", errorCode);
   NSError *error = GADMediationAdapterLineErrorWithFiveAdErrorCode(errorCode);
   [_interstitialAdEventDelegate didFailToPresentWithError:error];
 }
 
-- (void)fiveAdDidStart:(id<FADAdInterface>)ad {
-  GADMediationAdapterLineLog(@"The FiveAd interstitial ad did start.");
+- (void)fiveInterstitialAdDidImpression:(nonnull FADInterstitial *)ad {
+  GADMediationAdapterLineLog(@"The FiveAd interstitial ad did impression.");
+  [_interstitialAdEventDelegate reportImpression];
 }
 
-- (void)fiveAdDidPause:(id<FADAdInterface>)ad {
+- (void)fiveInterstitialAdDidClick:(nonnull FADInterstitial *)ad {
+  GADMediationAdapterLineLog(@"The FiveAd interstitial ad did click.");
+  [_interstitialAdEventDelegate reportClick];
+}
+
+- (void)fiveInterstitialAdFullScreenDidOpen:(nonnull FADInterstitial *)ad {
+  GADMediationAdapterLineLog(@"The FiveAd interstitial ad did open.");
+}
+
+- (void)fiveInterstitialAdFullScreenDidClose:(nonnull FADInterstitial *)ad {
+  GADMediationAdapterLineLog(@"The FiveAd interstitial ad did close.");
+  [_interstitialAdEventDelegate didDismissFullScreenView];
+}
+
+- (void)fiveInterstitialAdDidPlay:(nonnull FADInterstitial *)ad {
+  GADMediationAdapterLineLog(@"The FiveAd interstitial ad did play.");
+}
+
+- (void)fiveInterstitialAdDidPause:(nonnull FADInterstitial *)ad {
   GADMediationAdapterLineLog(@"The FiveAd interstitial ad did pause.");
 }
 
-- (void)fiveAdDidResume:(id<FADAdInterface>)ad {
-  GADMediationAdapterLineLog(@"The FiveAd interstitial ad did resume.");
-}
-
-- (void)fiveAdDidViewThrough:(id<FADAdInterface>)ad {
+- (void)fiveInterstitialAdDidViewThrough:(nonnull FADInterstitial *)ad {
   GADMediationAdapterLineLog(@"The FiveAd interstitial ad did view through.");
-}
-
-- (void)fiveAdDidReplay:(id<FADAdInterface>)ad {
-  GADMediationAdapterLineLog(@"The FiveAd interstitial ad did replay.");
-}
-
-- (void)fiveAdDidStall:(id<FADAdInterface>)ad {
-  GADMediationAdapterLineLog(@"The FiveAd interstitial ad did stall.");
-}
-
-- (void)fiveAdDidRecover:(id<FADAdInterface>)ad {
-  GADMediationAdapterLineLog(@"The FiveAd interstitial ad did recover.");
 }
 
 @end

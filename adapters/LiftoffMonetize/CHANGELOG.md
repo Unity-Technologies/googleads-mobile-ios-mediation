@@ -1,6 +1,83 @@
 ## Liftoff Monetize iOS Mediation Adapter Changelog
 
-#### Version 7.1.0.0 (In Progress)
+#### [Version 7.4.0.0](https://dl.google.com/googleadmobadssdk/mediation/ios/liftoffmonetize/LiftoffMonetizeAdapter-7.4.0.0.zip)
+- Verified compatibility with Vungle SDK 7.4.0.
+
+Built and tested with:
+- Google Mobile Ads SDK version 11.6.0.
+- Vungle SDK version 7.4.0.
+
+#### [Version 7.3.2.0](https://dl.google.com/googleadmobadssdk/mediation/ios/liftoffmonetize/LiftoffMonetizeAdapter-7.3.2.0.zip)
+- Verified compatibility with Vungle SDK 7.3.2.
+
+Built and tested with:
+- Google Mobile Ads SDK version 11.3.0.
+- Vungle SDK version 7.3.2.
+
+#### [Version 7.3.1.1.0](https://dl.google.com/googleadmobadssdk/mediation/ios/liftoffmonetize/LiftoffMonetizeAdapter-7.3.1.1.0.zip)
+- Verified compatibility with Vungle SDK 7.3.1.1.
+
+Built and tested with:
+- Google Mobile Ads SDK version 11.3.0.
+- Vungle SDK version 7.3.1.1.
+
+#### [Version 7.3.1.0](https://dl.google.com/googleadmobadssdk/mediation/ios/liftoffmonetize/LiftoffMonetizeAdapter-7.3.1.0.zip)
+- Verified compatibility with Vungle SDK 7.3.1.
+
+Built and tested with:
+- Google Mobile Ads SDK version 11.3.0.
+- Vungle SDK version 7.3.1.
+
+#### [Version 7.3.0.0](https://dl.google.com/googleadmobadssdk/mediation/ios/liftoffmonetize/LiftoffMonetizeAdapter-7.3.0.0.zip)
+- Verified compatibility with Vungle SDK 7.3.0.
+- Fixed an issue where the adapter cannot be imported in Swift.
+- Added waterfall and bidding support for app open ad format.
+
+Built and tested with:
+- Google Mobile Ads SDK version 11.2.0.
+- Vungle SDK version 7.3.0.
+
+#### [Version 7.2.2.1](https://dl.google.com/googleadmobadssdk/mediation/ios/liftoffmonetize/LiftoffMonetizeAdapter-7.2.2.1.zip)
+- Now requires minimum iOS version 12.0.
+- Now requires Google Mobile Ads SDK version 11.0 or higher.
+- Included `Info.plist` in the frameworks within `LiftoffMonetizeAdapter.xcframework`.
+
+Built and tested with:
+- Google Mobile Ads SDK version 11.0.1.
+- Vungle SDK version 7.2.2.
+
+#### [Version 7.2.2.0](https://dl.google.com/googleadmobadssdk/mediation/ios/liftoffmonetize/LiftoffMonetizeAdapter-7.2.2.0.zip)
+- Verified compatibility with Vungle SDK 7.2.2.
+- Now requires minimum iOS version of 12.0.
+
+Built and tested with:
+- Google Mobile Ads SDK version 11.0.0.
+- Vungle SDK version 7.2.2.
+
+#### [Version 7.2.1.1](https://dl.google.com/googleadmobadssdk/mediation/ios/liftoffmonetize/LiftoffMonetizeAdapter-7.2.1.1.zip)
+- Updated the MREC matching to be any size that can fit an MREC instead of being an exact match.
+
+Built and tested with:
+- Google Mobile Ads SDK version 10.14.0.
+- Vungle SDK version 7.2.1.
+
+#### [Version 7.2.1.0](https://dl.google.com/googleadmobadssdk/mediation/ios/liftoffmonetize/LiftoffMonetizeAdapter-7.2.1.0.zip)
+- Verified compatibility with Vungle SDK 7.2.1.
+
+Built and tested with:
+- Google Mobile Ads SDK version 10.14.0.
+- Vungle SDK version 7.2.1.
+
+#### [Version 7.2.0.0](https://dl.google.com/googleadmobadssdk/mediation/ios/liftoffmonetize/LiftoffMonetizeAdapter-7.2.0.0.zip)
+- Verified compatibility with Vungle SDK 7.2.0.
+- Removed the deprecated `willBackgroundApplication` delegate methods from the banner and interstitial ad implementations.
+- Replaced the deprecated `childDirectedTreatment` method with the `GADMobileAds.sharedInstance.requestConfiguration.tagForChildDirectedTreatment` property.
+
+Built and tested with:
+- Google Mobile Ads SDK version 10.14.0.
+- Vungle SDK version 7.2.0.
+
+#### [Version 7.1.0.0](https://dl.google.com/googleadmobadssdk/mediation/ios/liftoffmonetize/LiftoffMonetizeAdapter-7.1.0.0.zip)
 - Verified compatibility with Vungle SDK 7.1.0.
 
 Built and tested with:

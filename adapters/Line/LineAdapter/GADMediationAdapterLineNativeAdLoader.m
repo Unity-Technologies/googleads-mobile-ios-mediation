@@ -29,7 +29,7 @@ static NSUInteger GADMediationAdapterLineImageAssetLoadingTimeoutInSeconds = 10;
 
   /// The ad event delegate which is used to report native ad related information to the Google
   /// Mobile Ads SDK.
-  id<GADMediationNativeAdEventDelegate> _nativeAdEventDelegate;
+  __weak id<GADMediationNativeAdEventDelegate> _nativeAdEventDelegate;
 
   /// The native ad instance.
   FADNative *_nativeAd;
@@ -69,20 +69,22 @@ static NSUInteger GADMediationAdapterLineImageAssetLoadingTimeoutInSeconds = 10;
     return;
   }
 
-  NSString *slotID = GADMediationAdapterLineSlotID(_adConfiguration, &error);
-  if (error) {
-    [self callCompletionHandlerIfNeededWithAd:nil error:error];
-    return;
-  }
-
   _shouldLoadAdImages = YES;
+  BOOL shouldEnableSound = !GADMobileAds.sharedInstance.applicationMuted;
   NSUInteger numberOfImageAdLoaderOptions = 0;
+  NSUInteger numberOfVideoAdLoaderOptions = 0;
   for (GADAdLoaderOptions *loaderOptions in _adConfiguration.options) {
     if ([loaderOptions isKindOfClass:[GADNativeAdImageAdLoaderOptions class]]) {
       GADNativeAdImageAdLoaderOptions *imageOptions =
           (GADNativeAdImageAdLoaderOptions *)loaderOptions;
       _shouldLoadAdImages = !imageOptions.disableImageLoading;
       numberOfImageAdLoaderOptions += 1;
+    }
+
+    if ([loaderOptions isKindOfClass:[GADVideoOptions class]]) {
+      GADVideoOptions *videoOptions = (GADVideoOptions *)loaderOptions;
+      shouldEnableSound = !videoOptions.startMuted;
+      numberOfVideoAdLoaderOptions += 1;
     }
   }
 
@@ -97,13 +99,88 @@ static NSUInteger GADMediationAdapterLineImageAssetLoadingTimeoutInSeconds = 10;
     GADMediationAdapterLineLog(multipleAdLoaderOptionsWarningMessage);
   }
 
+  if (numberOfVideoAdLoaderOptions > 1) {
+    NSString *multipleVideoOptionsWarningMessage =
+        [NSString stringWithFormat:@"Multiple video options were found. If multiple video options "
+                                   @"are specified, then the adapter uses the last option found. "
+                                   @"To avoid this behavior, please pass only one video option. %@",
+                                   shouldEnableSound ? @"Sound will be enabled."
+                                                     : @"Sound will be disabled."];
+    GADMediationAdapterLineLog(multipleVideoOptionsWarningMessage);
+  }
+
+  if (_adConfiguration.bidResponse) {
+    [self loadBiddingAdWithSoundEnabled:shouldEnableSound];
+  } else {
+    [self loadWaterfallAdWithSoundEnabled:shouldEnableSound];
+  }
+}
+
+- (void)loadWaterfallAdWithSoundEnabled:(BOOL)soundEnabled {
+  NSError *error;
+  NSString *slotID = GADMediationAdapterLineSlotID(_adConfiguration.credentials, &error);
+  if (error) {
+    [self callCompletionHandlerIfNeededWithAd:nil error:error];
+    return;
+  }
+
   GADMediationAdapterLineExtras *extras = (GADMediationAdapterLineExtras *)_adConfiguration.extras;
   _nativeAd = [[FADNative alloc] initWithSlotId:slotID videoViewWidth:extras.nativeAdVideoWidth];
   [_nativeAd setLoadDelegate:self];
-  [_nativeAd setAdViewEventListener:self];
-  [_nativeAd enableSound:!GADMobileAds.sharedInstance.applicationMuted];
+  [_nativeAd setEventListener:self];
+  [_nativeAd enableSound:soundEnabled];
+
   GADMediationAdapterLineLog(@"Start loading a native ad from FiveAd SDK.");
   [_nativeAd loadAdAsync];
+}
+
+- (void)loadBiddingAdWithSoundEnabled:(BOOL)soundEnabled {
+  __block NSError *error;
+  FADAdLoader *adLoader = GADMediationAdapterLineFADAdLoaderForRegisteredConfig(&error);
+  if (error) {
+    [self callCompletionHandlerIfNeededWithAd:nil error:error];
+    return;
+  }
+
+  NSString *watermarkString =
+      GADMediationAdapterLineWatermarkStringFromAdConfiguration(_adConfiguration);
+  FADBidData *bidData = [[FADBidData alloc] initWithBidResponse:_adConfiguration.bidResponse
+                                                  withWatermark:watermarkString];
+  GADMediationAdapterLineNativeAdLoader *__weak weakSelf = self;
+  GADMediationAdapterLineLog(@"Start loading a native ad from FiveAd SDK.");
+  [adLoader
+      loadNativeAdWithBidData:bidData
+             withLoadCallback:^(FADNative *_Nullable nativeAd, NSError *_Nullable adLoadError) {
+               GADMediationAdapterLineNativeAdLoader *strongSelf = weakSelf;
+               if (!strongSelf) {
+                 return;
+               }
+
+               if (adLoadError) {
+                 GADMediationAdapterLineLog(
+                     @"FiveAd SDK failed to load a bidding native ad. The FiveAd error code: %ld.",
+                     adLoadError.code);
+                 error = GADMediationAdapterLineErrorWithFiveAdErrorCode(adLoadError.code);
+                 [strongSelf callCompletionHandlerIfNeededWithAd:nil error:error];
+                 return;
+               }
+
+               GADMediationAdapterLineExtras *extras = strongSelf->_adConfiguration.extras;
+               if (extras) {
+                 UIView *nativeAdMainView = [nativeAd getAdMainView];
+                 CGSize currentSize = nativeAdMainView.frame.size;
+                 CGRect newFrame = nativeAdMainView.frame;
+                 newFrame.size =
+                     CGSizeMake(extras.nativeAdVideoWidth,
+                                extras.nativeAdVideoWidth * currentSize.height / currentSize.width);
+                 nativeAdMainView.frame = newFrame;
+               }
+
+               [nativeAd setEventListener:strongSelf];
+               [nativeAd enableSound:soundEnabled];
+               strongSelf->_nativeAd = nativeAd;
+               [strongSelf fiveAdDidLoad:strongSelf->_nativeAd];
+             }];
 }
 
 - (void)loadAdImageAssetsAsynchronously {
@@ -293,40 +370,9 @@ static NSUInteger GADMediationAdapterLineImageAssetLoadingTimeoutInSeconds = 10;
                      withClickableViews:clickableAssetViews.allValues];
 }
 
-#pragma mark - FADAdViewEventListener
+#pragma mark - FADNativeEventListener
 
-- (void)fiveAdDidImpression:(id<FADAdInterface>)ad {
-  // Called when the native ad records a user impression.
-  GADMediationAdapterLineLog(@"The FiveAd native ad did impression.");
-  [_nativeAdEventDelegate reportImpression];
-}
-
-- (void)fiveAdDidClick:(id<FADAdInterface>)ad {
-  // Called when the native ad is clicked by the user.
-  GADMediationAdapterLineLog(@"The FiveAd native ad did click.");
-  [_nativeAdEventDelegate reportClick];
-}
-
-- (void)fiveAdDidStart:(id<FADAdInterface>)ad {
-  // Called if the native ad contains a video content and when it starts.
-  GADMediationAdapterLineLog(@"The FiveAd native ad did start.");
-  [_nativeAdEventDelegate didPlayVideo];
-}
-
-- (void)fiveAdDidViewThrough:(id<FADAdInterface>)ad {
-  // Called if the native ad contains a video content and when the video reaches its end.
-  GADMediationAdapterLineLog(@"The FiveAd native ad did view through.");
-  [_nativeAdEventDelegate didEndVideo];
-}
-
-- (void)fiveAdDidPause:(id<FADAdInterface>)ad {
-  // Called if the native ad contains a video content and when the app goes background while the
-  // video is still playing.
-  GADMediationAdapterLineLog(@"The FiveAd native ad did pause.");
-  [_nativeAdEventDelegate didPauseVideo];
-}
-
-- (void)fiveAd:(id<FADAdInterface>)ad didFailedToShowAdWithError:(FADErrorCode)errorCode {
+- (void)fiveNativeAd:(nonnull FADNative *)ad didFailedToShowAdWithError:(FADErrorCode)errorCode {
   // Called when something goes wrong in the Five Ad SDK.
   GADMediationAdapterLineLog(@"The FiveAd native ad did fail to show. The FiveAd error code: %ld.",
                              errorCode);
@@ -334,29 +380,40 @@ static NSUInteger GADMediationAdapterLineImageAssetLoadingTimeoutInSeconds = 10;
   [_nativeAdEventDelegate didFailToPresentWithError:error];
 }
 
-- (void)fiveAdDidClose:(id<FADAdInterface>)ad {
+- (void)fiveNativeAdDidClick:(nonnull FADNative *)ad {
+  // Called when the native ad is clicked by the user.
+  GADMediationAdapterLineLog(@"The FiveAd native ad did click.");
+  [_nativeAdEventDelegate reportClick];
+}
+
+- (void)fiveNativeAdDidImpression:(nonnull FADNative *)ad {
+  // Called when the native ad records a user impression.
+  GADMediationAdapterLineLog(@"The FiveAd native ad did impression.");
+  [_nativeAdEventDelegate reportImpression];
+}
+
+- (void)fiveNativeAdViewDidRemove:(nonnull FADNative *)ad {
   // Called when the native ad is closed by user using a close button.
-  GADMediationAdapterLineLog(@"The FiveAd native ad did close.");
+  GADMediationAdapterLineLog(@"The FiveAd native ad did remove.");
 }
 
-- (void)fiveAdDidResume:(id<FADAdInterface>)ad {
-  // Called if the native ad's video content was paused and when the app comes back to foreground.
-  GADMediationAdapterLineLog(@"The FiveAd native ad did resume.");
+- (void)fiveNativeAdDidPlay:(nonnull FADNative *)ad {
+  // Called if the native ad contains a video content and when it starts.
+  GADMediationAdapterLineLog(@"The FiveAd native ad did play.");
+  [_nativeAdEventDelegate didPlayVideo];
 }
 
-- (void)fiveAdDidReplay:(id<FADAdInterface>)ad {
-  // Called if the native ad contains a video content and when the video contents gets replayed.
-  GADMediationAdapterLineLog(@"The FiveAd native ad did replay.");
+- (void)fiveNativeAdDidPause:(nonnull FADNative *)ad {
+  // Called if the native ad contains a video content and when the app goes background while the
+  // video is still playing.
+  GADMediationAdapterLineLog(@"The FiveAd native ad did pause.");
+  [_nativeAdEventDelegate didPauseVideo];
 }
 
-- (void)fiveAdDidStall:(id<FADAdInterface>)ad {
-  // Called if the native ad contains a video content and when it gets stalled for some reason.
-  GADMediationAdapterLineLog(@"The FiveAd native ad did stall.");
-}
-
-- (void)fiveAdDidRecover:(id<FADAdInterface>)ad {
-  // Called when the native ad's video content recover from stalling.
-  GADMediationAdapterLineLog(@"The FiveAd native ad did recover.");
+- (void)fiveNativeAdDidViewThrough:(nonnull FADNative *)ad {
+  // Called if the native ad contains a video content and when the video reaches its end.
+  GADMediationAdapterLineLog(@"The FiveAd native ad did view through.");
+  [_nativeAdEventDelegate didEndVideo];
 }
 
 @end

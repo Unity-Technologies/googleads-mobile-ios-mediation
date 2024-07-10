@@ -1,7 +1,45 @@
 ## InMobi iOS Mediation Adapter Changelog
 
-#### Next version
+#### [Version 10.7.4.0](https://dl.google.com/googleadmobadssdk/mediation/ios/inmobi/InMobiAdapter-10.7.4.0.zip)
+- Verified compatibility with InMobi SDK 10.7.4.
+
+Built and tested with:
+- Google Mobile Ads SDK version 11.6.0.
+- InMobi SDK version 10.7.4.
+
+#### [Version 10.7.2.0](https://dl.google.com/googleadmobadssdk/mediation/ios/inmobi/InMobiAdapter-10.7.2.0.zip)
+- Verified compatibility with InMobi SDK 10.7.2.
+
+Built and tested with:
+- Google Mobile Ads SDK version 11.3.0.
+- InMobi SDK version 10.7.2.
+
+#### [Version 10.7.1.0](https://dl.google.com/googleadmobadssdk/mediation/ios/inmobi/InMobiAdapter-10.7.1.0.zip)
+- Verified compatibility with InMobi SDK 10.7.1.
+
+Built and tested with:
+- Google Mobile Ads SDK version 11.2.0.
+- InMobi SDK version 10.7.1.
+
+#### [Version 10.6.4.0](https://dl.google.com/googleadmobadssdk/mediation/ios/inmobi/InMobiAdapter-10.6.4.0.zip)
+- Verified compatibility with InMobi SDK 10.6.4.
+- Replaced the deprecated method `GADMobileAds.sharedInstance.sdkVersion` with `GADMobileAds.sharedInstance.versionNumber`.
+- Replaced the use of `NSUserDefaults` with `CFPreferences` functions.
+- Now requires minimum iOS version 12.0.
+- Now requires Google Mobile Ads SDK version 11.0 or higher.
+- Included `Info.plist` in the frameworks within `InMobiAdapter.xcframework`.
+
+Built and tested with:
+- Google Mobile Ads SDK version 11.0.1.
+- InMobi SDK version 10.6.4.
+
+#### [Version 10.6.0.0](https://dl.google.com/googleadmobadssdk/mediation/ios/inmobi/InMobiAdapter-10.6.0.0.zip)
+- Verified compatibility with InMobi SDK 10.6.0.
 - Added watermark support for bidding banner, interstitial and rewarded ad formats.
+
+Built and tested with:
+- Google Mobile Ads SDK version 10.13.0.
+- InMobi SDK version 10.6.0.
 
 #### [Version 10.5.8.0](https://dl.google.com/googleadmobadssdk/mediation/ios/inmobi/InMobiAdapter-10.5.8.0.zip)
 - Verified compatibility with InMobi SDK 10.5.8.

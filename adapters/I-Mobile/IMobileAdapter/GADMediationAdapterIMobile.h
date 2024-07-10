@@ -13,7 +13,7 @@
 // limitations under the License.
 
 #import <GoogleMobileAds/GoogleMobileAds.h>
-#import <ImobileSdkAds/ImobileSdkAds.h>
+#import <ImobileSdkAds.h>
 
 typedef NS_ENUM(NSInteger, GADMAdapterIMobileErrorCode) {
   /// Missing or invalid server parameters.
@@ -30,6 +30,6 @@ typedef NS_ENUM(NSInteger, GADMAdapterIMobileErrorCode) {
   GADMAdapterIMobileErrorAdAlreadyLoaded = 106
 };
 
-@interface GADMediationAdapterIMobile : NSObject
+@interface GADMediationAdapterIMobile : NSObject <GADMediationAdapter>
 
 @end

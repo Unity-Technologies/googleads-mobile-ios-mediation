@@ -62,19 +62,10 @@ NSError *_Nonnull GADMAdapterIronSourceErrorWithCodeAndDescription(
 }
 
 + (nonnull NSString *)getAdMobSDKVersion {
-  NSString *version = @"";
-  NSString *sdkVersion = GADMobileAds.sharedInstance.sdkVersion;
-  @try {
-    NSUInteger versionIndex = [sdkVersion rangeOfString:@"-v"].location + 1;
-    version = [sdkVersion substringFromIndex:versionIndex];
-    version = [version stringByReplacingOccurrencesOfString:@"." withString:@""];
-
-  } @catch (NSException *exception) {
-    NSLog(@"Unable to parse AdMob SDK version.");
-    version = @"";
-  }
-
-  return version;
+  return [NSString stringWithFormat:@"v%ld%ld%ld",
+                                    GADMobileAds.sharedInstance.versionNumber.majorVersion,
+                                    GADMobileAds.sharedInstance.versionNumber.minorVersion,
+                                    GADMobileAds.sharedInstance.versionNumber.patchVersion];
 }
 
 + (nullable ISBannerSize *)ironSourceAdSizeFromRequestedSize:(GADAdSize)size {
@@ -103,6 +94,14 @@ NSError *_Nonnull GADMAdapterIronSourceErrorWithCodeAndDescription(
                                        NSStringFromGADAdSize(size)]];
 
   return nil;
+}
+
++ (void)setWatermarkWithAdConfiguration:(nonnull GADMediationAdConfiguration *)adConfiguration {
+  NSData *watermark = adConfiguration.watermark;
+  if (watermark != nil) {
+    NSString *watermarkString = [watermark base64EncodedStringWithOptions:0];
+    [IronSource setMetaDataWithKey:@"google_water_mark" value:watermarkString];
+  }
 }
 
 @end
