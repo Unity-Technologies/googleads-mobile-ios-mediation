@@ -14,7 +14,11 @@
 
 #import "GADUnityBaseMediationAdapterProxy.h"
 
-@interface GADMUnityInterstitialMediationAdapterProxy : GADUnityBaseMediationAdapterProxy
+@interface GADMUnityInterstitialMediationAdapterProxy
+    : GADUnityBaseMediationAdapterProxy <UADSInterstitialShowDelegate>
 - (nonnull instancetype)initWithAd:(nonnull id<GADMediationInterstitialAd>)ad
-         completionHandler:(nonnull GADMediationInterstitialLoadCompletionHandler)completionHandler;
+                 completionHandler:
+                     (nonnull GADMediationInterstitialLoadCompletionHandler)completionHandler;
+- (void)adDidLoad;
+- (void)adDidFailToLoadWithError:(nonnull id<UnityAdsError>)error;
 @end

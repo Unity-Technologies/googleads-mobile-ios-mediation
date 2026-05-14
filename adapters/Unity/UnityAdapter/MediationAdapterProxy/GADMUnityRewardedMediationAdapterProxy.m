@@ -32,37 +32,48 @@
   return self;
 }
 
-#pragma mark UnityAdsLoadDelegate
-
-- (void)unityAdsAdFailedToLoad:(nonnull NSString *)placementId
-                     withError:(UnityAdsLoadError)loadError
-                   withMessage:(nonnull NSString *)message {
-  self.loadCompletionHandler(
-      self.ad, GADMAdapterUnitySDKErrorWithUnityAdsLoadErrorAndMessage(loadError, message));
-}
-
-- (void)unityAdsAdLoaded:(nonnull NSString *)placementId {
+- (void)adDidLoad {
   self.eventDelegate = self.loadCompletionHandler(self.ad, nil);
 }
 
-#pragma mark UnityAdsShowDelegate
+- (void)adDidFailToLoadWithError:(id<UnityAdsError>)error {
+  NSError *adapterError = GADMAdapterUnityErrorWithUnityAdsError(error);
+  self.loadCompletionHandler(self.ad, adapterError);
+}
 
-- (void)unityAdsShowComplete:(nonnull NSString *)placementId
-             withFinishState:(UnityAdsShowCompletionState)state {
+#pragma mark UADSRewardedShowDelegate
+
+- (void)showDidStart:(UADSRewardedAd *_Nonnull)unityAd {
+  [self.eventDelegate reportImpression];
+  [(id<GADMediationRewardedAdEventDelegate>)self.eventDelegate didStartVideo];
+}
+
+- (void)showDidClick:(UADSRewardedAd *_Nonnull)unityAd {
+  [self.eventDelegate reportClick];
+}
+
+- (void)showDidComplete:(UADSRewardedAd *_Nonnull)unityAd
+                   with:(enum UADSShowFinishState)finishState {
   id<GADMediationRewardedAdEventDelegate> eventDelegate =
       (id<GADMediationRewardedAdEventDelegate>)self.eventDelegate;
 
   [eventDelegate didEndVideo];
-  if (state == kUnityShowCompletionStateCompleted) {
+  if (finishState == UADSShowFinishStateCompleted) {
     [eventDelegate didRewardUser];
   }
 
-  [super unityAdsShowComplete:placementId withFinishState:state];
+  [eventDelegate willDismissFullScreenView];
+  [eventDelegate didDismissFullScreenView];
 }
 
-- (void)unityAdsShowStart:(nonnull NSString *)placementId {
-  [super unityAdsShowStart:placementId];
-  [(id<GADMediationRewardedAdEventDelegate>)self.eventDelegate didStartVideo];
+- (void)showDidFail:(UADSRewardedAd *_Nonnull)unityAd
+              error:(id<UnityAdsError> _Nonnull)error {
+  NSError *adapterError = GADMAdapterUnityErrorWithUnityAdsError(error);
+  [self.eventDelegate didFailToPresentWithError:adapterError];
+}
+
+- (void)showDidReceiveReward:(UADSRewardedAd *_Nonnull)unityAd {
+  // Reward is handled in showDidComplete: based on finish state
 }
 
 @end

@@ -15,14 +15,6 @@
 #import "GADMAdapterUnityUtils.h"
 #import "GADMAdapterUnityConstants.h"
 
-void GADMAdapterUnityConfigureMediationService(void) {
-  UADSMediationMetaData *mediationMetaData = [[UADSMediationMetaData alloc] init];
-  [mediationMetaData setName:GADMAdapterUnityMediationNetworkName];
-  [mediationMetaData setVersion:GADMAdapterUnityVersion];
-  [mediationMetaData set:@"adapter_version" value:[UnityAds getVersion]];
-  [mediationMetaData commit];
-}
-
 void GADMAdapterUnityMutableArrayAddObject(NSMutableArray *_Nullable array,
                                            NSObject *_Nonnull object) {
   if (object) {
@@ -46,24 +38,13 @@ NSError *_Nonnull GADMAdapterUnityErrorWithCodeAndDescription(GADMAdapterUnityEr
   return error;
 }
 
-NSError *_Nonnull GADMAdapterUnitySDKErrorWithUnityAdsShowErrorAndMessage(
-    UnityAdsShowError errorCode, NSString *_Nonnull message) {
+NSError *_Nonnull GADMAdapterUnityErrorWithUnityAdsError(id<UnityAdsError> _Nonnull error) {
+  NSString *message = error.message ?: @"Unknown Unity Ads error";
   NSDictionary *userInfo =
       @{NSLocalizedDescriptionKey : message, NSLocalizedFailureReasonErrorKey : message};
-  NSError *error = [NSError errorWithDomain:GADMAdapterUnitySDKErrorDomain
-                                       code:errorCode
-                                   userInfo:userInfo];
-  return error;
-}
-
-NSError *_Nonnull GADMAdapterUnitySDKErrorWithUnityAdsLoadErrorAndMessage(
-    UnityAdsLoadError loadError, NSString *_Nonnull message) {
-  NSDictionary *userInfo =
-      @{NSLocalizedDescriptionKey : message, NSLocalizedFailureReasonErrorKey : message};
-  NSError *error = [NSError errorWithDomain:GADMAdapterUnitySDKErrorDomain
-                                       code:loadError
-                                   userInfo:userInfo];
-  return error;
+  return [NSError errorWithDomain:GADMAdapterUnitySDKErrorDomain
+                             code:error.code
+                         userInfo:userInfo];
 }
 
 GADVersionNumber extractVersionFromString(NSString *_Nonnull string) {
@@ -76,4 +57,11 @@ GADVersionNumber extractVersionFromString(NSString *_Nonnull string) {
     version.patchVersion = components.count == 4 ? patch * 100 + components[3].integerValue : patch;
   }
   return version;
+}
+
+NSString *_Nonnull mediationVersion(void) {
+    return [NSString stringWithFormat:@"%ld.%ld.%ld",
+            GADMobileAds.sharedInstance.versionNumber.majorVersion,
+            GADMobileAds.sharedInstance.versionNumber.minorVersion,
+            GADMobileAds.sharedInstance.versionNumber.patchVersion];
 }

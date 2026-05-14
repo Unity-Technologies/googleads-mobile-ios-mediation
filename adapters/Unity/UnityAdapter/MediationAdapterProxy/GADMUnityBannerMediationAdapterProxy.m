@@ -38,20 +38,18 @@
   return self;
 }
 
-#pragma mark UADSBannerViewDelegate
-
-- (void)bannerViewDidLoad:(UADSBannerView *)bannerView {
+- (void)adDidLoadWithBannerView:(UIView *)bannerView {
   id<GADMediationBannerAd> ad = self.ad;
   // Verify the ad size only for waterfall.
   if (!_isBidding) {
     GADAdSize supportedSize = GADClosestValidSizeForAdSizes(
-        GADAdSizeFromCGSize(bannerView.size), @[ NSValueFromGADAdSize(_requestedAdSize) ]);
+        GADAdSizeFromCGSize(bannerView.frame.size), @[ NSValueFromGADAdSize(_requestedAdSize) ]);
     if (!IsGADAdSizeValid(supportedSize)) {
       NSString *errorMsg = [NSString
-          stringWithFormat:@"The banner ad returend by Unity does not match with the requested "
+          stringWithFormat:@"The banner ad returned by Unity does not match with the requested "
                            @"size. The requested ad size: %@. The Unity ad size: %@",
                            NSStringFromGADAdSize(_requestedAdSize),
-                           NSStringFromCGSize(bannerView.size)];
+                           NSStringFromCGSize(bannerView.frame.size)];
       NSError *error =
           GADMAdapterUnityErrorWithCodeAndDescription(GADMAdapterUnityErrorSizeMismatch, errorMsg);
       self.loadCompletionHandler(ad, error);
@@ -61,8 +59,25 @@
   self.eventDelegate = self.loadCompletionHandler(ad, nil);
 }
 
-- (void)bannerViewDidError:(UADSBannerView *)bannerView error:(UADSBannerError *)error {
-  self.loadCompletionHandler(self.ad, error);
+- (void)adDidFailToLoadWithError:(id<UnityAdsError>)error {
+  NSError *adapterError = GADMAdapterUnityErrorWithUnityAdsError(error);
+  self.loadCompletionHandler(self.ad, adapterError);
+}
+
+#pragma mark UADSBannerAdDelegate
+
+- (void)bannerImpression:(UADSBannerAd *_Nonnull)banner {
+  [self.eventDelegate reportImpression];
+}
+
+- (void)bannerDidClick:(UADSBannerAd *_Nonnull)banner {
+  [self.eventDelegate reportClick];
+}
+
+- (void)bannerDidFailShow:(UADSBannerAd *_Nonnull)banner
+                    error:(id<UnityAdsError> _Nonnull)error {
+  NSError *adapterError = GADMAdapterUnityErrorWithUnityAdsError(error);
+  [self.eventDelegate didFailToPresentWithError:adapterError];
 }
 
 @end

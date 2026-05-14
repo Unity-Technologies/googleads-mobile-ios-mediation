@@ -20,9 +20,6 @@
 
 #define GADMUnityLog(format, args...) NSLog(@"GADMediationAdapterUnity: " format, ##args)
 
-/// Configures metadata needed by Unity Ads SDK before initialization.
-void GADMAdapterUnityConfigureMediationService(void);
-
 /// Safely adds |object| to |set| if |object| is not nil.
 void GADMAdapterUnityMutableArrayAddObject(NSMutableArray *_Nullable array,
                                            NSObject *_Nonnull object);
@@ -35,15 +32,10 @@ void GADMAdapterUnityMutableSetAddObject(NSMutableSet *_Nullable set, NSObject *
 NSError *_Nonnull GADMAdapterUnityErrorWithCodeAndDescription(GADMAdapterUnityErrorCode code,
                                                               NSString *_Nonnull description);
 
-/// Returns an NSError with error |error| and with NSLocalizedDescriptionKey and
-/// NSLocalizedFailureReasonErrorKey values set to |message|.
-NSError *_Nonnull GADMAdapterUnitySDKErrorWithUnityAdsShowErrorAndMessage(
-    UnityAdsShowError errorCode, NSString *_Nonnull message);
-
-/// Returns an NSError with Unity Ads SDK load error |loadError| and with NSLocalizedDescriptionKey
-/// and NSLocalizedFailureReasonErrorKey values set to |message|.
-NSError *_Nonnull GADMAdapterUnitySDKErrorWithUnityAdsLoadErrorAndMessage(
-    UnityAdsLoadError loadError, NSString *_Nonnull message);
+/// Returns an NSError from UnityAdsError protocol.
+NSError *_Nonnull GADMAdapterUnityErrorWithUnityAdsError(id<UnityAdsError> _Nonnull error);
 
 /// Returns GADVersionNumber created from string
 GADVersionNumber extractVersionFromString(NSString *_Nonnull string);
+
+NSString *_Nonnull mediationVersion(void);

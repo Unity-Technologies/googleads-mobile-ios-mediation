@@ -14,7 +14,11 @@
 
 #import "GADUnityBaseMediationAdapterProxy.h"
 
-@interface GADMUnityRewardedMediationAdapterProxy : GADUnityBaseMediationAdapterProxy
+@interface GADMUnityRewardedMediationAdapterProxy
+    : GADUnityBaseMediationAdapterProxy <UADSRewardedShowDelegate>
 - (nonnull instancetype)initWithAd:(nonnull id<GADMediationRewardedAd>)ad
-         completionHandler:(nonnull GADMediationRewardedLoadCompletionHandler)completionHandler;
+                 completionHandler:
+                     (nonnull GADMediationRewardedLoadCompletionHandler)completionHandler;
+- (void)adDidLoad;
+- (void)adDidFailToLoadWithError:(nonnull id<UnityAdsError>)error;
 @end

@@ -14,28 +14,8 @@
 
 #import "GADUnityRouter.h"
 #import <UnityAds/UnityAds.h>
+#import "GADMAdapterUnityConstants.h"
 #import "GADMAdapterUnityUtils.h"
-
-@interface UnityAdsAdapterInitializationDelegate : NSObject <UnityAdsInitializationDelegate>
-@property(nonatomic, copy) void (^initializationCompleteBlock)(void);
-@property(nonatomic, copy) void (^initializationFailedBlock)
-    (UnityAdsInitializationError error, NSString *message);
-@end
-
-@implementation UnityAdsAdapterInitializationDelegate
-- (void)initializationComplete {
-  if (self.initializationCompleteBlock) {
-    self.initializationCompleteBlock();
-  }
-}
-
-- (void)initializationFailed:(UnityAdsInitializationError)error
-                 withMessage:(nonnull NSString *)message {
-  if (self.initializationFailedBlock) {
-    self.initializationFailedBlock(error, message);
-  }
-}
-@end
 
 typedef void (^InitCompletionHandler)(NSError *);
 
@@ -72,23 +52,26 @@ typedef void (^InitCompletionHandler)(NSError *);
 
   static dispatch_once_t unityInitToken;
   dispatch_once(&unityInitToken, ^{
-    GADMAdapterUnityConfigureMediationService();
-
-    UnityAdsAdapterInitializationDelegate *initDelegate =
-        [[UnityAdsAdapterInitializationDelegate alloc] init];
-
-    initDelegate.initializationCompleteBlock = ^{
-      [[GADUnityRouter sharedRouter] callCompletionBlocks:nil];
-    };
-    initDelegate.initializationFailedBlock =
-        ^(UnityAdsInitializationError error, NSString *message) {
-          NSError *adapterError = GADMAdapterUnityErrorWithCodeAndDescription(
-              GADMAdapterUnityErrorAdInitializationFailure, message);
-          [[GADUnityRouter sharedRouter] callCompletionBlocks:adapterError];
-        };
-    [UnityAds initialize:gameId
-                      testMode:GADMediationAdapterUnity.testMode
-        initializationDelegate:initDelegate];
+    UADSMediationInfo *mediationInfo =
+    [[UADSMediationInfo alloc] initWithName:GADMAdapterUnityMediationNetworkName
+                                    version:mediationVersion()
+                             adapterVersion:GADMAdapterUnityVersion];
+    
+    UADSInitializationConfiguration *config =
+    [[[[UADSInitializationConfigurationBuilder alloc] initWithGameId:gameId]
+      withTestMode:GADMediationAdapterUnity.testMode]
+     withMediationInfo:mediationInfo]
+      .build;
+    
+      [UnityAds initialize:config
+                completion:^(id<UnityAdsError> _Nullable error) {
+      if (error) {
+        NSError *adapterError = GADMAdapterUnityErrorWithCodeAndDescription(GADMAdapterUnityErrorAdInitializationFailure, error.message);
+        [[GADUnityRouter sharedRouter] callCompletionBlocks:adapterError];
+      } else {
+        [[GADUnityRouter sharedRouter] callCompletionBlocks:nil];
+      }
+    }];
   });
 }
 

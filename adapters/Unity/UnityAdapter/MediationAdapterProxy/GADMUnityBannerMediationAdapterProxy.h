@@ -14,10 +14,12 @@
 #import "GADUnityBaseMediationAdapterProxy.h"
 
 @interface GADMUnityBannerMediationAdapterProxy
-    : GADUnityBaseMediationAdapterProxy <UADSBannerViewDelegate>
+    : GADUnityBaseMediationAdapterProxy <UADSBannerAdDelegate>
 - (nonnull instancetype)initWithAd:(nonnull id<GADMediationBannerAd>)ad
                    requestedAdSize:(GADAdSize)requestedAdSize
                         forBidding:(BOOL)bidding
                  completionHandler:
                      (nonnull GADMediationBannerLoadCompletionHandler)completionHandler;
+- (void)adDidLoadWithBannerView:(nonnull UIView *)bannerView;
+- (void)adDidFailToLoadWithError:(nonnull id<UnityAdsError>)error;
 @end

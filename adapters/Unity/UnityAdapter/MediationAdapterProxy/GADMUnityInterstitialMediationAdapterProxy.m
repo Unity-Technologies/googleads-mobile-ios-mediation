@@ -33,17 +33,36 @@
   return self;
 }
 
-#pragma mark UnityAdsLoadDelegate
-
-- (void)unityAdsAdFailedToLoad:(nonnull NSString *)placementId
-                     withError:(UnityAdsLoadError)loadError
-                   withMessage:(nonnull NSString *)message {
-  self.loadCompletionHandler(
-      self.ad, GADMAdapterUnitySDKErrorWithUnityAdsLoadErrorAndMessage(loadError, message));
+- (void)adDidLoad {
+  self.eventDelegate = self.loadCompletionHandler(self.ad, nil);
 }
 
-- (void)unityAdsAdLoaded:(nonnull NSString *)placementId {
-  self.eventDelegate = self.loadCompletionHandler(self.ad, nil);
+- (void)adDidFailToLoadWithError:(id<UnityAdsError>)error {
+  NSError *adapterError = GADMAdapterUnityErrorWithUnityAdsError(error);
+  self.loadCompletionHandler(self.ad, adapterError);
+}
+
+#pragma mark UADSInterstitialShowDelegate
+
+- (void)showDidStart:(UADSInterstitialAd *_Nonnull)unityAd {
+  [self.eventDelegate reportImpression];
+}
+
+- (void)showDidClick:(UADSInterstitialAd *_Nonnull)unityAd {
+  [self.eventDelegate reportClick];
+}
+
+- (void)showDidComplete:(UADSInterstitialAd *_Nonnull)unityAd
+                   with:(enum UADSShowFinishState)finishState {
+  id<GADMediationAdEventDelegate> delegate = self.eventDelegate;
+  [delegate willDismissFullScreenView];
+  [delegate didDismissFullScreenView];
+}
+
+- (void)showDidFail:(UADSInterstitialAd *_Nonnull)unityAd
+              error:(id<UnityAdsError> _Nonnull)error {
+  NSError *adapterError = GADMAdapterUnityErrorWithUnityAdsError(error);
+  [self.eventDelegate didFailToPresentWithError:adapterError];
 }
 
 @end

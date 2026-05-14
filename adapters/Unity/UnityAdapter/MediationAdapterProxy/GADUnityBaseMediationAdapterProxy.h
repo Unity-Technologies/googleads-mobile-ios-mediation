@@ -16,7 +16,6 @@
 #import <GoogleMobileAds/GoogleMobileAds.h>
 #import <UnityAds/UnityAds.h>
 
-@interface GADUnityBaseMediationAdapterProxy
-    : NSObject <UnityAdsLoadDelegate, UnityAdsShowDelegate, UADSBannerViewDelegate>
+@interface GADUnityBaseMediationAdapterProxy : NSObject
 @property(nonatomic, weak) id<GADMediationAdEventDelegate> eventDelegate;
 @end
