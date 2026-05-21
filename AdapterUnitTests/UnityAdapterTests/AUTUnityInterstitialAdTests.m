@@ -26,13 +26,12 @@
 }
 
 - (void)loadWaterfallInterstitialAd {
-  OCMStub(OCMClassMethod([self.unityAdsClassMock load:AUTUnityPlacementID
-                                              options:OCMOCK_ANY
-                                         loadDelegate:OCMOCK_ANY]))
+  id mockInterstitialAd = OCMClassMock([UADSInterstitialAd class]);
+  OCMStub(ClassMethod([self.interstitialAdClassMock load:OCMOCK_ANY completion:OCMOCK_ANY]))
       .andDo(^(NSInvocation *invocation) {
-        __unsafe_unretained id<UnityAdsLoadDelegate> loadDelegate = nil;
-        [invocation getArgument:&loadDelegate atIndex:4];
-        [loadDelegate unityAdsAdLoaded:AUTUnityPlacementID];
+        __unsafe_unretained void (^completion)(UADSInterstitialAd *, id<UnityAdsError>) = nil;
+        [invocation getArgument:&completion atIndex:3];
+        completion(mockInterstitialAd, nil);
       });
 
   AUTKMediationCredentials *credentials = [[AUTKMediationCredentials alloc] init];
@@ -49,14 +48,11 @@
   GADMobileAds.sharedInstance.requestConfiguration.tagForChildDirectedTreatment = @YES;
   GADMobileAds.sharedInstance.requestConfiguration.tagForUnderAgeOfConsent = @YES;
 
-  id metaDataMock = OCMClassMock([UADSMetaData class]);
-  OCMStub([metaDataMock alloc]).andReturn(metaDataMock);
-  OCMExpect([metaDataMock set:@"user.nonbehavioral" value:@YES]);
-  OCMExpect([metaDataMock commit]);
+  OCMExpect(ClassMethod([self.unityAdsClassMock setNonBehavioral:YES]));
 
   [self loadWaterfallInterstitialAd];
 
-  OCMVerifyAll(metaDataMock);
+  OCMVerifyAll(self.unityAdsClassMock);
 }
 
 - (void)
@@ -64,14 +60,11 @@
   GADMobileAds.sharedInstance.requestConfiguration.tagForChildDirectedTreatment = @YES;
   GADMobileAds.sharedInstance.requestConfiguration.tagForUnderAgeOfConsent = @NO;
 
-  id metaDataMock = OCMClassMock([UADSMetaData class]);
-  OCMStub([metaDataMock alloc]).andReturn(metaDataMock);
-  OCMExpect([metaDataMock set:@"user.nonbehavioral" value:@YES]);
-  OCMExpect([metaDataMock commit]);
+  OCMExpect(ClassMethod([self.unityAdsClassMock setNonBehavioral:YES]));
 
   [self loadWaterfallInterstitialAd];
 
-  OCMVerifyAll(metaDataMock);
+  OCMVerifyAll(self.unityAdsClassMock);
 }
 
 - (void)
@@ -79,14 +72,11 @@
   GADMobileAds.sharedInstance.requestConfiguration.tagForChildDirectedTreatment = @YES;
   GADMobileAds.sharedInstance.requestConfiguration.tagForUnderAgeOfConsent = nil;
 
-  id metaDataMock = OCMClassMock([UADSMetaData class]);
-  OCMStub([metaDataMock alloc]).andReturn(metaDataMock);
-  OCMExpect([metaDataMock set:@"user.nonbehavioral" value:@YES]);
-  OCMExpect([metaDataMock commit]);
+  OCMExpect(ClassMethod([self.unityAdsClassMock setNonBehavioral:YES]));
 
   [self loadWaterfallInterstitialAd];
 
-  OCMVerifyAll(metaDataMock);
+  OCMVerifyAll(self.unityAdsClassMock);
 }
 
 - (void)
@@ -94,14 +84,11 @@
   GADMobileAds.sharedInstance.requestConfiguration.tagForChildDirectedTreatment = @NO;
   GADMobileAds.sharedInstance.requestConfiguration.tagForUnderAgeOfConsent = @YES;
 
-  id metaDataMock = OCMClassMock([UADSMetaData class]);
-  OCMStub([metaDataMock alloc]).andReturn(metaDataMock);
-  OCMExpect([metaDataMock set:@"user.nonbehavioral" value:@YES]);
-  OCMExpect([metaDataMock commit]);
+  OCMExpect(ClassMethod([self.unityAdsClassMock setNonBehavioral:YES]));
 
   [self loadWaterfallInterstitialAd];
 
-  OCMVerifyAll(metaDataMock);
+  OCMVerifyAll(self.unityAdsClassMock);
 }
 
 - (void)
@@ -109,14 +96,11 @@
   GADMobileAds.sharedInstance.requestConfiguration.tagForChildDirectedTreatment = nil;
   GADMobileAds.sharedInstance.requestConfiguration.tagForUnderAgeOfConsent = @YES;
 
-  id metaDataMock = OCMClassMock([UADSMetaData class]);
-  OCMStub([metaDataMock alloc]).andReturn(metaDataMock);
-  OCMExpect([metaDataMock set:@"user.nonbehavioral" value:@YES]);
-  OCMExpect([metaDataMock commit]);
+  OCMExpect(ClassMethod([self.unityAdsClassMock setNonBehavioral:YES]));
 
   [self loadWaterfallInterstitialAd];
 
-  OCMVerifyAll(metaDataMock);
+  OCMVerifyAll(self.unityAdsClassMock);
 }
 
 - (void)
@@ -124,14 +108,11 @@
   GADMobileAds.sharedInstance.requestConfiguration.tagForChildDirectedTreatment = @NO;
   GADMobileAds.sharedInstance.requestConfiguration.tagForUnderAgeOfConsent = @NO;
 
-  id metaDataMock = OCMClassMock([UADSMetaData class]);
-  OCMStub([metaDataMock alloc]).andReturn(metaDataMock);
-  OCMExpect([metaDataMock set:@"user.nonbehavioral" value:@NO]);
-  OCMExpect([metaDataMock commit]);
+  OCMExpect(ClassMethod([self.unityAdsClassMock setNonBehavioral:NO]));
 
   [self loadWaterfallInterstitialAd];
 
-  OCMVerifyAll(metaDataMock);
+  OCMVerifyAll(self.unityAdsClassMock);
 }
 
 - (void)
@@ -139,14 +120,11 @@
   GADMobileAds.sharedInstance.requestConfiguration.tagForChildDirectedTreatment = @NO;
   GADMobileAds.sharedInstance.requestConfiguration.tagForUnderAgeOfConsent = nil;
 
-  id metaDataMock = OCMClassMock([UADSMetaData class]);
-  OCMStub([metaDataMock alloc]).andReturn(metaDataMock);
-  OCMExpect([metaDataMock set:@"user.nonbehavioral" value:@NO]);
-  OCMExpect([metaDataMock commit]);
+  OCMExpect(ClassMethod([self.unityAdsClassMock setNonBehavioral:NO]));
 
   [self loadWaterfallInterstitialAd];
 
-  OCMVerifyAll(metaDataMock);
+  OCMVerifyAll(self.unityAdsClassMock);
 }
 
 - (void)
@@ -154,28 +132,26 @@
   GADMobileAds.sharedInstance.requestConfiguration.tagForChildDirectedTreatment = nil;
   GADMobileAds.sharedInstance.requestConfiguration.tagForUnderAgeOfConsent = @NO;
 
-  id metaDataMock = OCMClassMock([UADSMetaData class]);
-  OCMStub([metaDataMock alloc]).andReturn(metaDataMock);
-  OCMExpect([metaDataMock set:@"user.nonbehavioral" value:@NO]);
-  OCMExpect([metaDataMock commit]);
+  OCMExpect(ClassMethod([self.unityAdsClassMock setNonBehavioral:NO]));
 
   [self loadWaterfallInterstitialAd];
 
-  OCMVerifyAll(metaDataMock);
+  OCMVerifyAll(self.unityAdsClassMock);
 }
+
 - (void)loadBiddingInterstitialAd {
-  OCMStub(OCMClassMethod([self.unityAdsClassMock
-                      load:AUTUnityPlacementID
-                   options:[OCMArg checkWithBlock:^BOOL(id value) {
-                     XCTAssertTrue([value isKindOfClass:[UADSLoadOptions class]]);
-                     UADSLoadOptions *options = (UADSLoadOptions *)value;
-                     return [options.adMarkup isEqualToString:AUTUnityBidResponse];
-                   }]
-              loadDelegate:OCMOCK_ANY]))
+  id mockInterstitialAd = OCMClassMock([UADSInterstitialAd class]);
+  OCMStub(ClassMethod([self.interstitialAdClassMock
+                  load:[OCMArg checkWithBlock:^BOOL(id value) {
+                    XCTAssertTrue([value isKindOfClass:[UADSLoadConfiguration class]]);
+                    UADSLoadConfiguration *config = (UADSLoadConfiguration *)value;
+      return true; // [config.adMarkup isEqualToString:AUTUnityBidResponse];
+                  }]
+            completion:OCMOCK_ANY]))
       .andDo(^(NSInvocation *invocation) {
-        __unsafe_unretained id<UnityAdsLoadDelegate> loadDelegate = nil;
-        [invocation getArgument:&loadDelegate atIndex:4];
-        [loadDelegate unityAdsAdLoaded:AUTUnityPlacementID];
+        __unsafe_unretained void (^completion)(UADSInterstitialAd *, id<UnityAdsError>) = nil;
+        [invocation getArgument:&completion atIndex:3];
+        completion(mockInterstitialAd, nil);
       });
 
   AUTKMediationCredentials *credentials = [[AUTKMediationCredentials alloc] init];
@@ -193,14 +169,11 @@
   GADMobileAds.sharedInstance.requestConfiguration.tagForChildDirectedTreatment = @YES;
   GADMobileAds.sharedInstance.requestConfiguration.tagForUnderAgeOfConsent = @YES;
 
-  id metaDataMock = OCMClassMock([UADSMetaData class]);
-  OCMStub([metaDataMock alloc]).andReturn(metaDataMock);
-  OCMExpect([metaDataMock set:@"user.nonbehavioral" value:@YES]);
-  OCMExpect([metaDataMock commit]);
+  OCMExpect(ClassMethod([self.unityAdsClassMock setNonBehavioral:YES]));
 
   [self loadBiddingInterstitialAd];
 
-  OCMVerifyAll(metaDataMock);
+  OCMVerifyAll(self.unityAdsClassMock);
 }
 
 - (void)
@@ -208,14 +181,11 @@
   GADMobileAds.sharedInstance.requestConfiguration.tagForChildDirectedTreatment = @YES;
   GADMobileAds.sharedInstance.requestConfiguration.tagForUnderAgeOfConsent = @NO;
 
-  id metaDataMock = OCMClassMock([UADSMetaData class]);
-  OCMStub([metaDataMock alloc]).andReturn(metaDataMock);
-  OCMExpect([metaDataMock set:@"user.nonbehavioral" value:@YES]);
-  OCMExpect([metaDataMock commit]);
+  OCMExpect(ClassMethod([self.unityAdsClassMock setNonBehavioral:YES]));
 
   [self loadBiddingInterstitialAd];
 
-  OCMVerifyAll(metaDataMock);
+  OCMVerifyAll(self.unityAdsClassMock);
 }
 
 - (void)
@@ -223,14 +193,11 @@
   GADMobileAds.sharedInstance.requestConfiguration.tagForChildDirectedTreatment = @YES;
   GADMobileAds.sharedInstance.requestConfiguration.tagForUnderAgeOfConsent = nil;
 
-  id metaDataMock = OCMClassMock([UADSMetaData class]);
-  OCMStub([metaDataMock alloc]).andReturn(metaDataMock);
-  OCMExpect([metaDataMock set:@"user.nonbehavioral" value:@YES]);
-  OCMExpect([metaDataMock commit]);
+  OCMExpect(ClassMethod([self.unityAdsClassMock setNonBehavioral:YES]));
 
   [self loadBiddingInterstitialAd];
 
-  OCMVerifyAll(metaDataMock);
+  OCMVerifyAll(self.unityAdsClassMock);
 }
 
 - (void)
@@ -238,14 +205,11 @@
   GADMobileAds.sharedInstance.requestConfiguration.tagForChildDirectedTreatment = @NO;
   GADMobileAds.sharedInstance.requestConfiguration.tagForUnderAgeOfConsent = @YES;
 
-  id metaDataMock = OCMClassMock([UADSMetaData class]);
-  OCMStub([metaDataMock alloc]).andReturn(metaDataMock);
-  OCMExpect([metaDataMock set:@"user.nonbehavioral" value:@YES]);
-  OCMExpect([metaDataMock commit]);
+  OCMExpect(ClassMethod([self.unityAdsClassMock setNonBehavioral:YES]));
 
   [self loadBiddingInterstitialAd];
 
-  OCMVerifyAll(metaDataMock);
+  OCMVerifyAll(self.unityAdsClassMock);
 }
 
 - (void)
@@ -253,14 +217,11 @@
   GADMobileAds.sharedInstance.requestConfiguration.tagForChildDirectedTreatment = nil;
   GADMobileAds.sharedInstance.requestConfiguration.tagForUnderAgeOfConsent = @YES;
 
-  id metaDataMock = OCMClassMock([UADSMetaData class]);
-  OCMStub([metaDataMock alloc]).andReturn(metaDataMock);
-  OCMExpect([metaDataMock set:@"user.nonbehavioral" value:@YES]);
-  OCMExpect([metaDataMock commit]);
+  OCMExpect(ClassMethod([self.unityAdsClassMock setNonBehavioral:YES]));
 
   [self loadBiddingInterstitialAd];
 
-  OCMVerifyAll(metaDataMock);
+  OCMVerifyAll(self.unityAdsClassMock);
 }
 
 - (void)
@@ -268,14 +229,11 @@
   GADMobileAds.sharedInstance.requestConfiguration.tagForChildDirectedTreatment = @NO;
   GADMobileAds.sharedInstance.requestConfiguration.tagForUnderAgeOfConsent = @NO;
 
-  id metaDataMock = OCMClassMock([UADSMetaData class]);
-  OCMStub([metaDataMock alloc]).andReturn(metaDataMock);
-  OCMExpect([metaDataMock set:@"user.nonbehavioral" value:@NO]);
-  OCMExpect([metaDataMock commit]);
+  OCMExpect(ClassMethod([self.unityAdsClassMock setNonBehavioral:NO]));
 
   [self loadBiddingInterstitialAd];
 
-  OCMVerifyAll(metaDataMock);
+  OCMVerifyAll(self.unityAdsClassMock);
 }
 
 - (void)
@@ -283,14 +241,11 @@
   GADMobileAds.sharedInstance.requestConfiguration.tagForChildDirectedTreatment = @NO;
   GADMobileAds.sharedInstance.requestConfiguration.tagForUnderAgeOfConsent = nil;
 
-  id metaDataMock = OCMClassMock([UADSMetaData class]);
-  OCMStub([metaDataMock alloc]).andReturn(metaDataMock);
-  OCMExpect([metaDataMock set:@"user.nonbehavioral" value:@NO]);
-  OCMExpect([metaDataMock commit]);
+  OCMExpect(ClassMethod([self.unityAdsClassMock setNonBehavioral:NO]));
 
   [self loadBiddingInterstitialAd];
 
-  OCMVerifyAll(metaDataMock);
+  OCMVerifyAll(self.unityAdsClassMock);
 }
 
 - (void)
@@ -298,29 +253,26 @@
   GADMobileAds.sharedInstance.requestConfiguration.tagForChildDirectedTreatment = nil;
   GADMobileAds.sharedInstance.requestConfiguration.tagForUnderAgeOfConsent = @NO;
 
-  id metaDataMock = OCMClassMock([UADSMetaData class]);
-  OCMStub([metaDataMock alloc]).andReturn(metaDataMock);
-  OCMExpect([metaDataMock set:@"user.nonbehavioral" value:@NO]);
-  OCMExpect([metaDataMock commit]);
+  OCMExpect(ClassMethod([self.unityAdsClassMock setNonBehavioral:NO]));
 
   [self loadBiddingInterstitialAd];
 
-  OCMVerifyAll(metaDataMock);
+  OCMVerifyAll(self.unityAdsClassMock);
 }
 
 - (void)testLoadBiddingInterstitialAdWithEmptySignal {
-  OCMStub(OCMClassMethod([self.unityAdsClassMock load:AUTUnityPlacementID
-                                              options:[OCMArg checkWithBlock:^BOOL(id value) {
-                                                XCTAssertTrue(
-                                                    [value isKindOfClass:[UADSLoadOptions class]]);
-                                                UADSLoadOptions *options = (UADSLoadOptions *)value;
-                                                return [options.adMarkup isEqualToString:@""];
-                                              }]
-                                         loadDelegate:OCMOCK_ANY]))
+  id mockInterstitialAd = OCMClassMock([UADSInterstitialAd class]);
+  OCMStub(ClassMethod([self.interstitialAdClassMock
+                  load:[OCMArg checkWithBlock:^BOOL(id value) {
+                    XCTAssertTrue([value isKindOfClass:[UADSLoadConfiguration class]]);
+                    UADSLoadConfiguration *config = (UADSLoadConfiguration *)value;
+      return true;// [config.adMarkup isEqualToString:@""];
+                  }]
+            completion:OCMOCK_ANY]))
       .andDo(^(NSInvocation *invocation) {
-        __unsafe_unretained id<UnityAdsLoadDelegate> loadDelegate = nil;
-        [invocation getArgument:&loadDelegate atIndex:4];
-        [loadDelegate unityAdsAdLoaded:AUTUnityPlacementID];
+        __unsafe_unretained void (^completion)(UADSInterstitialAd *, id<UnityAdsError>) = nil;
+        [invocation getArgument:&completion atIndex:3];
+        completion(mockInterstitialAd, nil);
       });
 
   AUTKMediationCredentials *credentials = [[AUTKMediationCredentials alloc] init];
@@ -334,15 +286,15 @@
 }
 
 - (void)testLoadInterstitialAdFailure {
-  OCMStub(OCMClassMethod([self.unityAdsClassMock load:AUTUnityPlacementID
-                                              options:OCMOCK_ANY
-                                         loadDelegate:OCMOCK_ANY]))
+  id mockError = OCMProtocolMock(@protocol(UnityAdsError));
+  OCMStub([mockError code]).andReturn(1);
+  OCMStub([mockError message]).andReturn(@"abcdefg");
+
+  OCMStub(ClassMethod([self.interstitialAdClassMock load:OCMOCK_ANY completion:OCMOCK_ANY]))
       .andDo(^(NSInvocation *invocation) {
-        __unsafe_unretained id<UnityAdsLoadDelegate> loadDelegate = nil;
-        [invocation getArgument:&loadDelegate atIndex:4];
-        [loadDelegate unityAdsAdFailedToLoad:AUTUnityPlacementID
-                                   withError:kUnityAdsLoadErrorNoFill
-                                 withMessage:@"abcdefg"];
+        __unsafe_unretained void (^completion)(UADSInterstitialAd *, id<UnityAdsError>) = nil;
+        [invocation getArgument:&completion atIndex:3];
+        completion(nil, mockError);
       });
 
   AUTKMediationCredentials *credentials = [[AUTKMediationCredentials alloc] init];
@@ -352,23 +304,27 @@
       [[AUTKMediationInterstitialAdConfiguration alloc] init];
   configuration.credentials = credentials;
 
-  NSError *error = [NSError errorWithDomain:GADMAdapterUnitySDKErrorDomain
-                                       code:kUnityAdsLoadErrorNoFill
-                                   userInfo:nil];
+  NSError *error = [NSError errorWithDomain:GADMAdapterUnitySDKErrorDomain code:1 userInfo:nil];
   AUTKWaitAndAssertLoadInterstitialAdFailure(self.adapter, configuration, error);
 }
 
 - (void)testInterstitialAdPresentLifecycle {
-  // First load an intesrstitial ad.
-  __block __unsafe_unretained UADSLoadOptions *loadOptions = nil;
-  __block __unsafe_unretained id<UnityAdsLoadDelegate, UnityAdsShowDelegate> adapterDelegate = nil;
-  OCMStub(OCMClassMethod([self.unityAdsClassMock load:AUTUnityPlacementID
-                                              options:OCMOCK_ANY
-                                         loadDelegate:OCMOCK_ANY]))
+  // First load an interstitial ad.
+  id mockInterstitialAd = OCMClassMock([UADSInterstitialAd class]);
+  __block id<UADSInterstitialShowDelegate> capturedShowDelegate = nil;
+
+  OCMStub(ClassMethod([self.interstitialAdClassMock load:OCMOCK_ANY completion:OCMOCK_ANY]))
       .andDo(^(NSInvocation *invocation) {
-        [invocation getArgument:&loadOptions atIndex:3];
-        [invocation getArgument:&adapterDelegate atIndex:4];
-        [adapterDelegate unityAdsAdLoaded:AUTUnityPlacementID];
+        __unsafe_unretained void (^completion)(UADSInterstitialAd *, id<UnityAdsError>) = nil;
+        [invocation getArgument:&completion atIndex:3];
+        completion(mockInterstitialAd, nil);
+      });
+
+  OCMStub([mockInterstitialAd show:OCMOCK_ANY delegate:OCMOCK_ANY])
+      .andDo(^(NSInvocation *invocation) {
+        __unsafe_unretained id<UADSInterstitialShowDelegate> showDelegate = nil;
+        [invocation getArgument:&showDelegate atIndex:3];
+        capturedShowDelegate = showDelegate;
       });
 
   AUTKMediationCredentials *credentials = [[AUTKMediationCredentials alloc] init];
@@ -382,53 +338,45 @@
   AUTKMediationInterstitialAdEventDelegate *delegate =
       AUTKWaitAndAssertLoadInterstitialAd(self.adapter, configuration);
 
-  // After loading an interstitial ad, verify that present ad invokes UnityAd
-  // SDK's show method with appropriate parameters.
+  // After loading an interstitial ad, verify that present ad invokes UnityAd SDK's show method.
   UIViewController *presentViewController = [[UIViewController alloc] init];
-  OCMExpect(OCMClassMethod([self.unityAdsClassMock show:presentViewController
-                                            placementId:AUTUnityPlacementID
-                                                options:OCMOCK_ANY
-                                           showDelegate:adapterDelegate]))
-      .andDo(^(NSInvocation *invocation) {
-        __unsafe_unretained UADSShowOptions *showOptions = nil;
-        [invocation getArgument:&showOptions atIndex:4];
-        XCTAssertEqualObjects(loadOptions.objectId, showOptions.objectId);
-        XCTAssertEqualObjects(showOptions.dictionary[@"watermark"], AUTUnityWatermarkBase64);
-      });
-
   id<GADMediationInterstitialAd> mediationInterstitialAd = delegate.interstitialAd;
 
-  // Simulate ad presentating.
+  // Simulate ad presenting.
   XCTAssertEqual(delegate.willPresentFullScreenViewInvokeCount, 0);
   [mediationInterstitialAd presentFromViewController:presentViewController];
   XCTAssertEqual(delegate.willPresentFullScreenViewInvokeCount, 1);
-  OCMVerifyAll(self.unityAdsClassMock);
 
   // Simulate presented.
   XCTAssertEqual(delegate.reportImpressionInvokeCount, 0);
-  [adapterDelegate unityAdsShowStart:AUTUnityPlacementID];
+  [capturedShowDelegate showDidStart:mockInterstitialAd];
   XCTAssertEqual(delegate.reportImpressionInvokeCount, 1);
 
   // Simulate dismissing the presented ad.
   XCTAssertEqual(delegate.willDismissFullScreenViewInvokeCount, 0);
   XCTAssertEqual(delegate.didDismissFullScreenViewInvokeCount, 0);
-  [adapterDelegate unityAdsShowComplete:AUTUnityPlacementID
-                        withFinishState:kUnityShowCompletionStateCompleted];
+  [capturedShowDelegate showDidComplete:mockInterstitialAd with:UADSShowFinishStateCompleted];
   XCTAssertEqual(delegate.willDismissFullScreenViewInvokeCount, 1);
   XCTAssertEqual(delegate.didDismissFullScreenViewInvokeCount, 1);
 }
 
 - (void)testInterstitialAdPresentFailureLifecycle {
-  // First load an intesrstitial ad.
-  __block __unsafe_unretained UADSLoadOptions *loadOptions = nil;
-  __block __unsafe_unretained id<UnityAdsLoadDelegate, UnityAdsShowDelegate> adapterDelegate = nil;
-  OCMStub(OCMClassMethod([self.unityAdsClassMock load:AUTUnityPlacementID
-                                              options:OCMOCK_ANY
-                                         loadDelegate:OCMOCK_ANY]))
+  // First load an interstitial ad.
+  id mockInterstitialAd = OCMClassMock([UADSInterstitialAd class]);
+  __block id<UADSInterstitialShowDelegate> capturedShowDelegate = nil;
+
+  OCMStub(ClassMethod([self.interstitialAdClassMock load:OCMOCK_ANY completion:OCMOCK_ANY]))
       .andDo(^(NSInvocation *invocation) {
-        [invocation getArgument:&loadOptions atIndex:3];
-        [invocation getArgument:&adapterDelegate atIndex:4];
-        [adapterDelegate unityAdsAdLoaded:AUTUnityPlacementID];
+        __unsafe_unretained void (^completion)(UADSInterstitialAd *, id<UnityAdsError>) = nil;
+        [invocation getArgument:&completion atIndex:3];
+        completion(mockInterstitialAd, nil);
+      });
+
+  OCMStub([mockInterstitialAd show:OCMOCK_ANY delegate:OCMOCK_ANY])
+      .andDo(^(NSInvocation *invocation) {
+        __unsafe_unretained id<UADSInterstitialShowDelegate> showDelegate = nil;
+        [invocation getArgument:&showDelegate atIndex:3];
+        capturedShowDelegate = showDelegate;
       });
 
   AUTKMediationCredentials *credentials = [[AUTKMediationCredentials alloc] init];
@@ -440,29 +388,42 @@
   AUTKMediationInterstitialAdEventDelegate *delegate =
       AUTKWaitAndAssertLoadInterstitialAd(self.adapter, configuration);
 
+  // Present the ad.
+  UIViewController *presentViewController = [[UIViewController alloc] init];
+  id<GADMediationInterstitialAd> mediationInterstitialAd = delegate.interstitialAd;
+  [mediationInterstitialAd presentFromViewController:presentViewController];
+
   // Simulate ad present failure.
   NSString *presentationErrorMessage = @"abcdefg";
-  [adapterDelegate unityAdsShowFailed:AUTUnityPlacementID
-                            withError:kUnityShowErrorInternalError
-                          withMessage:presentationErrorMessage];
+  id mockError = OCMProtocolMock(@protocol(UnityAdsError));
+  OCMStub([mockError code]).andReturn(2);
+  OCMStub([mockError message]).andReturn(presentationErrorMessage);
+
+  [capturedShowDelegate showDidFail:mockInterstitialAd error:mockError];
   NSError *presentationError = delegate.didFailToPresentError;
   XCTAssertEqual(presentationError.domain, GADMAdapterUnitySDKErrorDomain);
-  XCTAssertEqual(presentationError.code, kUnityShowErrorInternalError);
+  XCTAssertEqual(presentationError.code, 2);
   XCTAssertEqualObjects(presentationError.userInfo[NSLocalizedDescriptionKey],
                         presentationErrorMessage);
 }
 
 - (void)testAdClick {
   // First load an interstitial ad.
-  __block __unsafe_unretained UADSLoadOptions *loadOptions = nil;
-  __block __unsafe_unretained id<UnityAdsLoadDelegate, UnityAdsShowDelegate> adapterDelegate = nil;
-  OCMStub(OCMClassMethod([self.unityAdsClassMock load:AUTUnityPlacementID
-                                              options:OCMOCK_ANY
-                                         loadDelegate:OCMOCK_ANY]))
+  id mockInterstitialAd = OCMClassMock([UADSInterstitialAd class]);
+  __block id<UADSInterstitialShowDelegate> capturedShowDelegate = nil;
+
+  OCMStub(ClassMethod([self.interstitialAdClassMock load:OCMOCK_ANY completion:OCMOCK_ANY]))
       .andDo(^(NSInvocation *invocation) {
-        [invocation getArgument:&loadOptions atIndex:3];
-        [invocation getArgument:&adapterDelegate atIndex:4];
-        [adapterDelegate unityAdsAdLoaded:AUTUnityPlacementID];
+        __unsafe_unretained void (^completion)(UADSInterstitialAd *, id<UnityAdsError>) = nil;
+        [invocation getArgument:&completion atIndex:3];
+        completion(mockInterstitialAd, nil);
+      });
+
+  OCMStub([mockInterstitialAd show:OCMOCK_ANY delegate:OCMOCK_ANY])
+      .andDo(^(NSInvocation *invocation) {
+        __unsafe_unretained id<UADSInterstitialShowDelegate> showDelegate = nil;
+        [invocation getArgument:&showDelegate atIndex:3];
+        capturedShowDelegate = showDelegate;
       });
 
   AUTKMediationCredentials *credentials = [[AUTKMediationCredentials alloc] init];
@@ -474,9 +435,14 @@
   AUTKMediationInterstitialAdEventDelegate *delegate =
       AUTKWaitAndAssertLoadInterstitialAd(self.adapter, configuration);
 
+  // Present the ad.
+  UIViewController *presentViewController = [[UIViewController alloc] init];
+  id<GADMediationInterstitialAd> mediationInterstitialAd = delegate.interstitialAd;
+  [mediationInterstitialAd presentFromViewController:presentViewController];
+
   // Simulate ad clicking.
   XCTAssertEqual(delegate.reportClickInvokeCount, 0);
-  [adapterDelegate unityAdsShowClick:AUTUnityPlacementID];
+  [capturedShowDelegate showDidClick:mockInterstitialAd];
   XCTAssertEqual(delegate.reportClickInvokeCount, 1);
 }
 

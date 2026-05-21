@@ -16,17 +16,15 @@
 
 - (void)testAdapterSetUp {
   id unityAdClassMock = OCMClassMock([UnityAds class]);
-  OCMStub(ClassMethod([unityAdClassMock initialize:AUTUnityGameID
-                                          testMode:NO
-                            initializationDelegate:OCMOCK_ANY]))
-      .andDo(^(NSInvocation *invocation) {
-        __unsafe_unretained NSObject *initDelegate;
-        [invocation getArgument:&initDelegate atIndex:4];
-        if ([initDelegate respondsToSelector:@selector(initializationComplete)]) {
-          [initDelegate performSelector:@selector(initializationComplete)];
-        }
-      });
-
+  
+  OCMStub(ClassMethod([unityAdClassMock initialize:OCMOCK_ANY  completion:OCMOCK_ANY]))
+    .andDo(^(NSInvocation *invocation) {
+      __unsafe_unretained void (^completionHandler)(id<UnityAdsError> *_Nullable error);
+      [invocation getArgument:&completionHandler atIndex:3];
+      completionHandler(nil);
+      
+    });
+  
   AUTKMediationCredentials *credentials = [[AUTKMediationCredentials alloc] init];
   credentials.settings = @{GADMAdapterUnityGameID : AUTUnityGameID};
   AUTKWaitAndAssertAdapterSetUpWithCredentials([GADMediationAdapterUnity class], credentials);
@@ -58,7 +56,7 @@
 
 - (void)testSignalCollectionsBanner {
   id unityAdsMock = OCMClassMock([UnityAds class]);
-  OCMStub(ClassMethod([unityAdsMock getTokenWith:OCMOCK_ANY completion:OCMOCK_ANY]))
+  OCMStub(ClassMethod([unityAdsMock getToken:OCMOCK_ANY completion:OCMOCK_ANY]))
       .andDo(^(NSInvocation *invocation) {
         __unsafe_unretained void (^completionHandler)(NSString *_Nullable token);
         [invocation getArgument:&completionHandler atIndex:3];
@@ -89,7 +87,7 @@
 
 - (void)testSignalCollectionsInterstitial {
   id unityAdsMock = OCMClassMock([UnityAds class]);
-  OCMStub(ClassMethod([unityAdsMock getTokenWith:OCMOCK_ANY completion:OCMOCK_ANY]))
+  OCMStub(ClassMethod([unityAdsMock getToken:OCMOCK_ANY completion:OCMOCK_ANY]))
       .andDo(^(NSInvocation *invocation) {
         __unsafe_unretained void (^completionHandler)(NSString *_Nullable token);
         [invocation getArgument:&completionHandler atIndex:3];
@@ -120,7 +118,7 @@
 
 - (void)testSignalCollectionsRewarded {
   id unityAdsMock = OCMClassMock([UnityAds class]);
-  OCMStub(ClassMethod([unityAdsMock getTokenWith:OCMOCK_ANY completion:OCMOCK_ANY]))
+  OCMStub(ClassMethod([unityAdsMock getToken:OCMOCK_ANY completion:OCMOCK_ANY]))
       .andDo(^(NSInvocation *invocation) {
         __unsafe_unretained void (^completionHandler)(NSString *_Nullable token);
         [invocation getArgument:&completionHandler atIndex:3];
@@ -151,7 +149,7 @@
 
 - (void)testSignalCollectionsRewardedInterstitial {
   id unityAdsMock = OCMClassMock([UnityAds class]);
-  OCMStub(ClassMethod([unityAdsMock getTokenWith:OCMOCK_ANY completion:OCMOCK_ANY]))
+  OCMStub(ClassMethod([unityAdsMock getToken:OCMOCK_ANY completion:OCMOCK_ANY]))
       .andDo(^(NSInvocation *invocation) {
         __unsafe_unretained void (^completionHandler)(NSString *_Nullable token);
         [invocation getArgument:&completionHandler atIndex:3];
@@ -182,7 +180,7 @@
 
 - (void)testSignalCollectionsFailureForUnsupportedAdFormat {
   id unityAdsMock = OCMClassMock([UnityAds class]);
-  OCMStub(ClassMethod([unityAdsMock getTokenWith:OCMOCK_ANY completion:OCMOCK_ANY]))
+  OCMStub(ClassMethod([unityAdsMock getToken:OCMOCK_ANY completion:OCMOCK_ANY]))
       .andDo(^(NSInvocation *invocation) {
         __unsafe_unretained void (^completionHandler)(NSString *_Nullable token);
         [invocation getArgument:&completionHandler atIndex:3];
@@ -214,7 +212,7 @@
 
 - (void)testNilSignalCollections {
   id unityAdsMock = OCMClassMock([UnityAds class]);
-  OCMStub(ClassMethod([unityAdsMock getTokenWith:OCMOCK_ANY completion:OCMOCK_ANY]))
+  OCMStub(ClassMethod([unityAdsMock getToken:OCMOCK_ANY completion:OCMOCK_ANY]))
       .andDo(^(NSInvocation *invocation) {
         __unsafe_unretained void (^completionHandler)(NSString *_Nullable token);
         [invocation getArgument:&completionHandler atIndex:3];
