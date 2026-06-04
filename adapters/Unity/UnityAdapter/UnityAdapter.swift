@@ -45,10 +45,17 @@ final class UnityAdapter: NSObject, RTBAdapter {
         .with(logLevel: isTestMode ? .debug : .info)
         .build()
 
+      Util.log("setUp: initializing UnityAds (gameId=\(gameId), testMode=\(isTestMode))")
       client.initialize(configuration: initConfig) { error in
-          completionHandler(error)
+        if let error {
+          Util.log("setUp: UnityAds init failed — \(error.localizedDescription)")
+        } else {
+          Util.log("setUp: UnityAds init succeeded")
+        }
+        completionHandler(error)
       }
     } catch {
+      Util.log("setUp: aborted before SDK init — \(error.localizedDescription)")
       completionHandler(error)
     }
   }

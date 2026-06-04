@@ -22,9 +22,9 @@ final class Util {
     case placementId = "zoneId"
   }
 
-  static func log(_ message: String) {
+  static func log(_ message: @autoclosure () -> String) {
     #if DEBUG
-      print("UnityAdapter: \(message)")
+      print("[UnityAdapter] \(message())")
     #endif
   }
 
