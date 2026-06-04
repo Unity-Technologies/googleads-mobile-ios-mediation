@@ -58,7 +58,7 @@ final class BannerAdLoader: NSObject {
     client.loadBannerAd(configuration: config) { [weak self] banner, error in
       guard let self else { return }
       self.bannerAd = banner
-      self.handleLoadedAd(self, error: error)
+      self.handleLoadedAd(error == nil ? self : nil, error: error)
     }
   }
 
@@ -74,7 +74,11 @@ final class BannerAdLoader: NSObject {
 
 extension BannerAdLoader: MediationBannerAd {
   var view: UIView {
-    bannerAd?.view ?? UIView()
+    guard let bannerAd else {
+      Util.log("The Unity Ads banner ad has not been loaded yet. Returning a default UIView.")
+      return UIView()
+    }
+    return bannerAd.view
   }
 }
 
@@ -86,7 +90,7 @@ extension BannerAdLoader: UADSBannerAdDelegate {
   }
 
   func bannerDidFailShow(_ banner: UADSBannerAd, error: any UnityAdsError) {
-    eventDelegate?.didFailToPresentWithError(error.toAdapterError())
+    eventDelegate?.didFailToPresentWithError(error.toNSError())
   }
 
   func bannerDidClick(_ banner: UADSBannerAd) {

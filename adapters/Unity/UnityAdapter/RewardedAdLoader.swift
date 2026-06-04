@@ -56,7 +56,7 @@ final class RewardedAdLoader: NSObject {
     client.loadRewardedAd(configuration: config) { [weak self] ad, error in
       guard let self else { return }
       self.rewardedAd = ad
-      self.handleLoadedAd(self, error: error)
+      self.handleLoadedAd(error == nil ? self : nil, error: error)
     }
   }
   
@@ -108,7 +108,7 @@ extension RewardedAdLoader: UADSRewardedShowDelegate {
     }
     
     func showDidFail(_ unityAd: UADSRewardedAd, error: any UnityAdsError) {
-        eventDelegate?.didFailToPresentWithError(error.toAdapterError())
+        eventDelegate?.didFailToPresentWithError(error.toNSError())
     }
     
     func showDidReceiveReward(_ unityAd: UADSRewardedAd) {

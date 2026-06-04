@@ -45,6 +45,11 @@ protocol UnityAdsClient: NSObject {
   func initialize(configuration: UADSInitializationConfiguration,
                   completion: @escaping (Error?) -> Void)
 
+  /// Forwards the privacy / non-behavioral targeting flag to the Unity Ads SDK.
+  /// Pass `true` to opt the user out of behavioral targeting (used when COPPA or
+  /// under-age-of-consent signals indicate a child), `false` otherwise.
+  func setNonBehavioral(_ nonBehavioral: Bool)
+
   /// Collects the bidding token for the specified ad format.
   func collectSignals(configuration: UADSTokenConfiguration,
                       completionHandler: @escaping (String?) -> Void) throws(UnityAdapterError)
@@ -75,10 +80,6 @@ protocol UnityAdsClient: NSObject {
 
 final class UnityAdsClientImpl: NSObject, UnityAdsClient {
 
-  private static let mediationName = "AdMob"
-  private static let adapterVersion = "4.18.0.0"
-  private static let watermarkKey = "watermark"
-
   func version() -> String {
     return UnityAds.getVersion()
   }
@@ -91,8 +92,12 @@ final class UnityAdsClientImpl: NSObject, UnityAdsClient {
     }
 
     UnityAds.initialize(configuration) { error in
-      completion(error?.toAdapterError())
+      completion(error?.toNSError())
     }
+  }
+
+  func setNonBehavioral(_ nonBehavioral: Bool) {
+    UnityAds.setNonBehavioral(nonBehavioral)
   }
 
   func collectSignals(configuration: UADSTokenConfiguration, completionHandler: @escaping (String?) -> Void) throws(UnityAdapterError) {
@@ -103,13 +108,13 @@ final class UnityAdsClientImpl: NSObject, UnityAdsClient {
 
   func loadBannerAd(configuration: UADSBannerLoadConfiguration, completionHandler: @escaping (UADSBannerAd?, Error?) -> Void) {
     UADSBannerAd.load(configuration) { banner, error in
-      completionHandler(banner, error?.toAdapterError())
+      completionHandler(banner, error?.toNSError())
     }
   }
 
   func loadInterstitialAd(configuration: UADSLoadConfiguration, completionHandler: @escaping (UADSInterstitialAd?, Error?) -> Void) {
     UADSInterstitialAd.load(configuration) { ad, error in
-      completionHandler(ad, error?.toAdapterError())
+      completionHandler(ad, error?.toNSError())
     }
   }
 
@@ -125,7 +130,7 @@ final class UnityAdsClientImpl: NSObject, UnityAdsClient {
 
   func loadRewardedAd(configuration: UADSLoadConfiguration, completionHandler: @escaping (UADSRewardedAd?, Error?) -> Void) {
     UADSRewardedAd.load(configuration) { ad, error in
-      completionHandler(ad, error?.toAdapterError())
+      completionHandler(ad, error?.toNSError())
     }
   }
 

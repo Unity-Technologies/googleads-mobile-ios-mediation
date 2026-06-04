@@ -153,6 +153,105 @@ final class UnityAdapterInitTests {
 
 }
 
+@Suite("Unity adapter privacy forwarding")
+@MainActor
+final class UnityAdapterPrivacyTests {
+
+  let client: FakeUnityAdsClient
+
+  init() {
+    client = FakeUnityAdsClient()
+    UnityAdsClientFactory.debugClient = client
+    MobileAds.shared.requestConfiguration.tagForChildDirectedTreatment = nil
+    MobileAds.shared.requestConfiguration.tagForUnderAgeOfConsent = nil
+  }
+
+  deinit {
+    MobileAds.shared.requestConfiguration.tagForChildDirectedTreatment = nil
+    MobileAds.shared.requestConfiguration.tagForUnderAgeOfConsent = nil
+  }
+
+  /// Runs `UnityAdapter.setUp(...)` with a minimal valid server configuration so the
+  /// `updatePrivacyPreferences(client:)` branch fires before SDK initialization.
+  private func runSetUp() async {
+    let credentials = AUTKMediationCredentials()
+    credentials.settings = ["gameId": "test_game_id"]
+    let serverConfiguration = AUTKMediationServerConfiguration()
+    serverConfiguration.credentials = [credentials]
+
+    await confirmation("wait for the adapter set up") { setUpCompletion in
+      UnityAdapter.setUp(with: serverConfiguration) { _ in
+        setUpCompletion()
+      }
+    }
+  }
+
+  @Test("Set up sets nonBehavioral=true when both privacy tags are nil (privacy-protective default)")
+  func setUp_nonBehavioralTrue_whenBothTagsNil() async {
+    await runSetUp()
+
+    #expect(client.setNonBehavioralCallCount == 1)
+    #expect(client.lastNonBehavioralValue == true)
+  }
+
+  @Test("Set up sets nonBehavioral=true when tagForChildDirectedTreatment is true")
+  func setUp_nonBehavioralTrue_whenChildTagTrue() async {
+    MobileAds.shared.requestConfiguration.tagForChildDirectedTreatment = true
+
+    await runSetUp()
+
+    #expect(client.lastNonBehavioralValue == true)
+  }
+
+  @Test("Set up sets nonBehavioral=true when tagForUnderAgeOfConsent is true")
+  func setUp_nonBehavioralTrue_whenUnderAgeTagTrue() async {
+    MobileAds.shared.requestConfiguration.tagForUnderAgeOfConsent = true
+
+    await runSetUp()
+
+    #expect(client.lastNonBehavioralValue == true)
+  }
+
+  @Test("Set up sets nonBehavioral=false when tagForChildDirectedTreatment is false")
+  func setUp_nonBehavioralFalse_whenChildTagFalse() async {
+    MobileAds.shared.requestConfiguration.tagForChildDirectedTreatment = false
+
+    await runSetUp()
+
+    #expect(client.lastNonBehavioralValue == false)
+  }
+
+  @Test("Set up sets nonBehavioral=false when tagForUnderAgeOfConsent is false")
+  func setUp_nonBehavioralFalse_whenUnderAgeTagFalse() async {
+    MobileAds.shared.requestConfiguration.tagForUnderAgeOfConsent = false
+
+    await runSetUp()
+
+    #expect(client.lastNonBehavioralValue == false)
+  }
+
+  @Test("Set up sets nonBehavioral=false when both privacy tags are explicitly false")
+  func setUp_nonBehavioralFalse_whenBothTagsFalse() async {
+    MobileAds.shared.requestConfiguration.tagForChildDirectedTreatment = false
+    MobileAds.shared.requestConfiguration.tagForUnderAgeOfConsent = false
+
+    await runSetUp()
+
+    #expect(client.lastNonBehavioralValue == false)
+  }
+
+  @Test("Set up sets nonBehavioral=true when signals conflict (child=true overrides underAge=false)")
+  func setUp_nonBehavioralTrue_whenChildTrueAndUnderAgeFalse() async {
+    MobileAds.shared.requestConfiguration.tagForChildDirectedTreatment = true
+    MobileAds.shared.requestConfiguration.tagForUnderAgeOfConsent = false
+
+    await runSetUp()
+
+    #expect(client.lastNonBehavioralValue == true)
+  }
+
+}
+
 @Suite("Unity adapter signals collection")
 @MainActor
 final class UnityAdapterSignalsCollectionTests {

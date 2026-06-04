@@ -56,7 +56,7 @@ final class InterstitialAdLoader: NSObject {
     client.loadInterstitialAd(configuration: config) { [weak self] ad, error in
       guard let self else { return }
       self.interstitialAd = ad
-      self.handleLoadedAd(self, error: error)
+      self.handleLoadedAd(error == nil ? self : nil, error: error)
     }
   }
 
@@ -107,7 +107,7 @@ extension InterstitialAdLoader: UADSInterstitialShowDelegate {
     }
     
     func showDidFail(_ ad: UADSInterstitialAd, error: any UnityAdsError) {
-        eventDelegate?.didFailToPresentWithError(error.toAdapterError())
+        eventDelegate?.didFailToPresentWithError(error.toNSError())
     }
     
 }

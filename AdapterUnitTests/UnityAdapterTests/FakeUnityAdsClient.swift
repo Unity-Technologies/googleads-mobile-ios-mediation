@@ -38,6 +38,12 @@ final class FakeUnityAdsClient: NSObject, UnityAdsClient, @unchecked Sendable {
   var interstitialShowConfiguration: UADSShowConfiguration?
   var rewardedShowConfiguration: UADSShowConfiguration?
 
+  /// Last value passed to `setNonBehavioral(_:)`. `nil` if the method has never been called.
+  var lastNonBehavioralValue: Bool?
+
+  /// Number of times `setNonBehavioral(_:)` has been called on this fake.
+  var setNonBehavioralCallCount = 0
+
   private var bannerDelegate: UADSBannerAdDelegate?
   private var interstitialDelegate: UADSInterstitialShowDelegate?
   private var rewardedDelegate: UADSRewardedShowDelegate?
@@ -56,6 +62,11 @@ final class FakeUnityAdsClient: NSObject, UnityAdsClient, @unchecked Sendable {
     } else {
       completion(NSError(domain: "com.test.domain", code: 12345))
     }
+  }
+
+  func setNonBehavioral(_ nonBehavioral: Bool) {
+    lastNonBehavioralValue = nonBehavioral
+    setNonBehavioralCallCount += 1
   }
 
   func collectSignals(

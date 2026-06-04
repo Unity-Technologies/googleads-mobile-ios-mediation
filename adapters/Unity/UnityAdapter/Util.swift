@@ -62,21 +62,4 @@ final class Util {
     return adFormat
   }
 
-  @MainActor static func rootViewController() -> UIViewController? {
-    var viewController: UIViewController?
-    if #available(iOS 13.0, *) {
-      let activeScene =
-        UIApplication.shared.connectedScenes
-        .filter { $0.activationState == .foregroundActive }
-        .first(where: { $0 is UIWindowScene }) as? UIWindowScene
-
-      let keyWindow = activeScene?.windows.first(where: { $0.isKeyWindow })
-      viewController = keyWindow?.rootViewController
-    } else {
-      viewController = UIApplication.shared.keyWindow?.rootViewController
-    }
-
-    return viewController
-  }
-
 }

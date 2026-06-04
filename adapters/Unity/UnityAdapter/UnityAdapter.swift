@@ -22,10 +22,6 @@ final class UnityAdapter: NSObject, RTBAdapter {
   static let mediationName = "AdMob"
   
   static let watermarkKey = "watermark"
-  
-  nonisolated(unsafe) private static let supportedFormats: [UADSAdFormat] = [
-    .banner, .interstitial, .rewarded
-  ]
 
   nonisolated(unsafe) private static var isTestMode = false
   
@@ -39,16 +35,17 @@ final class UnityAdapter: NSObject, RTBAdapter {
                           completionHandler: @escaping GADMediationAdapterSetUpCompletionBlock) {
     do {
       let gameId = try Util.gameId(from: configuration)
+      let client = UnityAdsClientFactory.createClient()
 
-      updatePrivacyPreferences()
+      updatePrivacyPreferences(client: client)
 
-      let configuration = UADSInitializationConfigurationBuilder(gameId: gameId)
+      let initConfig = UADSInitializationConfigurationBuilder(gameId: gameId)
         .with(testMode: isTestMode)
         .with(mediationInfo: Self.mediationInfo)
         .with(logLevel: isTestMode ? .debug : .info)
         .build()
 
-      UnityAdsClientFactory.createClient().initialize(configuration: configuration) { error in
+      client.initialize(configuration: initConfig) { error in
           completionHandler(error)
       }
     } catch {
@@ -130,8 +127,8 @@ final class UnityAdapter: NSObject, RTBAdapter {
     for adConfiguration: MediationBannerAdConfiguration,
     completionHandler: @escaping GADMediationBannerLoadCompletionHandler
   ) {
-    Self.updatePrivacyPreferences()
-    
+    Self.updatePrivacyPreferences(client: UnityAdsClientFactory.createClient())
+
     bannerAdLoader = BannerAdLoader(
       adConfiguration: adConfiguration, loadCompletionHandler: completionHandler)
     bannerAdLoader?.loadAd()
@@ -142,8 +139,8 @@ final class UnityAdapter: NSObject, RTBAdapter {
     for adConfiguration: MediationInterstitialAdConfiguration,
     completionHandler: @escaping GADMediationInterstitialLoadCompletionHandler
   ) {
-    Self.updatePrivacyPreferences()
-    
+    Self.updatePrivacyPreferences(client: UnityAdsClientFactory.createClient())
+
     interstitialAdLoader = InterstitialAdLoader(
       adConfiguration: adConfiguration, loadCompletionHandler: completionHandler)
     interstitialAdLoader?.loadAd()
@@ -154,14 +151,14 @@ final class UnityAdapter: NSObject, RTBAdapter {
     for adConfiguration: MediationRewardedAdConfiguration,
     completionHandler: @escaping GADMediationRewardedLoadCompletionHandler
   ) {
-    Self.updatePrivacyPreferences()
-    
+    Self.updatePrivacyPreferences(client: UnityAdsClientFactory.createClient())
+
     rewardedAdLoader = RewardedAdLoader(
       adConfiguration: adConfiguration, loadCompletionHandler: completionHandler)
     rewardedAdLoader?.loadAd()
   }
 
-  private static func updatePrivacyPreferences() {
+  private static func updatePrivacyPreferences(client: UnityAdsClient) {
     let tagForChildDirectedTreatment =
       MobileAds.shared.requestConfiguration.tagForChildDirectedTreatment
     let tagForUnderAgeOfConsent = MobileAds.shared.requestConfiguration.tagForUnderAgeOfConsent
@@ -172,9 +169,9 @@ final class UnityAdapter: NSObject, RTBAdapter {
     let isNotUnderAge = tagForUnderAgeOfConsent?.boolValue == false
 
     if !isChildDirected && !isUnderAge && (isNotChildDirected || isNotUnderAge) {
-      UnityAds.setNonBehavioral(false)
+      client.setNonBehavioral(false)
     } else {
-      UnityAds.setNonBehavioral(true)
+      client.setNonBehavioral(true)
     }
   }
 
