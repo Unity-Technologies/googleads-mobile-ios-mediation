@@ -51,7 +51,6 @@
 		7FF2753F2FBF68AE003CEE12 /* UnityInterstitialAdTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF2753B2FBF68AE003CEE12 /* UnityInterstitialAdTests.swift */; };
 		7FF275402FBF68AE003CEE12 /* UnityRewardedAdTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF2753C2FBF68AE003CEE12 /* UnityRewardedAdTests.swift */; };
 		7FF275412FBF68AE003CEE12 /* UnityAdapterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF275392FBF68AE003CEE12 /* UnityAdapterTests.swift */; };
-		7FF275802FBFC571003CEE12 /* libAdapter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FF2757F2FBFC571003CEE12 /* libAdapter.a */; };
 		8526681E2C755D15000BBD3A /* FakeMolocoRewardedFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8526681D2C755D15000BBD3A /* FakeMolocoRewardedFactory.swift */; };
 		856602ED2C642DE70068D786 /* FakeMolocoRewarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 856602EC2C642DE70068D786 /* FakeMolocoRewarded.swift */; };
 		8595C0C42C59A82B00B46FD2 /* MolocoRewardedAdTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8595C0C32C59A82B00B46FD2 /* MolocoRewardedAdTest.swift */; };
@@ -280,7 +279,6 @@
 		ADFB3AD52D9B931E0048B197 /* PubMaticInterstitialTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA0289D2D9B8DB000AE181B /* PubMaticInterstitialTests.swift */; };
 		ADFB3BB82D9C6E0C0048B197 /* PubMaticRewardedAdTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFB3BB72D9C6E000048B197 /* PubMaticRewardedAdTests.swift */; };
 		ADFB3C502D9C8F120048B197 /* PubMaticBannerViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFB3C4F2D9C8F090048B197 /* PubMaticBannerViewTests.swift */; };
-		B891FDAA1B21EEFFBD263E69 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		CD0084442F68CCAC009BAEC3 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CD0083F12F68CCAB009BAEC3 /* libc++.tbd */; };
 		CD00AE352FB25C0200F2F45B /* placeholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD00ADDC2FB25BFB00F2F45B /* placeholder.swift */; };
 		CD00AE382FB25CC300F2F45B /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CD00AE372FB25CC300F2F45B /* libc++.tbd */; };
@@ -299,11 +297,9 @@
 		CD92208F2F71EF4600F4655A /* placeholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD92203C2F71EF3D00F4655A /* placeholder.swift */; };
 		CD949C5A2F3BF29B00B7CA8F /* libAdapterWithoutValidationScript.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD1D4DB72F3BE5DB009A7681 /* libAdapterWithoutValidationScript.a */; };
 		CDA1015B2F845F9F00145D3D /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CD0083F12F68CCAB009BAEC3 /* libc++.tbd */; };
-		CDA101AF2F845FB100145D3D /* (null) in Sources */ = {isa = PBXBuildFile; };
 		CDC303472F994F990071A719 /* AdapterUnitTestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD6FA0352A16BF4A007335D2 /* AdapterUnitTestKit.framework */; };
 		CDC303482F994FAF0071A719 /* libMaxAdapter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CDC303352F994E450071A719 /* libMaxAdapter.a */; };
 		CDCA7F4D2F841A920000EF1B /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CD0083F12F68CCAB009BAEC3 /* libc++.tbd */; };
-		CDCA7FA12F841AC30000EF1B /* (null) in Sources */ = {isa = PBXBuildFile; };
 		CDD2215A2F7B301300ED9C43 /* libc++.1.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CDD221592F7B301300ED9C43 /* libc++.1.tbd */; };
 		E2E2719D2F3308DA00143B5D /* AUTMaioBannerAdTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E2E2719C2F3308DA00143B5D /* AUTMaioBannerAdTests.m */; };
 		F090AA192D6563F4003DB8CC /* FakeMolocoNativeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F090AA182D6563F4003DB8CC /* FakeMolocoNativeFactory.swift */; };
@@ -1598,7 +1594,6 @@
 		7FF2753B2FBF68AE003CEE12 /* UnityInterstitialAdTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnityInterstitialAdTests.swift; sourceTree = "<group>"; };
 		7FF2753C2FBF68AE003CEE12 /* UnityRewardedAdTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnityRewardedAdTests.swift; sourceTree = "<group>"; };
 		7FF2757B2FBFC54A003CEE12 /* UnityAdapter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = UnityAdapter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7FF2757F2FBFC571003CEE12 /* libAdapter.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libAdapter.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8526681D2C755D15000BBD3A /* FakeMolocoRewardedFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeMolocoRewardedFactory.swift; sourceTree = "<group>"; };
 		856602EC2C642DE70068D786 /* FakeMolocoRewarded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeMolocoRewarded.swift; sourceTree = "<group>"; };
 		8595C0C32C59A82B00B46FD2 /* MolocoRewardedAdTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MolocoRewardedAdTest.swift; sourceTree = "<group>"; };
@@ -1940,9 +1935,6 @@
 				CDA1015B2F845F9F00145D3D /* libc++.tbd in Frameworks */,
 				AD6E3B1D2EA16C2300818296 /* libAdapter.a in Frameworks */,
 				AD0D6E9D2AF591B0002C0B60 /* AdapterUnitTestKit.framework in Frameworks */,
-				B891FDAA1B21EEFFBD263E69 /* (null) in Frameworks */,
-				B891FDAA1B21EEFFBD263E69 /* (null) in Frameworks */,
-				B891FDAA1B21EEFFBD263E69 /* (null) in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2089,7 +2081,6 @@
 				CD00AE382FB25CC300F2F45B /* libc++.tbd in Frameworks */,
 				AD6E3B3A2EA16D3C00818296 /* libAdapter.a in Frameworks */,
 				AD45EDCC2A784AA8001B29D8 /* AdapterUnitTestKit.framework in Frameworks */,
-				7FF275802FBFC571003CEE12 /* libAdapter.a in Frameworks */,
 				27F86595A4515144DC5831CE /* Pods_Default_UnityAdapterTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2878,7 +2869,6 @@
 		AD6FA03D2A16BF98007335D2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				7FF2757F2FBFC571003CEE12 /* libAdapter.a */,
 				7FF2757B2FBFC54A003CEE12 /* UnityAdapter.framework */,
 				CD00AE372FB25CC300F2F45B /* libc++.tbd */,
 				CDD221592F7B301300ED9C43 /* libc++.1.tbd */,
@@ -5332,7 +5322,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				15CC4C632CF5DED100567229 /* AUTIronSourceRtbBannerAdTests.m in Sources */,
-				CDA101AF2F845FB100145D3D /* (null) in Sources */,
 				70AA2A472B1E8FF400589F6A /* AUTIronSourceRewardedInterstitialAdTest.m in Sources */,
 				AD0D6EAA2AF59517002C0B60 /* AUTIronSourceAdapterTests.m in Sources */,
 				AD0D6EBE2AF596A3002C0B60 /* AUTIronSourceBannerTests.m in Sources */,
@@ -5357,7 +5346,6 @@
 				70D2CC7D2B0C4B5600E94792 /* AUTLiftoffMonetizeWaterfallRewardedAdTests.m in Sources */,
 				7003A94A2B965BBB0082A2F3 /* AUTLiftoffMonetizeAppOpenAdTests.m in Sources */,
 				707FFE2C2B13D676006A1283 /* AUTLiftoffMonetizeUtilsTests.m in Sources */,
-				CDCA7FA12F841AC30000EF1B /* (null) in Sources */,
 				AD0D6EFD2AF5BF08002C0B60 /* AUTLiftoffMonetizeBannerAdTests.m in Sources */,
 				AD0D6F032AF5BFA4002C0B60 /* AUTLiftoffMonetizeNativeAdTests.m in Sources */,
 				AD0D6EFF2AF5BF3C002C0B60 /* AUTLiftoffMonetizeInterstitialAdTests.m in Sources */,
