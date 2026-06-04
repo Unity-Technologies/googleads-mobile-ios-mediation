@@ -122,7 +122,7 @@ final class UnityAdapter: NSObject, RTBAdapter {
     } 
   }
 
-  @objc public
+  @objc
   func loadBanner(
     for adConfiguration: MediationBannerAdConfiguration,
     completionHandler: @escaping GADMediationBannerLoadCompletionHandler
