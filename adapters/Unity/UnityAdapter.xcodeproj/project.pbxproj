@@ -32,72 +32,35 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		00DF0F6C256593E7006A9764 /* GADMAdapterUnity.m in Sources */ = {isa = PBXBuildFile; fileRef = 00DF0F6A256593E7006A9764 /* GADMAdapterUnity.m */; };
-		00DF0F6D256593E7006A9764 /* GADMAdapterUnity.h in Headers */ = {isa = PBXBuildFile; fileRef = 00DF0F6B256593E7006A9764 /* GADMAdapterUnity.h */; };
-		236B3F6B276AC52300337A5E /* GADUnityRouter.h in Headers */ = {isa = PBXBuildFile; fileRef = 236B3F69276AC52300337A5E /* GADUnityRouter.h */; };
-		236B3F6C276AC52300337A5E /* GADUnityRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = 236B3F6A276AC52300337A5E /* GADUnityRouter.m */; };
-		2397665427725BCA00B6E431 /* NSErrorUnity.h in Headers */ = {isa = PBXBuildFile; fileRef = 2397665027725BCA00B6E431 /* NSErrorUnity.h */; };
-		2397665527725BCA00B6E431 /* GADMediationConfigurationSettings.h in Headers */ = {isa = PBXBuildFile; fileRef = 2397665127725BCA00B6E431 /* GADMediationConfigurationSettings.h */; };
-		2397665627725BCA00B6E431 /* GADMediationConfigurationSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 2397665227725BCA00B6E431 /* GADMediationConfigurationSettings.m */; };
-		2397665727725BCA00B6E431 /* NSErrorUnity.m in Sources */ = {isa = PBXBuildFile; fileRef = 2397665327725BCA00B6E431 /* NSErrorUnity.m */; };
-		2397666127725C3A00B6E431 /* GADMUnityBannerMediationAdapterProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 2397665927725C3A00B6E431 /* GADMUnityBannerMediationAdapterProxy.h */; };
-		2397666227725C3A00B6E431 /* GADMUnityBannerMediationAdapterProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2397665A27725C3A00B6E431 /* GADMUnityBannerMediationAdapterProxy.m */; };
-		2397666327725C3A00B6E431 /* GADMUnityRewardedMediationAdapterProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 2397665B27725C3A00B6E431 /* GADMUnityRewardedMediationAdapterProxy.h */; };
-		2397666427725C3A00B6E431 /* GADMUnityInterstitialMediationAdapterProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 2397665C27725C3A00B6E431 /* GADMUnityInterstitialMediationAdapterProxy.h */; };
-		2397666527725C3A00B6E431 /* GADUnityBaseMediationAdapterProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 2397665D27725C3A00B6E431 /* GADUnityBaseMediationAdapterProxy.h */; };
-		2397666627725C3A00B6E431 /* GADMUnityInterstitialMediationAdapterProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2397665E27725C3A00B6E431 /* GADMUnityInterstitialMediationAdapterProxy.m */; };
-		2397666727725C3A00B6E431 /* GADUnityBaseMediationAdapterProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2397665F27725C3A00B6E431 /* GADUnityBaseMediationAdapterProxy.m */; };
-		2397666827725C3A00B6E431 /* GADMUnityRewardedMediationAdapterProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2397666027725C3A00B6E431 /* GADMUnityRewardedMediationAdapterProxy.m */; };
-		419E44CB251BFD60004DD07C /* GADMAdapterUnityUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 419E44BC251BFD60004DD07C /* GADMAdapterUnityUtils.h */; };
-		419E44D3251BFD60004DD07C /* GADMAdapterUnityUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 419E44C4251BFD60004DD07C /* GADMAdapterUnityUtils.m */; };
-		419E44D4251BFD60004DD07C /* GADMAdapterUnityConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 419E44C5251BFD60004DD07C /* GADMAdapterUnityConstants.h */; };
+		3491733C9E91D34A2B0BF111 /* Pods_Default_AdapterWithoutValidationScript.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56C4AB84033C1FDBDD95BBE1 /* Pods_Default_AdapterWithoutValidationScript.framework */; };
 		419E44D6251BFD60004DD07C /* GADMediationAdapterUnity.h in Headers */ = {isa = PBXBuildFile; fileRef = 419E44C7251BFD60004DD07C /* GADMediationAdapterUnity.h */; };
-		419E44D8251BFD60004DD07C /* GADMediationAdapterUnity.m in Sources */ = {isa = PBXBuildFile; fileRef = 419E44C9251BFD60004DD07C /* GADMediationAdapterUnity.m */; };
 		7DA782681DDA681E000C088E /* UnityAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = 7DA7825A1DDA681E000C088E /* UnityAdapter.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AD6E38582EA165F600818296 /* GADMUnityRewardedMediationAdapterProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2397666027725C3A00B6E431 /* GADMUnityRewardedMediationAdapterProxy.m */; };
-		AD6E38592EA165F600818296 /* GADUnityRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = 236B3F6A276AC52300337A5E /* GADUnityRouter.m */; };
-		AD6E385A2EA165F600818296 /* GADMediationConfigurationSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 2397665227725BCA00B6E431 /* GADMediationConfigurationSettings.m */; };
-		AD6E385B2EA165F600818296 /* GADMAdapterUnityUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 419E44C4251BFD60004DD07C /* GADMAdapterUnityUtils.m */; };
-		AD6E385C2EA165F600818296 /* NSErrorUnity.m in Sources */ = {isa = PBXBuildFile; fileRef = 2397665327725BCA00B6E431 /* NSErrorUnity.m */; };
-		AD6E385D2EA165F600818296 /* GADMUnityInterstitialMediationAdapterProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2397665E27725C3A00B6E431 /* GADMUnityInterstitialMediationAdapterProxy.m */; };
-		AD6E385E2EA165F600818296 /* GADMediationAdapterUnity.m in Sources */ = {isa = PBXBuildFile; fileRef = 419E44C9251BFD60004DD07C /* GADMediationAdapterUnity.m */; };
-		AD6E385F2EA165F600818296 /* GADUnityBaseMediationAdapterProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2397665F27725C3A00B6E431 /* GADUnityBaseMediationAdapterProxy.m */; };
-		AD6E38602EA165F600818296 /* GADMUnityBannerMediationAdapterProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2397665A27725C3A00B6E431 /* GADMUnityBannerMediationAdapterProxy.m */; };
-		AD6E38612EA165F600818296 /* GADMAdapterUnity.m in Sources */ = {isa = PBXBuildFile; fileRef = 00DF0F6A256593E7006A9764 /* GADMAdapterUnity.m */; };
-		AD6E38652EA165F600818296 /* GADMediationConfigurationSettings.h in Headers */ = {isa = PBXBuildFile; fileRef = 2397665127725BCA00B6E431 /* GADMediationConfigurationSettings.h */; };
-		AD6E38662EA165F600818296 /* GADMUnityBannerMediationAdapterProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 2397665927725C3A00B6E431 /* GADMUnityBannerMediationAdapterProxy.h */; };
-		AD6E38672EA165F600818296 /* GADUnityBaseMediationAdapterProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 2397665D27725C3A00B6E431 /* GADUnityBaseMediationAdapterProxy.h */; };
-		AD6E38682EA165F600818296 /* GADUnityRouter.h in Headers */ = {isa = PBXBuildFile; fileRef = 236B3F69276AC52300337A5E /* GADUnityRouter.h */; };
+		7FF275492FBF68E6003CEE12 /* UnityAdsClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF275472FBF68E6003CEE12 /* UnityAdsClient.swift */; };
+		7FF2754A2FBF68E6003CEE12 /* RewardedAdLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF275442FBF68E6003CEE12 /* RewardedAdLoader.swift */; };
+		7FF2754B2FBF68E6003CEE12 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF275482FBF68E6003CEE12 /* Util.swift */; };
+		7FF2754C2FBF68E6003CEE12 /* BannerAdLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF275422FBF68E6003CEE12 /* BannerAdLoader.swift */; };
+		7FF2754D2FBF68E6003CEE12 /* InterstitialAdLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF275432FBF68E6003CEE12 /* InterstitialAdLoader.swift */; };
+		7FF2754E2FBF68E6003CEE12 /* UnityAdapterError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF275462FBF68E6003CEE12 /* UnityAdapterError.swift */; };
+		7FF2754F2FBF68E6003CEE12 /* UnityAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF275452FBF68E6003CEE12 /* UnityAdapter.swift */; };
+		7FF275502FBF68E6003CEE12 /* UnityAdsClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF275472FBF68E6003CEE12 /* UnityAdsClient.swift */; };
+		7FF275512FBF68E6003CEE12 /* RewardedAdLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF275442FBF68E6003CEE12 /* RewardedAdLoader.swift */; };
+		7FF275522FBF68E6003CEE12 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF275482FBF68E6003CEE12 /* Util.swift */; };
+		7FF275532FBF68E6003CEE12 /* BannerAdLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF275422FBF68E6003CEE12 /* BannerAdLoader.swift */; };
+		7FF275542FBF68E6003CEE12 /* InterstitialAdLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF275432FBF68E6003CEE12 /* InterstitialAdLoader.swift */; };
+		7FF275552FBF68E6003CEE12 /* UnityAdapterError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF275462FBF68E6003CEE12 /* UnityAdapterError.swift */; };
+		7FF275562FBF68E6003CEE12 /* UnityAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF275452FBF68E6003CEE12 /* UnityAdapter.swift */; };
+		7FF275572FBF68E6003CEE12 /* UnityAdsClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF275472FBF68E6003CEE12 /* UnityAdsClient.swift */; };
+		7FF275582FBF68E6003CEE12 /* RewardedAdLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF275442FBF68E6003CEE12 /* RewardedAdLoader.swift */; };
+		7FF275592FBF68E6003CEE12 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF275482FBF68E6003CEE12 /* Util.swift */; };
+		7FF2755A2FBF68E6003CEE12 /* BannerAdLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF275422FBF68E6003CEE12 /* BannerAdLoader.swift */; };
+		7FF2755B2FBF68E6003CEE12 /* InterstitialAdLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF275432FBF68E6003CEE12 /* InterstitialAdLoader.swift */; };
+		7FF2755C2FBF68E6003CEE12 /* UnityAdapterError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF275462FBF68E6003CEE12 /* UnityAdapterError.swift */; };
+		7FF2755D2FBF68E6003CEE12 /* UnityAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF275452FBF68E6003CEE12 /* UnityAdapter.swift */; };
+		86780D368F5E5F2189E185B5 /* Pods_Default_Adapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C39781CB84777760484D1AD8 /* Pods_Default_Adapter.framework */; };
 		AD6E38692EA165F600818296 /* GADMediationAdapterUnity.h in Headers */ = {isa = PBXBuildFile; fileRef = 419E44C7251BFD60004DD07C /* GADMediationAdapterUnity.h */; };
-		AD6E386A2EA165F600818296 /* GADMAdapterUnity.h in Headers */ = {isa = PBXBuildFile; fileRef = 00DF0F6B256593E7006A9764 /* GADMAdapterUnity.h */; };
-		AD6E386B2EA165F600818296 /* NSErrorUnity.h in Headers */ = {isa = PBXBuildFile; fileRef = 2397665027725BCA00B6E431 /* NSErrorUnity.h */; };
-		AD6E386C2EA165F600818296 /* GADMAdapterUnityConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 419E44C5251BFD60004DD07C /* GADMAdapterUnityConstants.h */; };
-		AD6E386D2EA165F600818296 /* GADMUnityRewardedMediationAdapterProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 2397665B27725C3A00B6E431 /* GADMUnityRewardedMediationAdapterProxy.h */; };
-		AD6E386E2EA165F600818296 /* GADMUnityInterstitialMediationAdapterProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 2397665C27725C3A00B6E431 /* GADMUnityInterstitialMediationAdapterProxy.h */; };
 		AD6E386F2EA165F600818296 /* UnityAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = 7DA7825A1DDA681E000C088E /* UnityAdapter.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AD6E38702EA165F600818296 /* GADMAdapterUnityUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 419E44BC251BFD60004DD07C /* GADMAdapterUnityUtils.h */; };
-		ADA6BA9F2CF1471F009C8FDA /* GADMUnityRewardedMediationAdapterProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2397666027725C3A00B6E431 /* GADMUnityRewardedMediationAdapterProxy.m */; };
-		ADA6BAA02CF1471F009C8FDA /* GADUnityRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = 236B3F6A276AC52300337A5E /* GADUnityRouter.m */; };
-		ADA6BAA12CF1471F009C8FDA /* GADMediationConfigurationSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 2397665227725BCA00B6E431 /* GADMediationConfigurationSettings.m */; };
-		ADA6BAA22CF1471F009C8FDA /* GADMAdapterUnityUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 419E44C4251BFD60004DD07C /* GADMAdapterUnityUtils.m */; };
-		ADA6BAA32CF1471F009C8FDA /* NSErrorUnity.m in Sources */ = {isa = PBXBuildFile; fileRef = 2397665327725BCA00B6E431 /* NSErrorUnity.m */; };
-		ADA6BAA42CF1471F009C8FDA /* GADMUnityInterstitialMediationAdapterProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2397665E27725C3A00B6E431 /* GADMUnityInterstitialMediationAdapterProxy.m */; };
-		ADA6BAA52CF1471F009C8FDA /* GADMediationAdapterUnity.m in Sources */ = {isa = PBXBuildFile; fileRef = 419E44C9251BFD60004DD07C /* GADMediationAdapterUnity.m */; };
-		ADA6BAA62CF1471F009C8FDA /* GADUnityBaseMediationAdapterProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2397665F27725C3A00B6E431 /* GADUnityBaseMediationAdapterProxy.m */; };
-		ADA6BAA72CF1471F009C8FDA /* GADMUnityBannerMediationAdapterProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2397665A27725C3A00B6E431 /* GADMUnityBannerMediationAdapterProxy.m */; };
-		ADA6BAA82CF1471F009C8FDA /* GADMAdapterUnity.m in Sources */ = {isa = PBXBuildFile; fileRef = 00DF0F6A256593E7006A9764 /* GADMAdapterUnity.m */; };
-		ADA6BAAC2CF1471F009C8FDA /* GADMediationConfigurationSettings.h in Headers */ = {isa = PBXBuildFile; fileRef = 2397665127725BCA00B6E431 /* GADMediationConfigurationSettings.h */; };
-		ADA6BAAD2CF1471F009C8FDA /* GADMUnityBannerMediationAdapterProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 2397665927725C3A00B6E431 /* GADMUnityBannerMediationAdapterProxy.h */; };
-		ADA6BAAE2CF1471F009C8FDA /* GADUnityBaseMediationAdapterProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 2397665D27725C3A00B6E431 /* GADUnityBaseMediationAdapterProxy.h */; };
-		ADA6BAAF2CF1471F009C8FDA /* GADUnityRouter.h in Headers */ = {isa = PBXBuildFile; fileRef = 236B3F69276AC52300337A5E /* GADUnityRouter.h */; };
 		ADA6BAB02CF1471F009C8FDA /* GADMediationAdapterUnity.h in Headers */ = {isa = PBXBuildFile; fileRef = 419E44C7251BFD60004DD07C /* GADMediationAdapterUnity.h */; };
-		ADA6BAB12CF1471F009C8FDA /* GADMAdapterUnity.h in Headers */ = {isa = PBXBuildFile; fileRef = 00DF0F6B256593E7006A9764 /* GADMAdapterUnity.h */; };
-		ADA6BAB22CF1471F009C8FDA /* NSErrorUnity.h in Headers */ = {isa = PBXBuildFile; fileRef = 2397665027725BCA00B6E431 /* NSErrorUnity.h */; };
-		ADA6BAB32CF1471F009C8FDA /* GADMAdapterUnityConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 419E44C5251BFD60004DD07C /* GADMAdapterUnityConstants.h */; };
-		ADA6BAB42CF1471F009C8FDA /* GADMUnityRewardedMediationAdapterProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 2397665B27725C3A00B6E431 /* GADMUnityRewardedMediationAdapterProxy.h */; };
-		ADA6BAB52CF1471F009C8FDA /* GADMUnityInterstitialMediationAdapterProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 2397665C27725C3A00B6E431 /* GADMUnityInterstitialMediationAdapterProxy.h */; };
 		ADA6BAB62CF1471F009C8FDA /* UnityAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = 7DA7825A1DDA681E000C088E /* UnityAdapter.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		ADA6BAB72CF1471F009C8FDA /* GADMAdapterUnityUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 419E44BC251BFD60004DD07C /* GADMAdapterUnityUtils.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -142,27 +105,9 @@
 
 /* Begin PBXFileReference section */
 		00DD269322F10D040039C1D4 /* Script_Validate.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = Script_Validate.sh; sourceTree = "<group>"; };
-		00DF0F6A256593E7006A9764 /* GADMAdapterUnity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GADMAdapterUnity.m; sourceTree = "<group>"; };
-		00DF0F6B256593E7006A9764 /* GADMAdapterUnity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADMAdapterUnity.h; sourceTree = "<group>"; };
-		236B3F69276AC52300337A5E /* GADUnityRouter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADUnityRouter.h; sourceTree = "<group>"; };
-		236B3F6A276AC52300337A5E /* GADUnityRouter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GADUnityRouter.m; sourceTree = "<group>"; };
-		2397665027725BCA00B6E431 /* NSErrorUnity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSErrorUnity.h; sourceTree = "<group>"; };
-		2397665127725BCA00B6E431 /* GADMediationConfigurationSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADMediationConfigurationSettings.h; sourceTree = "<group>"; };
-		2397665227725BCA00B6E431 /* GADMediationConfigurationSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GADMediationConfigurationSettings.m; sourceTree = "<group>"; };
-		2397665327725BCA00B6E431 /* NSErrorUnity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSErrorUnity.m; sourceTree = "<group>"; };
-		2397665927725C3A00B6E431 /* GADMUnityBannerMediationAdapterProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADMUnityBannerMediationAdapterProxy.h; sourceTree = "<group>"; };
-		2397665A27725C3A00B6E431 /* GADMUnityBannerMediationAdapterProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GADMUnityBannerMediationAdapterProxy.m; sourceTree = "<group>"; };
-		2397665B27725C3A00B6E431 /* GADMUnityRewardedMediationAdapterProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADMUnityRewardedMediationAdapterProxy.h; sourceTree = "<group>"; };
-		2397665C27725C3A00B6E431 /* GADMUnityInterstitialMediationAdapterProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADMUnityInterstitialMediationAdapterProxy.h; sourceTree = "<group>"; };
-		2397665D27725C3A00B6E431 /* GADUnityBaseMediationAdapterProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADUnityBaseMediationAdapterProxy.h; sourceTree = "<group>"; };
-		2397665E27725C3A00B6E431 /* GADMUnityInterstitialMediationAdapterProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GADMUnityInterstitialMediationAdapterProxy.m; sourceTree = "<group>"; };
-		2397665F27725C3A00B6E431 /* GADUnityBaseMediationAdapterProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GADUnityBaseMediationAdapterProxy.m; sourceTree = "<group>"; };
-		2397666027725C3A00B6E431 /* GADMUnityRewardedMediationAdapterProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GADMUnityRewardedMediationAdapterProxy.m; sourceTree = "<group>"; };
-		419E44BC251BFD60004DD07C /* GADMAdapterUnityUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADMAdapterUnityUtils.h; sourceTree = "<group>"; };
-		419E44C4251BFD60004DD07C /* GADMAdapterUnityUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GADMAdapterUnityUtils.m; sourceTree = "<group>"; };
-		419E44C5251BFD60004DD07C /* GADMAdapterUnityConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADMAdapterUnityConstants.h; sourceTree = "<group>"; };
 		419E44C7251BFD60004DD07C /* GADMediationAdapterUnity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADMediationAdapterUnity.h; sourceTree = "<group>"; };
-		419E44C9251BFD60004DD07C /* GADMediationAdapterUnity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GADMediationAdapterUnity.m; sourceTree = "<group>"; };
+		4F5A150DC450F30F076086C6 /* Pods-Default-Adapter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Default-Adapter.debug.xcconfig"; path = "Target Support Files/Pods-Default-Adapter/Pods-Default-Adapter.debug.xcconfig"; sourceTree = "<group>"; };
+		56C4AB84033C1FDBDD95BBE1 /* Pods_Default_AdapterWithoutValidationScript.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Default_AdapterWithoutValidationScript.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D37C14E1DDCEFDF00207DCB /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
 		7D37C14F1DDCEFED00207DCB /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		7D46CFDF1DB6B7CC0050F612 /* Adapter.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Adapter.xcconfig; sourceTree = "<group>"; };
@@ -173,9 +118,20 @@
 		7DA7825B1DDA681E000C088E /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 		7DE821BF1DB04B5000AA08CF /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		7DFABB1D1DA8682C00322E02 /* libAdapter.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAdapter.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		7E60E2983811B6F1DF5EE5EE /* Pods-Default-Adapter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Default-Adapter.release.xcconfig"; path = "Target Support Files/Pods-Default-Adapter/Pods-Default-Adapter.release.xcconfig"; sourceTree = "<group>"; };
+		7FF275422FBF68E6003CEE12 /* BannerAdLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerAdLoader.swift; sourceTree = "<group>"; };
+		7FF275432FBF68E6003CEE12 /* InterstitialAdLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterstitialAdLoader.swift; sourceTree = "<group>"; };
+		7FF275442FBF68E6003CEE12 /* RewardedAdLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardedAdLoader.swift; sourceTree = "<group>"; };
+		7FF275452FBF68E6003CEE12 /* UnityAdapter.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = UnityAdapter.swift; sourceTree = "<group>"; };
+		7FF275462FBF68E6003CEE12 /* UnityAdapterError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnityAdapterError.swift; sourceTree = "<group>"; };
+		7FF275472FBF68E6003CEE12 /* UnityAdsClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnityAdsClient.swift; sourceTree = "<group>"; };
+		7FF275482FBF68E6003CEE12 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
+		8D5B9C2098284FE8DF48928E /* Pods-Default-AdapterWithoutValidationScript.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Default-AdapterWithoutValidationScript.debug.xcconfig"; path = "Target Support Files/Pods-Default-AdapterWithoutValidationScript/Pods-Default-AdapterWithoutValidationScript.debug.xcconfig"; sourceTree = "<group>"; };
 		AD00C4AD2B87E8B3007C85F3 /* UnityAdapter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UnityAdapter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD6E38742EA165F600818296 /* libAdapter.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAdapter.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADA6BABB2CF1471F009C8FDA /* libStaticUnityAdapter.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libStaticUnityAdapter.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		C39781CB84777760484D1AD8 /* Pods_Default_Adapter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Default_Adapter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DCB97B972D2305B9CC847C44 /* Pods-Default-AdapterWithoutValidationScript.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Default-AdapterWithoutValidationScript.release.xcconfig"; path = "Target Support Files/Pods-Default-AdapterWithoutValidationScript/Pods-Default-AdapterWithoutValidationScript.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,6 +139,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				86780D368F5E5F2189E185B5 /* Pods_Default_Adapter.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -197,6 +154,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3491733C9E91D34A2B0BF111 /* Pods_Default_AdapterWithoutValidationScript.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,30 +168,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2397664F27725B8E00B6E431 /* Categories */ = {
+		6A6AE1E0F7A108CF2B70525B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				2397665127725BCA00B6E431 /* GADMediationConfigurationSettings.h */,
-				2397665227725BCA00B6E431 /* GADMediationConfigurationSettings.m */,
-				2397665027725BCA00B6E431 /* NSErrorUnity.h */,
-				2397665327725BCA00B6E431 /* NSErrorUnity.m */,
+				56C4AB84033C1FDBDD95BBE1 /* Pods_Default_AdapterWithoutValidationScript.framework */,
+				C39781CB84777760484D1AD8 /* Pods_Default_Adapter.framework */,
 			);
-			path = Categories;
-			sourceTree = "<group>";
-		};
-		2397665827725C0600B6E431 /* MediationAdapterProxy */ = {
-			isa = PBXGroup;
-			children = (
-				2397665927725C3A00B6E431 /* GADMUnityBannerMediationAdapterProxy.h */,
-				2397665A27725C3A00B6E431 /* GADMUnityBannerMediationAdapterProxy.m */,
-				2397665C27725C3A00B6E431 /* GADMUnityInterstitialMediationAdapterProxy.h */,
-				2397665E27725C3A00B6E431 /* GADMUnityInterstitialMediationAdapterProxy.m */,
-				2397665B27725C3A00B6E431 /* GADMUnityRewardedMediationAdapterProxy.h */,
-				2397666027725C3A00B6E431 /* GADMUnityRewardedMediationAdapterProxy.m */,
-				2397665D27725C3A00B6E431 /* GADUnityBaseMediationAdapterProxy.h */,
-				2397665F27725C3A00B6E431 /* GADUnityBaseMediationAdapterProxy.m */,
-			);
-			path = MediationAdapterProxy;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		7D46CFDE1DB6B76E0050F612 /* Configuration */ = {
@@ -267,16 +208,13 @@
 		7DA7825D1DDA681E000C088E /* UnityAdapter */ = {
 			isa = PBXGroup;
 			children = (
-				2397665827725C0600B6E431 /* MediationAdapterProxy */,
-				2397664F27725B8E00B6E431 /* Categories */,
-				236B3F69276AC52300337A5E /* GADUnityRouter.h */,
-				236B3F6A276AC52300337A5E /* GADUnityRouter.m */,
-				00DF0F6B256593E7006A9764 /* GADMAdapterUnity.h */,
-				00DF0F6A256593E7006A9764 /* GADMAdapterUnity.m */,
-				419E44C5251BFD60004DD07C /* GADMAdapterUnityConstants.h */,
-				419E44BC251BFD60004DD07C /* GADMAdapterUnityUtils.h */,
-				419E44C4251BFD60004DD07C /* GADMAdapterUnityUtils.m */,
-				419E44C9251BFD60004DD07C /* GADMediationAdapterUnity.m */,
+				7FF275422FBF68E6003CEE12 /* BannerAdLoader.swift */,
+				7FF275432FBF68E6003CEE12 /* InterstitialAdLoader.swift */,
+				7FF275442FBF68E6003CEE12 /* RewardedAdLoader.swift */,
+				7FF275452FBF68E6003CEE12 /* UnityAdapter.swift */,
+				7FF275462FBF68E6003CEE12 /* UnityAdapterError.swift */,
+				7FF275472FBF68E6003CEE12 /* UnityAdsClient.swift */,
+				7FF275482FBF68E6003CEE12 /* Util.swift */,
 			);
 			path = UnityAdapter;
 			sourceTree = "<group>";
@@ -301,6 +239,8 @@
 				7DE821BD1DB04B5000AA08CF /* BuildScript */,
 				7D46CFDE1DB6B76E0050F612 /* Configuration */,
 				7DFABB1E1DA8682C00322E02 /* Products */,
+				F1F6E3CBF8C486353320B9EA /* Pods */,
+				6A6AE1E0F7A108CF2B70525B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -315,6 +255,18 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		F1F6E3CBF8C486353320B9EA /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8D5B9C2098284FE8DF48928E /* Pods-Default-AdapterWithoutValidationScript.debug.xcconfig */,
+				DCB97B972D2305B9CC847C44 /* Pods-Default-AdapterWithoutValidationScript.release.xcconfig */,
+				4F5A150DC450F30F076086C6 /* Pods-Default-Adapter.debug.xcconfig */,
+				7E60E2983811B6F1DF5EE5EE /* Pods-Default-Adapter.release.xcconfig */,
+			);
+			name = Pods;
+			path = ../../AdapterUnitTests/Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -322,18 +274,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2397665527725BCA00B6E431 /* GADMediationConfigurationSettings.h in Headers */,
-				2397666127725C3A00B6E431 /* GADMUnityBannerMediationAdapterProxy.h in Headers */,
-				2397666527725C3A00B6E431 /* GADUnityBaseMediationAdapterProxy.h in Headers */,
-				236B3F6B276AC52300337A5E /* GADUnityRouter.h in Headers */,
 				419E44D6251BFD60004DD07C /* GADMediationAdapterUnity.h in Headers */,
-				00DF0F6D256593E7006A9764 /* GADMAdapterUnity.h in Headers */,
-				2397665427725BCA00B6E431 /* NSErrorUnity.h in Headers */,
-				419E44D4251BFD60004DD07C /* GADMAdapterUnityConstants.h in Headers */,
-				2397666327725C3A00B6E431 /* GADMUnityRewardedMediationAdapterProxy.h in Headers */,
-				2397666427725C3A00B6E431 /* GADMUnityInterstitialMediationAdapterProxy.h in Headers */,
 				7DA782681DDA681E000C088E /* UnityAdapter.h in Headers */,
-				419E44CB251BFD60004DD07C /* GADMAdapterUnityUtils.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -348,18 +290,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AD6E38652EA165F600818296 /* GADMediationConfigurationSettings.h in Headers */,
-				AD6E38662EA165F600818296 /* GADMUnityBannerMediationAdapterProxy.h in Headers */,
-				AD6E38672EA165F600818296 /* GADUnityBaseMediationAdapterProxy.h in Headers */,
-				AD6E38682EA165F600818296 /* GADUnityRouter.h in Headers */,
 				AD6E38692EA165F600818296 /* GADMediationAdapterUnity.h in Headers */,
-				AD6E386A2EA165F600818296 /* GADMAdapterUnity.h in Headers */,
-				AD6E386B2EA165F600818296 /* NSErrorUnity.h in Headers */,
-				AD6E386C2EA165F600818296 /* GADMAdapterUnityConstants.h in Headers */,
-				AD6E386D2EA165F600818296 /* GADMUnityRewardedMediationAdapterProxy.h in Headers */,
-				AD6E386E2EA165F600818296 /* GADMUnityInterstitialMediationAdapterProxy.h in Headers */,
 				AD6E386F2EA165F600818296 /* UnityAdapter.h in Headers */,
-				AD6E38702EA165F600818296 /* GADMAdapterUnityUtils.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -367,18 +299,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ADA6BAAC2CF1471F009C8FDA /* GADMediationConfigurationSettings.h in Headers */,
-				ADA6BAAD2CF1471F009C8FDA /* GADMUnityBannerMediationAdapterProxy.h in Headers */,
-				ADA6BAAE2CF1471F009C8FDA /* GADUnityBaseMediationAdapterProxy.h in Headers */,
-				ADA6BAAF2CF1471F009C8FDA /* GADUnityRouter.h in Headers */,
 				ADA6BAB02CF1471F009C8FDA /* GADMediationAdapterUnity.h in Headers */,
-				ADA6BAB12CF1471F009C8FDA /* GADMAdapterUnity.h in Headers */,
-				ADA6BAB22CF1471F009C8FDA /* NSErrorUnity.h in Headers */,
-				ADA6BAB32CF1471F009C8FDA /* GADMAdapterUnityConstants.h in Headers */,
-				ADA6BAB42CF1471F009C8FDA /* GADMUnityRewardedMediationAdapterProxy.h in Headers */,
-				ADA6BAB52CF1471F009C8FDA /* GADMUnityInterstitialMediationAdapterProxy.h in Headers */,
 				ADA6BAB62CF1471F009C8FDA /* UnityAdapter.h in Headers */,
-				ADA6BAB72CF1471F009C8FDA /* GADMAdapterUnityUtils.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -389,6 +311,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7DFABB261DA8682C00322E02 /* Build configuration list for PBXNativeTarget "Adapter" */;
 			buildPhases = (
+				54AFFE40D4B826EAFDDFAABC /* [CP] Check Pods Manifest.lock */,
 				7DFABB191DA8682C00322E02 /* Sources */,
 				7DFABB1A1DA8682C00322E02 /* Frameworks */,
 				7DFABB1B1DA8682C00322E02 /* CopyFiles */,
@@ -426,6 +349,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AD6E38712EA165F600818296 /* Build configuration list for PBXNativeTarget "AdapterWithoutValidationScript" */;
 			buildPhases = (
+				8F8C04727A1F00E083180A8D /* [CP] Check Pods Manifest.lock */,
 				AD6E38572EA165F600818296 /* Sources */,
 				AD6E38622EA165F600818296 /* Frameworks */,
 				AD6E38632EA165F600818296 /* CopyFiles */,
@@ -472,10 +396,17 @@
 					};
 					7DFABB1C1DA8682C00322E02 = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 2640;
 					};
 					AD00C4AC2B87E8B3007C85F3 = {
 						CreatedOnToolsVersion = 15.1;
 						ProvisioningStyle = Automatic;
+					};
+					AD6E38542EA165F600818296 = {
+						LastSwiftMigration = 2640;
+					};
+					ADA6BA9B2CF1471F009C8FDA = {
+						LastSwiftMigration = 2640;
 					};
 				};
 			};
@@ -527,6 +458,28 @@
 			shellPath = /bin/sh;
 			shellScript = "set -o errexit\nset -o nounset\nset -o xtrace\n\nbash \"${SRCROOT}/BuildScript/Script_Validate.sh\"\n";
 		};
+		54AFFE40D4B826EAFDDFAABC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Default-Adapter-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		7D1B6CA61DC2AD7700D8CABF /* Framework Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -541,6 +494,28 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/BuildScript/Script_Framework.sh\"\n";
 		};
+		8F8C04727A1F00E083180A8D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Default-AdapterWithoutValidationScript-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -548,16 +523,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2397666827725C3A00B6E431 /* GADMUnityRewardedMediationAdapterProxy.m in Sources */,
-				236B3F6C276AC52300337A5E /* GADUnityRouter.m in Sources */,
-				2397665627725BCA00B6E431 /* GADMediationConfigurationSettings.m in Sources */,
-				419E44D3251BFD60004DD07C /* GADMAdapterUnityUtils.m in Sources */,
-				2397665727725BCA00B6E431 /* NSErrorUnity.m in Sources */,
-				2397666627725C3A00B6E431 /* GADMUnityInterstitialMediationAdapterProxy.m in Sources */,
-				419E44D8251BFD60004DD07C /* GADMediationAdapterUnity.m in Sources */,
-				2397666727725C3A00B6E431 /* GADUnityBaseMediationAdapterProxy.m in Sources */,
-				2397666227725C3A00B6E431 /* GADMUnityBannerMediationAdapterProxy.m in Sources */,
-				00DF0F6C256593E7006A9764 /* GADMAdapterUnity.m in Sources */,
+				7FF275572FBF68E6003CEE12 /* UnityAdsClient.swift in Sources */,
+				7FF275582FBF68E6003CEE12 /* RewardedAdLoader.swift in Sources */,
+				7FF275592FBF68E6003CEE12 /* Util.swift in Sources */,
+				7FF2755A2FBF68E6003CEE12 /* BannerAdLoader.swift in Sources */,
+				7FF2755B2FBF68E6003CEE12 /* InterstitialAdLoader.swift in Sources */,
+				7FF2755C2FBF68E6003CEE12 /* UnityAdapterError.swift in Sources */,
+				7FF2755D2FBF68E6003CEE12 /* UnityAdapter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -572,16 +544,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AD6E38582EA165F600818296 /* GADMUnityRewardedMediationAdapterProxy.m in Sources */,
-				AD6E38592EA165F600818296 /* GADUnityRouter.m in Sources */,
-				AD6E385A2EA165F600818296 /* GADMediationConfigurationSettings.m in Sources */,
-				AD6E385B2EA165F600818296 /* GADMAdapterUnityUtils.m in Sources */,
-				AD6E385C2EA165F600818296 /* NSErrorUnity.m in Sources */,
-				AD6E385D2EA165F600818296 /* GADMUnityInterstitialMediationAdapterProxy.m in Sources */,
-				AD6E385E2EA165F600818296 /* GADMediationAdapterUnity.m in Sources */,
-				AD6E385F2EA165F600818296 /* GADUnityBaseMediationAdapterProxy.m in Sources */,
-				AD6E38602EA165F600818296 /* GADMUnityBannerMediationAdapterProxy.m in Sources */,
-				AD6E38612EA165F600818296 /* GADMAdapterUnity.m in Sources */,
+				7FF275502FBF68E6003CEE12 /* UnityAdsClient.swift in Sources */,
+				7FF275512FBF68E6003CEE12 /* RewardedAdLoader.swift in Sources */,
+				7FF275522FBF68E6003CEE12 /* Util.swift in Sources */,
+				7FF275532FBF68E6003CEE12 /* BannerAdLoader.swift in Sources */,
+				7FF275542FBF68E6003CEE12 /* InterstitialAdLoader.swift in Sources */,
+				7FF275552FBF68E6003CEE12 /* UnityAdapterError.swift in Sources */,
+				7FF275562FBF68E6003CEE12 /* UnityAdapter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -589,16 +558,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ADA6BA9F2CF1471F009C8FDA /* GADMUnityRewardedMediationAdapterProxy.m in Sources */,
-				ADA6BAA02CF1471F009C8FDA /* GADUnityRouter.m in Sources */,
-				ADA6BAA12CF1471F009C8FDA /* GADMediationConfigurationSettings.m in Sources */,
-				ADA6BAA22CF1471F009C8FDA /* GADMAdapterUnityUtils.m in Sources */,
-				ADA6BAA32CF1471F009C8FDA /* NSErrorUnity.m in Sources */,
-				ADA6BAA42CF1471F009C8FDA /* GADMUnityInterstitialMediationAdapterProxy.m in Sources */,
-				ADA6BAA52CF1471F009C8FDA /* GADMediationAdapterUnity.m in Sources */,
-				ADA6BAA62CF1471F009C8FDA /* GADUnityBaseMediationAdapterProxy.m in Sources */,
-				ADA6BAA72CF1471F009C8FDA /* GADMUnityBannerMediationAdapterProxy.m in Sources */,
-				ADA6BAA82CF1471F009C8FDA /* GADMAdapterUnity.m in Sources */,
+				7FF275492FBF68E6003CEE12 /* UnityAdsClient.swift in Sources */,
+				7FF2754A2FBF68E6003CEE12 /* RewardedAdLoader.swift in Sources */,
+				7FF2754B2FBF68E6003CEE12 /* Util.swift in Sources */,
+				7FF2754C2FBF68E6003CEE12 /* BannerAdLoader.swift in Sources */,
+				7FF2754D2FBF68E6003CEE12 /* InterstitialAdLoader.swift in Sources */,
+				7FF2754E2FBF68E6003CEE12 /* UnityAdapterError.swift in Sources */,
+				7FF2754F2FBF68E6003CEE12 /* UnityAdapter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -720,15 +686,29 @@
 		};
 		7DFABB271DA8682C00322E02 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4F5A150DC450F30F076086C6 /* Pods-Default-Adapter.debug.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				PRODUCT_MODULE_NAME = UnityAdapter;
 				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_STRICT_CONCURRENCY = minimal;
+				SWIFT_VERSION = 6.0;
 			};
 			name = Debug;
 		};
 		7DFABB281DA8682C00322E02 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7E60E2983811B6F1DF5EE5EE /* Pods-Default-Adapter.release.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				PRODUCT_MODULE_NAME = UnityAdapter;
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_STRICT_CONCURRENCY = minimal;
+				SWIFT_VERSION = 6.0;
 			};
 			name = Release;
 		};
@@ -848,33 +828,58 @@
 		};
 		AD6E38722EA165F600818296 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8D5B9C2098284FE8DF48928E /* Pods-Default-AdapterWithoutValidationScript.debug.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				PRODUCT_MODULE_NAME = UnityAdapter;
 				PRODUCT_NAME = "${PRODUCT_NAME}";
 				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_APPROACHABLE_CONCURRENCY = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_STRICT_CONCURRENCY = "";
+				SWIFT_VERSION = 6.0;
 			};
 			name = Debug;
 		};
 		AD6E38732EA165F600818296 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DCB97B972D2305B9CC847C44 /* Pods-Default-AdapterWithoutValidationScript.release.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				PRODUCT_MODULE_NAME = UnityAdapter;
 				PRODUCT_NAME = "${PRODUCT_NAME}";
 				SKIP_INSTALL = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_STRICT_CONCURRENCY = "";
+				SWIFT_VERSION = 6.0;
 			};
 			name = Release;
 		};
 		ADA6BAB92CF1471F009C8FDA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_STRICT_CONCURRENCY = "";
+				SWIFT_VERSION = 6.0;
 			};
 			name = Debug;
 		};
 		ADA6BABA2CF1471F009C8FDA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_STRICT_CONCURRENCY = "";
+				SWIFT_VERSION = 6.0;
 			};
 			name = Release;
 		};
