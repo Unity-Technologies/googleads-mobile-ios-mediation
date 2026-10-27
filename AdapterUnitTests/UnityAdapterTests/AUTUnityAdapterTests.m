@@ -388,8 +388,8 @@
   id metaDataMock = OCMClassMock([UADSMediationMetaData class]);
   OCMStub([metaDataMock alloc]).andReturn(metaDataMock);
   OCMExpect([metaDataMock setName:GADMAdapterUnityMediationNetworkName]);
-  OCMExpect([metaDataMock setVersion:GADMAdapterUnityVersion]);
-  OCMExpect([metaDataMock set:@"adapter_version" value:OCMOCK_ANY]);
+  OCMExpect([metaDataMock setVersion:OCMOCK_ANY]);
+  OCMExpect([metaDataMock set:@"adapter_version" value:GADMAdapterUnityVersion]);
   OCMExpect([metaDataMock commit]).andDo(^(NSInvocation *invocation) {
     metaDataCommitted = YES;
   });
